@@ -14,7 +14,7 @@
         <div class="title">文章导航</div>
         <div class="r-list">
           <div class="r-item" v-for="item in list" :key="item.text" @click="linkToDoc(item.link)">
-            {{ item.text }}
+            <router-link :to="item.link">{{ item.text }}</router-link>
           </div>
         </div>
       </div>
@@ -26,21 +26,21 @@
 <script setup>
 import { ref } from 'vue'
 const list = ref([
-  { text: '作用域链', link: 'docs/fore-end/javascript/浏览器工作原理和作用域链.md' },
-  { text: 'Set Map', link: 'docs/fore-end/javascript/Set Map weakSet weakMap.md' },
-  { text: '事件循环', link: 'docs/fore-end/javascript/Promise await async 宏微任务 事件循环.md' },
-  { text: '响应式原理', link: 'docs/fore-end/javascript/Proxy Reflect vue2 vue3响应式原理.md' },
-  { text: 'this', link: 'docs/fore-end/javascript/this call apply 箭头函数.md' },
-  { text: '原型链', link: 'docs/fore-end/javascript/面向对象 构造函数 原型链 继承.md' },
-  { text: 'ES6', link: 'docs/fore-end/javascript/ES6知识点.md' },
-  { text: '闭包', link: 'docs/fore-end/javascript/闭包 内存泄漏.md' },
-  { text: '内存管理', link: 'docs/fore-end/javascript/内存管理和垃圾回收机制.md' },
-  { text: '队列（Queue）', link: 'docs/back-end/data-struct/队列（Queue）.md'  },
-  { text: '链表', link: 'docs/back-end/data-struct/链表.md'  },
-  { text: '栈（stack）', link: 'docs/back-end/data-struct/栈（stack）.md'  },
+  { text: '作用域链', link: '/fore-end/javascript/浏览器工作原理和作用域链.md' },
+  { text: 'Set Map', link: '/fore-end/javascript/Set Map weakSet weakMap.md' },
+  { text: '事件循环', link: '/fore-end/javascript/Promise await async 宏微任务 事件循环.md' },
+  { text: '响应式原理', link: '/fore-end/javascript/Proxy Reflect vue2 vue3响应式原理.md' },
+  { text: 'this', link: '/fore-end/javascript/this call apply 箭头函数.md' },
+  { text: '原型链', link: '/fore-end/javascript/面向对象 构造函数 原型链 继承.md' },
+  { text: 'ES6', link: '/fore-end/javascript/ES6知识点.md' },
+  { text: '闭包', link: '/fore-end/javascript/闭包 内存泄漏.md' },
+  { text: '内存管理', link: '/fore-end/javascript/内存管理和垃圾回收机制.md' },
+  { text: '队列', link: '/back-end/data-struct/队列.md'  },
+  { text: '链表', link: '/back-end/data-struct/链表.md'  },
+  { text: '栈', link: '/back-end/data-struct/栈.md'  },
 ])
 const linkToDoc = () => {
-  
+  // console.log(this.$router);
 }
 </script>
 <style scoped>
@@ -87,5 +87,11 @@ const linkToDoc = () => {
     padding-bottom: 2.5rem;
     text-align: center;
     color: #4e6e8e;
+}
+a {
+    color: #4e6e8e;
+}
+a:hover {
+  color: rgb(50, 142, 223)
 }
 </style>

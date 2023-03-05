@@ -15,8 +15,10 @@
   },
   "dependencies": {
     "@vuepress/plugin-search": "^2.0.0-beta.61",
+    "element-plus": "^2.2.33",
     "leancloud-storage": "^4.14.0",
     "valine": "^1.5.1",
+    "vue-router": "4",
     "vuepress-plugin-anchor-right": "^0.0.1-beta.7",
     "vuepress-plugin-code-copy": "^1.0.6",
     "vuepress-sidebar-atuo": "^1.0.4"

@@ -19,7 +19,7 @@ export default defineUserConfig({
     logo: '/logo.png',
     logoDark: '/logoDark.png',
     repo: 'vuejs/vuepress',
-    repo: 'https://gitlab.com/foo/',
+    repo: 'https://github.com/lanmx/vue-press-yy',
     search: true,
     navbar: [
       { text: '首页', link: '/' },
@@ -40,9 +40,6 @@ export default defineUserConfig({
           collapsible: true,
           sidebarDepth: 3,    // 可选的, 默认值是 2
           children: getChildren('docs/fore-end/javascript/')
-          // children: [
-          //   { text: '浏览器工作原理和作用域链', link: '/javascript/浏览器工作原理和作用域链.md' },....
-          // ]
         },
         {
           text: 'Vue',
@@ -73,6 +70,11 @@ export default defineUserConfig({
           text: '打包工具',
           collapsible: true,
           children: getChildren('docs/fore-end/packer-tool/')
+        },
+        {
+          text: 'vuePress',
+          collapsible: true,
+          children: getChildren('docs/fore-end/vuepress/')
         }
       ],
       '/back-end/': [
@@ -81,9 +83,7 @@ export default defineUserConfig({
           collapsible: true,
           children: getChildren('docs/back-end/data-struct/')
           // children: [
-          //   { text: '队列（Queue）', link: '/data-struct/队列（Queue）.md'  },
-          //   { text: '链表', link: '/data-struct/链表.md'  },
-          //   { text: '栈（stack）', link: '/data-struct/栈（stack）.md'  },
+          //   { text: '队列', link: '/data-struct/队列.md'  },
           // ]
         },
         {
