@@ -3,7 +3,6 @@ import path from 'path'
 function getChildren(path) {
   const root = []
   readDirSync(path,root)
-  console.log(root);
   return root
 }
 

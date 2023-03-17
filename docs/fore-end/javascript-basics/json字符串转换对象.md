@@ -8,7 +8,6 @@
    const obj = JSON.parse(json)
    ```
 
-   ![image-20220617183708485](@alias/image-20220617183708485.png)
 
 2. 使用`JSON.parse()`不支持单引号的中文作为变量名
 
@@ -18,7 +17,6 @@
    const obj = JSON.parse(json)
    ```
 
-   ![image-20220617183631824](@alias/image-20220617183631824.png)
 
 3. 中文名变量必须用双引号
 

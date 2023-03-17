@@ -2,7 +2,6 @@ import { defineUserConfig } from 'vuepress'
 import { defaultTheme } from '@vuepress/theme-default'
 import vuepressPluginAnchorRight from 'vuepress-plugin-anchor-right';
 import getChildren from "../utils/get-children"
-import getChildFloders from "../utils/get-child-floder"
 import { path, getDirname } from '@vuepress/utils'
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
 import { searchPlugin } from '@vuepress/plugin-search'
@@ -18,13 +17,14 @@ export default defineUserConfig({
     home: '/',
     logo: '/logo.png',
     logoDark: '/logoDark.png',
-    repo: 'vuejs/vuepress',
+    // repo: 'vuejs/vuepress',
     repo: 'https://github.com/lanmx/vue-press-yy',
     search: true,
     navbar: [
       { text: '首页', link: '/' },
       { text: '前端', link: '/fore-end/' },
       { text: '后台', link: '/back-end/' },
+      { text: '音乐', link: '/music/' },
       { text: '关于', link: '/about/' },
     ],
     displayAllHeaders: false,
@@ -101,7 +101,7 @@ export default defineUserConfig({
           collapsible: true,
           children: getChildren('docs/back-end/git/')
         }
-      ]
+      ],
     },
     subSidebar: 'auto',
     smoothScroll: true,
@@ -146,10 +146,32 @@ export default defineUserConfig({
           content: "复制成功"
       }
     }],
-    ['copyright',{
+    ['vuepress-plugin-copyright',{
         authorName: 'lanminxiao', // 选中的文字将无法被复制
         minLength: 30, // 如果长度超过  30 个字符
     }],
-    ['vuepress-plugin-code-copy', true]
-  ]
+    ['vuepress-plugin-code-copy', true],
+    ['@vuepress-reco/vuepress-plugin-bgm-player', 
+      { audios: [ 
+          { name: '瞬间的永恒', artist: '赵海洋', url: 'https://www.ytmp3.cn/down/53702.mp3', cover: 'https://p1.music.126.net/qTSIZ27qiFvRoKj-P30BiA==/109951165895951287.jpg?param=200y200' },
+          { name: '夜空的寂静', artist: '赵海洋', url: 'https://www.ytmp3.cn/down/54888.mp3', cover: 'https://p1.music.126.net/qTSIZ27qiFvRoKj-P30BiA==/109951165895951287.jpg?param=200y200' },
+          { name: '秋的思念', artist: '赵海洋', url: 'https://www.ytmp3.cn/down/47097.mp3', cover: 'https://p1.music.126.net/qTSIZ27qiFvRoKj-P30BiA==/109951165895951287.jpg?param=200y200' },
+          { name: '红豆', artist: '赵海洋', url: 'https://www.ytmp3.cn/down/78229.mp3', cover: 'https://p1.music.126.net/qTSIZ27qiFvRoKj-P30BiA==/109951165895951287.jpg?param=200y200' },
+          { name: '安静的午后', artist: '高至豪', url: 'https://www.ytmp3.cn/down/76204.mp3', cover: 'https://p1.music.126.net/qTSIZ27qiFvRoKj-P30BiA==/109951165895951287.jpg?param=200y200' },
+          { name: 'River Flows in You', artist: '米歇尔很甜', url: 'https://www.ytmp3.cn/down/76694.mp3', cover: 'https://p1.music.126.net/qTSIZ27qiFvRoKj-P30BiA==/109951165895951287.jpg?param=200y200' },
+          { name: '夜的钢琴曲五', artist: 'Caxey', url: 'https://www.ytmp3.cn/down/76887.mp3', cover: 'https://p1.music.126.net/qTSIZ27qiFvRoKj-P30BiA==/109951165895951287.jpg?param=200y200' },
+        ], 
+        // 是否默认缩小 
+        autoShrink: true , 
+        // 缩小时缩为哪种模式 
+        shrinkMode: 'float', 
+        // 悬浮窗样式 
+        floatStyle:{ bottom: '10px', 'z-index': '999999' } 
+      }
+    ] 
+  ],
+  // head: [
+  //   ['script', { src: 'http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js' }],
+  //   ['script', { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/1.9.0/jquery.pjax.js' }],
+  // ]
 })
