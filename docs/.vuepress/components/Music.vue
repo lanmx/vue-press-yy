@@ -313,7 +313,7 @@ const lrcInterval = () => {
 <style scoped>
 .content {
   width: 100%;
-  height: calc(100% - 78px);
+  height: calc(100% - 90px);
   background-image: linear-gradient(180deg, #22272e, rgb(122, 122, 122));
   position: absolute;
   left: 0;
@@ -328,7 +328,7 @@ const lrcInterval = () => {
 }
 .music-body {
   width: 100%;
-  height: 800px;
+  height: calc(100% - 308px);
   color: #adbac7;
 }
 .cover {
@@ -356,14 +356,14 @@ const lrcInterval = () => {
   animation: round 9s infinite linear;
 }
 .song-word {
-  height: 46%;
+  height: 36%;
   text-align: center;
   padding: auto;
   line-height: 300px;
   opacity: 0.7;
 }
 .song-word-list {
-  height: 41%;
+  height: 33%;
   text-align: center;
   opacity: 0.7;
   line-height: 40px;
@@ -377,7 +377,7 @@ const lrcInterval = () => {
 .rhy-thm {
   display: flex;
   justify-content: center;
-  height: 48%;
+  height: 36%;
   transform: rotateX(180deg);
   padding: 0 5%;
 }
@@ -590,5 +590,18 @@ svg {
 .music-list {
     position: absolute;
     right: 35px;
+}
+@media screen and (max-width:600px){ 
+  .title-music{
+    padding: 0 20% 0 15%;
+  }
+  .vol-bar {
+    display: none;
+  }
+}
+@media screen and (max-height: 900px){ 
+  .rhy-thm {
+    display: none;
+  }
 }
 </style>

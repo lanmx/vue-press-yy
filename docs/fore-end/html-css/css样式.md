@@ -125,4 +125,39 @@ table {
 }
 ```
 
+### 8. 文字换行
+一、使用css实现
+```css
+white-space: pre-wrap; 
+```
+```html
+<div style="white-space: pre-wrap;">{{'含有\n的字符串'}}</div> 
+```
+white-space属性值：
+- normal: 默认。空白会被浏览器忽略。
+- pre: 空白会被浏览器保留。其行为方式类似 HTML 中的 `<pre>` 标签。
+- nowrap: 文本不会换行，文本会在在同一行上继续，直到遇到 `<br>` 标签为止。
+- pre-wrap: 保留空白符序列，但是正常地进行换行。
+- pre-line: 合并空白符序列，但是保留换行符。
+- inherit: 规定应该从父元素继承 white-space 属性的值。
+二、使用v-html实现
+首先，将字符串里的 `\n` 替换为  `<br>`，然后用 v-html 指令渲染字符串为 innerHTML 。 代码如下
+```js
+// JS部分
+this.text = res.data.replace(/\n/g,'<br>')
+// HTML部分
+<div v-html="text"></div>
+```
+
+### 9.顶部吸顶
+
+```css
+.category-title {
+    position: sticky;
+    top: 0px;
+}
+
+```
+
+
 <Valine></Valine>
