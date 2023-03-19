@@ -13,7 +13,7 @@
         </div>
       </div>
       <div :class="{'song-word': !lrc,'song-word-list': lrc }">
-        <div>{{ lrc ? lrc : '纯音乐'  }}</div>
+        <div id="scroll-list-id">{{ lrc ? lrc : '纯音乐'  }}</div>
       </div>
       <div class="rhy-thm">
       <div v-for="item in rhythmlist" :key="item" :class="{'rhy-thm-item-stop': stopshow, 'rhy-thm-item': !stopshow}">
@@ -105,8 +105,9 @@ let curmusic = new Audio(musiclist.value[0].url);
 type TimerType = NodeJS.Timeout
 let timer = ref<TimerType>()
 const full = ref(false)
-const defvolume = ref(0.5 * 100)
+const defvolume = ref(0.2 * 100)
 const muted = ref(false)
+const lrcTimer = ref<TimerType>()
 onMounted(async () =>{
   time.value.duration = curmusic.duration ? formatjs.secondsminute(curmusic.duration) : '02:45'
   time.value.current = formatjs.secondsminute(curmusic.currentTime)
@@ -139,6 +140,7 @@ const stop = () => {
   stopshow.value = true
   setstatus('stop')
   clearTimeout(timer.value);
+  // clearTimeout(lrcTimer.value);
 }
 // 播放
 const play = async () => {
@@ -147,7 +149,8 @@ const play = async () => {
     await curmusic.play();
     stopshow.value = false
     loading.value = false
-    setstatus('playing')
+    setstatus('playing');
+    clearTimeout(timer.value);
     timeInterval();
     console.log(curmusic,curmusic.paused);
   }
@@ -211,7 +214,9 @@ const playMusic = (music?) => {
       stopshow.value = false
       loading.value = false
       setstatus('playing');
+      clearTimeout(timer.value);
       timeInterval();
+      // lrcInterval();// 歌词滚动需要每一句歌词返回对应的时间点
       console.log('Playing...');
       resolve(true)
     } catch (err) {
@@ -224,13 +229,13 @@ const playMusic = (music?) => {
 const getCurrent = () => {
   time.value.current = formatjs.secondsminute(Math.round(curmusic.currentTime))
   process.value = Math.floor((100* curmusic.currentTime) / curmusic.duration)
+  console.log(curmusic.currentTime,curmusic.duration);
+  if(circleshow.value && curmusic.duration - curmusic.currentTime < 1) {
+    next();
+  }
 }
 // 音量控制
 const volume = (e) => {
-  console.log(e,"volume");
-  console.log(e.offsetX, e.offsetY,"xy");
-  var bar = document.getElementsByClassName('vol-bar');
-  console.log(bar,"8**");
   defvolume.value = 100 * e.offsetX / 80
   console.log(defvolume.value);
   curmusic.volume = e.offsetX / 80
@@ -292,6 +297,18 @@ const quitScreen = () => {
   }
   full.value = false
 }
+// 歌词滚动
+const lrcscroll = () => {
+  const scroll = document.getElementById('scroll-list-id')
+  if(scroll) {
+    let height = scroll.scrollHeight
+    curmusic.currentTime * height / curmusic.duration
+    scroll.style.top = - + curmusic.currentTime * height / curmusic.duration + 'px'
+  } 
+}
+const lrcInterval = () => {
+  lrcTimer.value = setInterval(lrcscroll, 2400);
+}
 </script>
 <style scoped>
 .content {
@@ -346,12 +363,16 @@ const quitScreen = () => {
   opacity: 0.7;
 }
 .song-word-list {
-  height: 46%;
+  height: 41%;
   text-align: center;
   opacity: 0.7;
   line-height: 40px;
   white-space: pre-wrap;
   overflow-y: auto;
+  margin-top: 5%;
+}
+#scroll-list-id {
+  position: relative;
 }
 .rhy-thm {
   display: flex;
