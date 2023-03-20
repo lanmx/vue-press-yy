@@ -158,6 +158,10 @@ this.text = res.data.replace(/\n/g,'<br>')
 }
 
 ```
+### 10.width:100%和100vh的区别
 
+100% 是相对于父元素 ；
+
+100vh v是相对于 当前的window
 
 <Valine></Valine>

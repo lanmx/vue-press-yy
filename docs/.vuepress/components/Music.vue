@@ -66,6 +66,7 @@
 import { ref, onMounted } from 'vue'
 import formatjs from '../../utils/format'
 import data from '../static/lrc'
+import _ from 'lodash'
 
 const rhythmlist = ref(Array.from({ length: 28 }).map(() => Math.floor(Math.random() * 70)));
 let process = ref<number>(0);

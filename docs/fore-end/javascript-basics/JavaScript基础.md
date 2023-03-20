@@ -444,6 +444,18 @@ Math.ceil(-5.1); //-5
 
 Math.random() 返回介于 0（包括） 与 1（不包括） 之间的随机数
 
+## 五、深拷贝和浅拷贝
+#### 浅拷贝: Object.assign()
+如果对象的属性值为简单类型`（string，number）`，通过`Object.assign({},srcobj)`，得到的新对象为深拷贝；
+
+如果属性值是对象或其他引用类型，那对于这个引用数据类型而言是浅拷贝的。
+#### 浅拷贝：_.clone()
+#### 深拷贝：JSON.parse(JSON.stringify())
+
+#### 深拷贝：_.cloneDeep()
+深拷贝建议用Lodash的_.cloneDeep()
+
+## 六、
 <Valine></Valine>
 
 

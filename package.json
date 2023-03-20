@@ -20,6 +20,7 @@
     "aplayer": "^1.10.1",
     "element-plus": "^2.2.33",
     "leancloud-storage": "^4.14.0",
+    "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "valine": "^1.5.1",
     "vue-router": "4",
