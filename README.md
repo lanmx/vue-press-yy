@@ -1,6 +1,27 @@
 # vue-press-yy
 基于vuepress2.0.0-beta.61构建的前端文档网站，共同学习成长！
 
+## yarn dev
+
+## 目录结构
+- docs
+  - .vuepress
+    - components  vue组件
+    - images  所有文档图片
+    - pubilc  logo
+    - static  歌词
+    - styles
+    - client.js
+    - config.js
+  - about 关于
+  - back-end 后端
+  - fore-end 前端
+  - music 音乐
+  - utils 封装的函数方法
+- package.json
+- README.md
+- yarn.lock
+
 ## 实现功能
 - 侧边栏自动生成目录 - 手写代码逻辑，详见/utils/get-children.js
 - 本地文档搜索 - 基于searchPlugin插件

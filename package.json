@@ -11,7 +11,7 @@
     "vuepress-theme-vdoing": "^1.12.8"
   },
   "scripts": {
-    "docs:dev": "vuepress dev docs",
+    "dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
