@@ -4,7 +4,7 @@
     <el-dialog
       v-model="dialogVisible"
       title="QQ群：743092907"
-      width="30%"
+      width="auto"
       align-center
     >
       <div class="pic">

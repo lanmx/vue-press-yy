@@ -26,7 +26,7 @@
       <div class="progress">
         <div class="time">{{ time.current }}</div>
         <div class="slider-demo-block">
-          <el-slider v-model="process" :format-tooltip="format" />
+          <el-slider v-model="process" :format-tooltip="format" disabled />
         </div>
         <div class="time-end">{{ time.duration }}</div>
       </div>
@@ -63,7 +63,7 @@
   
 </template>
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import formatjs from '../../utils/format'
 import data from '../static/lrc'
 import _ from 'lodash'
@@ -113,6 +113,9 @@ onMounted(async () =>{
   time.value.duration = curmusic.duration ? formatjs.secondsminute(curmusic.duration) : '02:45'
   time.value.current = formatjs.secondsminute(curmusic.currentTime)
   init();
+})
+onUnmounted(() => {
+  
 })
 // 初始化
 const init = () => {
@@ -321,11 +324,11 @@ const lrcInterval = () => {
   z-index: 1;
 }
 .title-music {
-    line-height: 100px;
     font-weight: bold;
     text-align: center;
     font-size: 36px;
     color: #adbac7;
+    padding: 30px 0;
 }
 .music-body {
   width: 100%;
@@ -357,11 +360,13 @@ const lrcInterval = () => {
   animation: round 9s infinite linear;
 }
 .song-word {
-  height: 36%;
+  height: 33%;
   text-align: center;
   padding: auto;
-  line-height: 300px;
   opacity: 0.7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .song-word-list {
   height: 33%;
@@ -592,17 +597,34 @@ svg {
     position: absolute;
     right: 35px;
 }
-@media screen and (max-width:600px){ 
-  .title-music{
-    padding: 0 20% 0 15%;
+@media screen and (max-height: 900px) and  (max-width:600px){ 
+  .rhy-thm {
+    height: 20%;
+  }
+  .title-music {
+    font-size: 28px;
+    padding: 5% 15%;
   }
   .vol-bar {
     display: none;
   }
+  .full-icon {
+    right: 15px;
+    top: -10px
+  }
 }
-@media screen and (max-height: 900px){ 
-  .rhy-thm {
-    display: none;
+@media screen and (max-height: 670px) and  (max-width:380px){ 
+  .title-music {
+    font-size: 24px;
+    padding: 5% 15%;
+  }
+  .cover-div {
+    width: 170px;
+    height: 170px;
+  }
+  .cover-inner {
+    width: 110.5px;
+    height: 110.5px;
   }
 }
 </style>
