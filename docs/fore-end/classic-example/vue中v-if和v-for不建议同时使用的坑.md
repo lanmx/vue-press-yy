@@ -6,4 +6,6 @@
 
 可以选择使用computed过滤掉列表中不需要显示的项目。
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>

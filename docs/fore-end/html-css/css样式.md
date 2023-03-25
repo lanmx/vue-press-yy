@@ -164,4 +164,6 @@ this.text = res.data.replace(/\n/g,'<br>')
 
 100vh v是相对于 当前的window
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>

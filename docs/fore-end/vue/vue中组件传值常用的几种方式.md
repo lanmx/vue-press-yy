@@ -61,4 +61,6 @@ this.$parant.msg();
 
 3. vuex
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>

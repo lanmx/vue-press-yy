@@ -8,4 +8,6 @@
 - 组件实例对象`data`必须为函数，目的是为了防止多个组件实例对象之间共用一个`data`，产生数据污染。采用函数的形式，`initData`时会将其作为工厂函数都会返回全新`data`对象
 
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>

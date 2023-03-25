@@ -18,4 +18,6 @@ nextTick中的回调函数，在下一次DOM更新循环结束后，执行回调
 Vue中的数据更新是异步的，使用nextTick可以数据更新完再处理；
 
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>

@@ -68,5 +68,7 @@ methods: {
 
 ```
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>
 

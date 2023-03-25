@@ -45,4 +45,6 @@ netstat -ano |findstr "8888"
 
 因此可以将经常访问的程序和文件的路径添加到path中，这样我们既可以在任意位置来访问这些文件和程序了。（也类似于给路径设置为全局）
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>

@@ -50,5 +50,7 @@ async selectType(val,index) {
 },
 ```
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>
 

@@ -43,5 +43,7 @@ export class complianceHomePage {
 }
 ```
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>
 

@@ -90,4 +90,6 @@ export class First_pages1 implements OnInit, OnDestroy {
 </ion-card>
 ```
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>

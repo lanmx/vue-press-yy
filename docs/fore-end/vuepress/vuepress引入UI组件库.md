@@ -40,5 +40,7 @@ export default defineClientConfig({
 ## 推荐使用element Plus组件引入vuepress项目。
 
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>
 

@@ -24,5 +24,9 @@ features:
   details: 永不放弃有两个原则，第一个是永不放弃，第二个原则就是：当你向放弃时回头看看第一个原则;
 # footer: MIT Licensed | Copyright © 2018-present Evan You (https://github.com/yyx990803)
 ---
-<ThreeD />
-<Footer></Footer>
+<ClientOnly>
+  <ThreeD />
+</ClientOnly>
+<ClientOnly>
+  <Footer></Footer>
+</ClientOnly>

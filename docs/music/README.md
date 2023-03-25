@@ -1,2 +1,4 @@
-<Music></Music>
+<ClientOnly>
+  <Music></Music>
+</ClientOnly>
 <!-- <Player></Player> -->

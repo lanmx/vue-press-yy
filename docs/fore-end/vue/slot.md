@@ -140,5 +140,7 @@ export default {
 </script>
 ```
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>
 

@@ -414,5 +414,7 @@ vue create my_project
 
 [提高打包速度](https://juejin.cn/post/6844904071736852487)
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>
 

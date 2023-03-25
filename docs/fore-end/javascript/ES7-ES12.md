@@ -177,5 +177,7 @@ info.friend?.girlfriend // ,没有的话返回undefined,不会报错
 
 #### 5. `String/replaceAll`: 字符串替换
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>
 

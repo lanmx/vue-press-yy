@@ -24,4 +24,6 @@ watch叫做侦听器，当侦听的值发生改变时，其他变化会跟着改
 > 这时候可以结合computed计算属性监听新旧数据。
 
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>

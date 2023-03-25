@@ -85,4 +85,6 @@ sidebar: {
 这样就能自动获取该目录下所有的md文件路径和文件名了，自动生成菜单列表。
 ![](@alias/1679739104289.jpg)
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>

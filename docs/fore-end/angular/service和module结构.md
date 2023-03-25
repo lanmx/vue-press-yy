@@ -105,4 +105,6 @@ export class ComplianceHomeModule {}
 
 ```
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>

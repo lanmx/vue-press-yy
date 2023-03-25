@@ -184,5 +184,7 @@ const fns = target.get('name')
 fns.forEach(item => item())
 ```
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>
 

@@ -22,4 +22,6 @@ git config --global --unset http.proxy
 
 再去PULL或者PUSH代码的时候接可以了
 
-<Valine></Valine>
+<ClientOnly>
+  <Valine></Valine>
+</ClientOnly>
