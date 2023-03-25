@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "build": "vuepress build docs"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",

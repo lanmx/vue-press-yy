@@ -8,7 +8,7 @@
           但是文档存放电脑的地址改变了，导致图片识别不了，
           因此基于vuepress做了个文档仓库。
         </div>
-        <p>网站日常记录和分享技术，共同成长。（所有权归作者所有）</p>
+        <p>网站日常记录和分享技术。（所有权归作者所有）</p>
       </div>
       <div class="right">
         <div class="title">文章导航</div>
@@ -21,7 +21,10 @@
     </div>
   </div>
   <div class="line"></div>
-  <div class="tips">MIT Licensed | Copyright © 2018-present Evan You</div>
+  <div class="tips">
+    <p>MIT Licensed | Copyright © 2018-2023 蓝敏晓</p>
+    <a href="https://beian.miit.gov.cn" target="_blank">备案号：粤ICP备2023024899号-1</a> 
+  </div>
 </template>
 <script setup>
 import { ref } from 'vue'
@@ -30,14 +33,17 @@ const list = ref([
   { text: 'Set Map', link: '/fore-end/javascript/Set Map weakSet weakMap.md' },
   { text: '事件循环', link: '/fore-end/javascript/Promise await async 宏微任务 事件循环.md' },
   { text: '响应式原理', link: '/fore-end/javascript/Proxy Reflect vue2 vue3响应式原理.md' },
+  { text: '手写双向绑定原理', link: '/fore-end/vue/手写双向绑定原理.md' },
   { text: 'this', link: '/fore-end/javascript/this call apply 箭头函数.md' },
   { text: '原型链', link: '/fore-end/javascript/面向对象 构造函数 原型链 继承.md' },
   { text: 'ES6', link: '/fore-end/javascript/ES6知识点.md' },
   { text: '闭包', link: '/fore-end/javascript/闭包 内存泄漏.md' },
   { text: '内存管理', link: '/fore-end/javascript/内存管理和垃圾回收机制.md' },
+  { text: 'Webpack', link: '/fore-end/packer-tool/Webpack.md'  },
   { text: '队列', link: '/back-end/data-struct/队列.md'  },
   { text: '链表', link: '/back-end/data-struct/链表.md'  },
   { text: '栈', link: '/back-end/data-struct/栈.md'  },
+  { text: 'nodejs', link: '/back-end/nodejs/nodejs基础.md'  },
 ])
 const linkToDoc = () => {
   // console.log(this.$router);
@@ -87,6 +93,7 @@ const linkToDoc = () => {
     padding-bottom: 2.5rem;
     text-align: center;
     color: #4e6e8e;
+    font-size: 14px;
 }
 a {
     color: #4e6e8e;
