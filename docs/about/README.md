@@ -21,5 +21,9 @@
 </ClientOnly>
 
 <ClientOnly>
+  <Reward />
+</ClientOnly>
+
+<ClientOnly>
   <Valine></Valine>
 </ClientOnly>

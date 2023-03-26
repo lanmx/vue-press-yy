@@ -184,6 +184,11 @@ const fns = target.get('name')
 fns.forEach(item => item())
 ```
 
+
+<ClientOnly>
+  <Reward />
+</ClientOnly>
+
 <ClientOnly>
   <Valine></Valine>
 </ClientOnly>

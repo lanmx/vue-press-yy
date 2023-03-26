@@ -12,12 +12,14 @@ const __dirname = getDirname(import.meta.url)
 export default defineUserConfig({
   lang: 'zh-CN',
   title: '嘟嘟在蓝色海底',
-  description: '一枚喜欢音乐的女程序员，记录成长痕迹！',
+  description: '一枚喜欢音乐的女程序员！',
+  head: [
+    ['meta', { name: '蓝敏晓', content: '嘟嘟在蓝色海底'}]
+  ],
   theme: defaultTheme({
     home: '/',
     logo: '/logo.png',
     logoDark: '/logoDark.png',
-    // repo: 'vuejs/vuepress',
     repo: 'https://github.com/lanmx/vue-press-yy',
     search: true,
     navbar: [
@@ -92,7 +94,7 @@ export default defineUserConfig({
           children: getChildren('docs/back-end/computer-basics/')
         },
         {
-          text: 'Node.js',
+          text: 'Nodejs',
           collapsible: true,
           children: getChildren('docs/back-end/nodejs/')
         },
@@ -105,6 +107,9 @@ export default defineUserConfig({
     },
     subSidebar: 'auto',
     smoothScroll: true,
+    lastUpdatedText: '最近更新',
+    contributorsText: '贡献者',
+    editLinkText: '在gitHub上编辑此页'
   }),
   alias: {
     '@alias': path.resolve(__dirname, './../../docs/.vuepress/images'),
@@ -170,8 +175,4 @@ export default defineUserConfig({
       }
     ] 
   ],
-  // head: [
-  //   ['script', { src: 'http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js' }],
-  //   ['script', { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/1.9.0/jquery.pjax.js' }],
-  // ]
 })

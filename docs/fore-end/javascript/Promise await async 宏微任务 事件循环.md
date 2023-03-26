@@ -906,6 +906,11 @@ Promise.resolve().then(() => {
 6. **`close queue`**
 
 
+
+<ClientOnly>
+  <Reward />
+</ClientOnly>
+
 <ClientOnly>
   <Valine></Valine>
 </ClientOnly>

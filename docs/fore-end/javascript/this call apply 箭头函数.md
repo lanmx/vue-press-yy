@@ -671,6 +671,11 @@ var obj = {
 }
 ```
 
+
+<ClientOnly>
+  <Reward />
+</ClientOnly>
+
 <ClientOnly>
   <Valine></Valine>
 </ClientOnly>

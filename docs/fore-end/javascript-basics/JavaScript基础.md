@@ -1,7 +1,5 @@
 # JavaScript基础
 
-https://juejin.cn/post/7061588533214969892
-
 ## 一、类型和条件语句
 
 #### 1、转数字类型
@@ -455,7 +453,7 @@ Math.random() 返回介于 0（包括） 与 1（不包括） 之间的随机数
 #### 深拷贝：_.cloneDeep()
 深拷贝建议用Lodash的_.cloneDeep()
 
-## 六、
+
 <ClientOnly>
   <Valine></Valine>
 </ClientOnly>

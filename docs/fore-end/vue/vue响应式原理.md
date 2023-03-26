@@ -265,6 +265,11 @@ class Watcher {
 `vue2`通过`Object.defineProerty`监听数据的变化和收集相关依赖
 
 
+
+<ClientOnly>
+  <Reward />
+</ClientOnly>
+
 <ClientOnly>
   <Valine></Valine>
 </ClientOnly>

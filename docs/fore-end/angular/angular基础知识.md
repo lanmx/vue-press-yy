@@ -1,13 +1,13 @@
 ## 一、angular命令新建组件
 
-```
+```powershell
 ng g component components/news
 ng g component home
 ```
 
 ## 二、创建项目不安装依赖
 
-```
+```powershell
 ng new angulardemo --skip-install
 ```
 
@@ -18,14 +18,14 @@ ng new angulardemo --skip-install
 - private  私有 只有当前类才可以访问这个属性
 
 ```typescript
-public name:any="lanmx"
+public name: any="lanmx"
 public user: object={
     username: "lanmx",
-    age:"20
+    age:"20"
 }
 public user: any={
     username: "lanmx",
-    age:"20
+    age:"20"
 }
 public msghtml="<h1>你好</h1>"
 public list:any[]=['11',22,'EE']
@@ -49,7 +49,7 @@ public list:Array<any>=[1,3,4,5]
 
 ```html
 <div innerHTML="<h1>你好</h1>"></div>
-<div [innerHTML]="msghtml"</div>
+<div [innerHTML]="msghtml"></div>
 ```
 
 #### 3. *ngFor
@@ -205,7 +205,6 @@ public attr='red'
 ```html
 <div>
     {{ name: 'lanmx' | json }}
-    <!-- { "name": "lanmx" } -->
 </div>
 ```
 
@@ -866,7 +865,7 @@ app-component.html
 ```html
 <a routerLink="/home">首页</a>
 <a [routerLink]="['/path', routerparam ]" routerLinkActive="active">{{ name }}</a>
-<-- 在css里可直接配置 .active { color: red } -->
+<!-- 在css里可直接配置 .active { color: red } -->
 <router-outlet></router-outlet>
 ```
 
