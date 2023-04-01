@@ -11,10 +11,15 @@ const __dirname = getDirname(import.meta.url)
 
 export default defineUserConfig({
   lang: 'zh-CN',
-  title: '嘟嘟在蓝色海底',
-  description: '一枚喜欢音乐的女程序员！',
+  title: '蓝敏晓的博客',
+  description: '前端知识分享',
   head: [
-    ['meta', { name: '蓝敏晓', content: '嘟嘟在蓝色海底'}]
+      ['meta', { name: 'keywords', content: '蓝敏晓'}],
+      ['meta', { name: 'keywords', content: '前端技术'}],
+      ['meta', { name: 'keywords', content: '音乐'}],
+      ['meta', { name: 'keywords', content: 'vue'}],
+      ['meta', { name: 'keywords', content: 'angular'}],
+      ['meta', { name: 'keywords', content: 'javascript'}],
   ],
   theme: defaultTheme({
     home: '/',

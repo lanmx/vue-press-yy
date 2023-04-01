@@ -1,3 +1,13 @@
+---
+lang: zh-CN
+title: promise await async 迭代器生成器
+description: promise、await、async、迭代器生成器、线程与进程、js/node事件循环
+head:
+  - - meta
+    - name: keywords
+      content: promise await async 迭代器 生成器 线程 进程 事件循环
+---
+
 # promise、await、async、迭代器生成器、线程与进程、js/node事件循环
 
 ## 一、promise类

@@ -1,3 +1,13 @@
+---
+lang: zh-CN
+title: this call apply
+description: this、call、apply和箭头函数
+head:
+  - - meta
+    - name: keywords
+      content: this call apply 箭头函数
+---
+
 # this、call、apply
 
 ## 一、this介绍

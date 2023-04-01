@@ -1,3 +1,13 @@
+---
+lang: zh-CN
+title: Proxy和Reflect
+description: Proxy / Reflect ：vue2 vue3响应式原理
+head:
+  - - meta
+    - name: keywords
+      content: Proxy Reflect vue3响应式原理
+---
+
 # Proxy / Reflect ：vue2 vue3响应式原理
 
 `vue3`通过 `Proxy`监听数据的变化和收集相关依赖

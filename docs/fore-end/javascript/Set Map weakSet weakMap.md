@@ -1,3 +1,13 @@
+---
+lang: zh-CN
+title: Set Map weakSet weakMap
+description: Set Map weakSet weakMap vue3响应式原理
+head:
+  - - meta
+    - name: keywords
+      content: Set Map weakSet weakMap vue3响应式原理
+---
+
 # Set  / Map / weakSet / weakMap 、vue3响应式原理
 
 ## 一、Set的基本使用

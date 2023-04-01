@@ -1,3 +1,13 @@
+---
+lang: zh-CN
+title: es6
+description: es6类的使用，ES6知识点
+head:
+  - - meta
+    - name: keywords
+      content: es6类 ES6
+---
+
 ## es6类的使用、ES6知识点
 
 ### 一、class定义类

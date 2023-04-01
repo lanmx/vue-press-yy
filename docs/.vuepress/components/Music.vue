@@ -93,6 +93,10 @@ const musiclist = ref([
   { name: '花海(KTV版伴奏)', artist: '周杰伦', lrc: '',  url: 'https://www.ytmp3.cn/down/70577.mp3', cover: 'https://img1.kuwo.cn/star/starheads/500/8/10/2150960774.jpg' },
   { name: '夜曲', artist: '周杰伦', lrc: '',  url: 'https://www.ytmp3.cn/down/69953.mp3', cover: 'https://img1.kuwo.cn/star/starheads/500/8/10/2150960774.jpg' },
   { name: '南山南', artist: '马頔', lrc: data['南山南'],  url: 'https://www.ytmp3.cn/down/34439.mp3', cover: 'https://gimg3.baidu.com/yule/src=http%3A%2F%2Fgips3.baidu.com%2Fit%2Fu%3D3821660248%2C722443707%26fm%3D3007%26app%3D3007%26f%3DJPEG%3Fw%3D500%26h%3D500&refer=http%3A%2F%2Fwww.baidu.com&app=2019&size=w931&n=0&g=0n&q=75&fmt=auto?sec=1679245200&t=ae7ba3ede889673d8ad6da9f464ec95d' },
+  { name: '故乡的原风景', artist: '宗次郎', lrc: data['故乡的原风景'],  url: 'https://www.ytmp3.cn/down/43070.mp3', cover: 'https://gimg3.baidu.com/yule/src=http%3A%2F%2Fgips3.baidu.com%2Fit%2Fu%3D656871383%2C3751881678%26fm%3D3007%26app%3D3007%26f%3DJPEG%3Fw%3D500%26h%3D334&refer=http%3A%2F%2Fwww.baidu.com&app=2019&size=w931&n=0&g=0n&q=75&fmt=auto?sec=1680454800&t=53a858eff0b9c075068a91149b6f5dd3' },
+  { name: '乌兰巴托的夜', artist: '蒋敦豪', lrc: data['乌兰巴托的夜'],  url: 'https://www.ytmp3.cn/down/74492.mp3', cover: 'https://img0.baidu.com/it/u=2862673366,2327537177&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500' },
+  { name: '偏爱', artist: '张芸京', lrc: data['偏爱'],  url: 'https://www.ytmp3.cn/down/51462.mp3', cover: 'https://bkimg.cdn.bcebos.com/pic/38dbb6fd5266d016e8a151ed952bd40734fa35bf?x-bce-process=image/resize,m_lfit,w_536,limit_1' },
+  { name: '江上清风游', artist: '变奏的梦想', lrc: data['江上清风游'],  url: 'https://www.ytmp3.cn/down/54842.mp3', cover: 'https://gimg3.baidu.com/yule/src=http%3A%2F%2Fgips0.baidu.com%2Fit%2Fu%3D3231589805%2C1255950623%26fm%3D3007%26app%3D3007%26f%3DJPEG%3Fw%3D500%26h%3D500&refer=http%3A%2F%2Fwww.baidu.com&app=2019&size=w931&n=0&g=0n&q=75&fmt=auto?sec=1680454800&t=1bae58b4255ff03d5782db38e10ce4d0' },
 ])
 const name = ref(musiclist.value[0].name)
 const author = ref(musiclist.value[0].artist)
@@ -596,6 +600,9 @@ svg {
 .music-list {
     position: absolute;
     right: 35px;
+}
+::deep .el-scrollbar__wrap {
+  height: 500px;
 }
 @media screen and (max-height: 900px) and  (max-width:600px){ 
   .rhy-thm {
