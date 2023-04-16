@@ -1,3 +1,11 @@
+---
+title: vue2的data属性为啥是函数
+meta:
+  - name: description
+    content: vue2的data属性为啥是函数
+  - name: keywords
+    content: vue2 data() 作用域
+---
 ## data属性为啥是函数
 
 [原理分析](https://vue3js.cn/interview/vue/data.html#%E4%B8%89%E3%80%81%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90)

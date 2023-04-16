@@ -1,3 +1,12 @@
+---
+title: computed和watch的区别
+meta:
+  - name: description
+    content: computed和watch的区别
+  - name: keywords
+    content: computed watch 生命周期 vue
+---
+
 ## computed和watch的区别
 
 ### 1. 计算属性computed

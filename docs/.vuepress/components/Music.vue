@@ -45,16 +45,14 @@
           <div class="cur-bar" :style="{'width': defvolume +'%'}"></div>
         </div>
         <div class="music-list">
-          <el-dropdown trigger="click" placement="top">
-          <svg t="1678588735035" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13064" width="200" height="200"><path d="M981.333333 917.333333a21.333333 21.333333 0 0 1-21.333333 21.333334H64a21.333333 21.333333 0 0 1 0-42.666667h896a21.333333 21.333333 0 0 1 21.333333 21.333333zM490.666667 170.666667h469.333333a21.333333 21.333333 0 0 0 0-42.666667H490.666667a21.333333 21.333333 0 0 0 0 42.666667z m469.333333 341.333333H64a21.333333 21.333333 0 0 0 0 42.666667h896a21.333333 21.333333 0 0 0 0-42.666667zM76.193333 446.32C96 461.16 121.953333 469.333333 149.333333 469.333333s53.333333-8.173333 73.14-23.013333c21.333333-16 33.526667-38.666667 33.526667-62.32V179.266667q3.206667 3.58 6.586667 6.813333a21.473333 21.473333 0 0 0 2.953333 2.366667 64.24 64.24 0 0 1 13.333333 12c8.666667 10.22 15.84 24.18 20.733334 40.373333a21.333333 21.333333 0 0 0 40.84-12.346667c-6.666667-22.053333-16.44-40.773333-29.04-55.626666a107.46 107.46 0 0 0-20.493334-18.78c-8.813333-8.806667-16.526667-20.666667-22.36-34.42-9.033333-21.333333-11.813333-42.666667-12.553333-56.78A21.333333 21.333333 0 0 0 234.666667 42.666667h-0.566667A21.333333 21.333333 0 0 0 213.333333 64v251.56C195 304.613333 172.666667 298.666667 149.333333 298.666667c-27.38 0-53.333333 8.173333-73.14 23.013333-21.333333 16-33.526667 38.666667-33.526666 62.32s12.22 46.34 33.526666 62.32z" fill="#333333" p-id="13065"></path></svg>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item v-for="item in musiclist" :key="item" @click="changeMusic(item)">
-                  {{ item.name }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
+          <el-popover placement="top" :width="300" trigger="click">
+            <template #reference>
+              <svg t="1678588735035" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13064" width="200" height="200"><path d="M981.333333 917.333333a21.333333 21.333333 0 0 1-21.333333 21.333334H64a21.333333 21.333333 0 0 1 0-42.666667h896a21.333333 21.333333 0 0 1 21.333333 21.333333zM490.666667 170.666667h469.333333a21.333333 21.333333 0 0 0 0-42.666667H490.666667a21.333333 21.333333 0 0 0 0 42.666667z m469.333333 341.333333H64a21.333333 21.333333 0 0 0 0 42.666667h896a21.333333 21.333333 0 0 0 0-42.666667zM76.193333 446.32C96 461.16 121.953333 469.333333 149.333333 469.333333s53.333333-8.173333 73.14-23.013333c21.333333-16 33.526667-38.666667 33.526667-62.32V179.266667q3.206667 3.58 6.586667 6.813333a21.473333 21.473333 0 0 0 2.953333 2.366667 64.24 64.24 0 0 1 13.333333 12c8.666667 10.22 15.84 24.18 20.733334 40.373333a21.333333 21.333333 0 0 0 40.84-12.346667c-6.666667-22.053333-16.44-40.773333-29.04-55.626666a107.46 107.46 0 0 0-20.493334-18.78c-8.813333-8.806667-16.526667-20.666667-22.36-34.42-9.033333-21.333333-11.813333-42.666667-12.553333-56.78A21.333333 21.333333 0 0 0 234.666667 42.666667h-0.566667A21.333333 21.333333 0 0 0 213.333333 64v251.56C195 304.613333 172.666667 298.666667 149.333333 298.666667c-27.38 0-53.333333 8.173333-73.14 23.013333-21.333333 16-33.526667 38.666667-33.526666 62.32s12.22 46.34 33.526666 62.32z" fill="#333333" p-id="13065"></path></svg>
             </template>
-          </el-dropdown>
+            <div class="list-box">
+              <div class="list-item" :class="{ 'active-item': item.name === name }" v-for="item in musiclist" :key="item.name" @click="changeMusic(item)">{{ item.name }}</div>
+            </div>
+          </el-popover>
         </div>
       </div>
     </div>
@@ -97,6 +95,9 @@ const musiclist = ref([
   { name: '乌兰巴托的夜', artist: '蒋敦豪', lrc: data['乌兰巴托的夜'],  url: 'https://www.ytmp3.cn/down/74492.mp3', cover: 'https://img0.baidu.com/it/u=2862673366,2327537177&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500' },
   { name: '偏爱', artist: '张芸京', lrc: data['偏爱'],  url: 'https://www.ytmp3.cn/down/51462.mp3', cover: 'https://bkimg.cdn.bcebos.com/pic/38dbb6fd5266d016e8a151ed952bd40734fa35bf?x-bce-process=image/resize,m_lfit,w_536,limit_1' },
   { name: '江上清风游', artist: '变奏的梦想', lrc: data['江上清风游'],  url: 'https://www.ytmp3.cn/down/54842.mp3', cover: 'https://gimg3.baidu.com/yule/src=http%3A%2F%2Fgips0.baidu.com%2Fit%2Fu%3D3231589805%2C1255950623%26fm%3D3007%26app%3D3007%26f%3DJPEG%3Fw%3D500%26h%3D500&refer=http%3A%2F%2Fwww.baidu.com&app=2019&size=w931&n=0&g=0n&q=75&fmt=auto?sec=1680454800&t=1bae58b4255ff03d5782db38e10ce4d0' },
+  { name: '莫失莫忘', artist: '文武贝', lrc: data['莫失莫忘'],  url: 'https://www.ytmp3.cn/down/37324.mp3', cover: 'https://cdn.lizhi.fm/audio_cover/2015/01/26/17528785911437959_580x580.jpg' },
+  { name: '绿野仙踪 (钢琴版伴奏)', artist: '陈悦', lrc: data['绿野仙踪 (钢琴版伴奏)'],  url: 'https://www.ytmp3.cn/down/55916.mp3', cover: 'https://imgessl.kugou.com/uploadpic/softhead/400/20130531/20130531162457903.jpg' },
+  { name: '绿野仙踪 箫', artist: '竹影聆风', lrc: data['绿野仙踪 箫'],  url: 'https://www.ytmp3.cn/down/76846.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20220519/20220519004705774043.jpg' },
 ])
 const name = ref(musiclist.value[0].name)
 const author = ref(musiclist.value[0].artist)
@@ -601,8 +602,27 @@ svg {
     position: absolute;
     right: 35px;
 }
-::deep .el-scrollbar__wrap {
-  height: 500px;
+.list-box {
+  background: #252a30;
+}
+.list-item {
+  line-height: 30px;
+  cursor: pointer;
+  padding-left: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #adbac7;
+}
+.list-item:hover {
+  background-color: #b3d3f4;
+  border-radius: 6px;
+  color:  #000;
+}
+.active-item {
+  background-color: #b3d3f4;
+  border-radius: 6px;
+  color:  #000;
 }
 @media screen and (max-height: 900px) and  (max-width:600px){ 
   .rhy-thm {
@@ -633,5 +653,21 @@ svg {
     width: 110.5px;
     height: 110.5px;
   }
+}
+</style>
+<style>
+.el-popper.is-light {
+  background: #22272e !important;
+  border: 1px solid #22272e !important;
+  max-height: 60% !important;;
+  overflow-y: auto !important;
+}
+
+.el-popper__arrow {
+    display: none !important;
+}
+
+.el-popover.el-popper {
+  margin-bottom: 10px !important;
 }
 </style>

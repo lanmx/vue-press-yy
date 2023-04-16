@@ -1,11 +1,10 @@
 ---
-lang: zh-CN
-title: es6
-description: es6类的使用，ES6知识点
-head:
-  - - meta
-    - name: keywords
-      content: es6类 ES6
+title: es6类的使用，ES6知识点
+meta:
+  - name: description
+    content: js的es6类的使用，ES6知识点
+  - name: keywords
+    content: es6类 ES6
 ---
 
 ## es6类的使用、ES6知识点

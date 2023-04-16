@@ -1,11 +1,10 @@
 ---
-lang: zh-CN
 title: Proxy和Reflect
-description: Proxy / Reflect ：vue2 vue3响应式原理
-head:
-  - - meta
-    - name: keywords
-      content: Proxy Reflect vue3响应式原理
+meta:
+  - name: description
+    content: Proxy / Reflect ：vue2 vue3响应式原理
+  - name: keywords
+    content: Proxy Reflect vue3响应式原理
 ---
 
 # Proxy / Reflect ：vue2 vue3响应式原理
