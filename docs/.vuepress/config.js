@@ -11,9 +11,10 @@ const __dirname = getDirname(import.meta.url)
 
 export default defineUserConfig({
   lang: 'zh-CN',
-  title: '蓝敏晓的博客 | lanmx',
+  title: '蓝敏晓的博客',
   description: '女程序员，爱弹琴，爱发呆，爱coding，一个专注分享学习经验，记录前端知识的个人博客',
   head: [
+      ['meta', { name: 'baidu-site-verification', content: 'codeva-CG1MKx50Sm'}],
       ['meta', { name: 'keywords', content: '蓝敏晓'}],
       ['meta', { name: 'keywords', content: 'vuepress'}],
       ['meta', { name: 'keywords', content: '音乐'}],
