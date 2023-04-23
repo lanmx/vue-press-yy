@@ -14,12 +14,12 @@ export default defineClientConfig({
     }
     app.config.globalProperties.$Bus = mitt();
     // 路由导航钩子
-    router.beforeEach((to) => {
-      console.log('before navigation')
-    })
-    router.afterEach((to) => {
-      console.log('after navigation')
-    })
+    // router.beforeEach((to) => {
+    //   console.log('before navigation')
+    // })
+    // router.afterEach((to) => {
+    //   console.log('after navigation')
+    // })
   },
   setup() {},
   rootComponents: [],

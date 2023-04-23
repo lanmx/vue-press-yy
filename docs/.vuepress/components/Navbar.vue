@@ -280,5 +280,10 @@ export default {
 .drawer-outer {
   border-radius: 30px 30px 0 0;
 }
+@media screen and  (max-width: 1000px){ 
+  .article-nav-bar {
+    display: none;
+  }
+}
 </style>
 
