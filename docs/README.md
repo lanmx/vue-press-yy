@@ -1,7 +1,7 @@
 ---
 home: true
 search: true
-heroImage: /logo.png
+heroImage: /sculpture.jpg
 heroImageDark: /logoDark.png
 heroText: 嘟嘟在蓝色海底 - 蓝敏晓的博客
 tagline: 业精于勤而荒于嬉，行成于思而毁于随。
