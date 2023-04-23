@@ -28,7 +28,7 @@ export default defineUserConfig({
   ],
   theme: defaultTheme({
     home: '/',
-    logo: '/logo.png',
+    logo: '/sculpture.jpg',
     logoDark: '/logoDark.png',
     repo: 'https://github.com/lanmx/vue-press-yy',
     search: true,

@@ -6,8 +6,8 @@
     <div class="tab-box">
       <div class="tab-name" :class="{'active-line': all }" @click="getAllAct('all')">全部文章</div>
     </div>
-    <div class="tab-box">
-      <div class="tab-name" :class="{'active-line': !all }" @click="getAllAct">{{ cateItem.name }}</div>
+    <div class="tab-box" v-for="item in menu" :key="item.text">
+      <div class="tab-name" :class="{'active-line': !all && item.name == cateItem.name }" @click="getAllAct(item)">{{ item.name }}</div>
     </div>
   </div>
   <div v-for="item in list" :key="item.text">
@@ -46,17 +46,48 @@ export default {
 	// setup函数中要使用props的话，要接收一下
   setup(props, context) {
     const cate = props.cate;
+    const menu = __MENU__[cate];
+    // 文档菜单目录和标题名称的映射
+    const menuMap = {
+      'javascript-basics': 'JavaScript基础',
+      'javascript': '高级JavaScript教程',
+      'vue': 'Vue',
+      'angular': 'Angular',
+      'classic-example': '经典例子',
+      'html-css': 'HTML CSS',
+      'mobile-terminal': '移动端',
+      'packer-tool': '打包工具',
+      'vuepress': 'vuePress',
+      'data-struct': '数据结构与算法',
+      'computer-basics': '计算机基础',
+      'nodejs': 'Nodejs',
+      'git': 'Git',
+    };
+
+    // 初始化菜单
+    const getMenu = () => {
+      if (menu) {
+        menu.forEach(m => {
+          m.name = menuMap[m.text]
+        })
+        console.log(menu);
+      }
+    }
+    onBeforeMount(() => {
+      getMenu();
+    })
     console.log(cate, props.cate);
     const articleData = __ARTICLE__[cate];
-    onBeforeMount(() => {
-      console.log('articleData', articleData, props)
-    })
+    // onBeforeMount(() => {
+    //   console.log('articleData', articleData, props)
+    // })
     const list = ref([])
     list.value = articleData.list.filter(item => item.text !== 'README')
     const cateItem = ref({});
     const instance = getCurrentInstance()
     instance?.proxy?.$Bus.on('getCurCate', (res) => {
       if (res) {
+        console.log(res)
         cateItem.value = res;
         all.value = false;
       }
@@ -70,19 +101,20 @@ export default {
     );
     // 获取文章类别
     const getCateList = (value) => {
+      console.log(value)
       list.value = articleData.list.filter(item => item.parent === value.text);
-      console.log('list.value', list.value);
     }
 
     // 获取所有文章
     const all = ref(true);
-    const getAllAct = (e) => {
-      if (e === 'all') {
+    const getAllAct = (item) => {
+      if (item === 'all') {
         all.value = true;
         list.value = _.cloneDeep(articleData.list);
       } else {
         all.value = false;
-        getCateList(cateItem.value);
+        cateItem.value = item;
+        getCateList(item);
       }
     }
     // 返回值会暴露给模板和其他的选项式 API 钩子
@@ -91,6 +123,7 @@ export default {
       cateItem,
       all,
       list,
+      menu,
       getAllAct,
       getCateList
     }
@@ -106,6 +139,9 @@ export default {
   position: sticky;
   top: 55px;
   background-color: var(--c-bg);
+  flex-wrap: wrap;
+  height: auto;
+  z-index: 9;
   svg {
     width: 1.7rem;
     height: 1.7rem;
@@ -122,7 +158,7 @@ export default {
     border-bottom: 3px solid #3eaf7c;
   }
   .tab-box {
-    padding: 0 10px;
+    padding: 0 15px;
   }
 }
 .title {
