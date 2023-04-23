@@ -11,7 +11,7 @@
         <p>网站日常记录和分享技术。（所有权归作者所有）</p>
       </div>
       <div class="right">
-        <div class="title">文章导航</div>
+        <div class="title">推荐文章导航</div>
         <div class="r-list">
           <div class="r-item" v-for="item in list" :key="item.text" @click="linkToDoc(item.link)">
             <router-link :to="item.link">{{ item.text }}</router-link>
@@ -51,7 +51,7 @@ const linkToDoc = () => {
 </script>
 <style scoped>
 .footer-nav {
-  border-top: 1px solid #eaecef;
+  border-top: 1px solid var(--c-border);
   width: 100%;
   height: auto;
   display: flex;

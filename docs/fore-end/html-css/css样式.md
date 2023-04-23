@@ -164,6 +164,16 @@ this.text = res.data.replace(/\n/g,'<br>')
 
 100vh v是相对于 当前的window
 
+### 11.卡片hover放大和加边框
+```css
+.el-card {
+  transition: background .3s ease-in-out,transform .3s ease-in-out;
+}
+.el-card:hover {
+  border: 3px solid #3eaf7c;
+  transform: scale(1.05);
+}
+```
 <ClientOnly>
   <Valine></Valine>
 </ClientOnly>

@@ -61,6 +61,83 @@ this.$parant.msg();
 
 3. vuex
 
+### 三、vue3组件子传父
+1、子组件先定义defineEmits
+```ts
+const emit = defineEmits(['getcurMusic'])
+```
+
+2、子组件函数中发射
+```ts
+// 初始化
+const init = () => {
+  emit('getcurMusic', musiclist.value[0])
+}
+```
+3、父组件使用
+```html
+<Music @getcurMusic="getcurMusic" />
+```
+```ts
+onMounted(() => {
+  getcurMusic();
+})
+```
+
+### 四、vue3使用mitt插件实现事件总线传值
+1、在client.js客户端文件全局引入mitt插件并注册
+```ts
+import { defineClientConfig } from '@vuepress/client'
+import mitt from 'mitt'
+
+export default defineClientConfig({
+  enhance({ app, router, siteData }) {
+    app.config.globalProperties.$Bus = mitt();
+  },
+  setup() {},
+})
+```
+
+2、在组件中使用
+
+要注意的是，事件总线的方法不能调用实例函数,因为事件总线不在实例生命周期里
+
+如果想要在实现总线方法里调实例函数，可以用watch函数监听变化值再调用
+
+```ts
+import { getCurrentInstance  } from 'vue'
+export default {
+  props: {
+  },
+  setup() {
+    const cateItem = ref({});
+    const instance = getCurrentInstance()
+    instance?.proxy?.$Bus.on('getCurCate', (res) => {
+      if (res) {
+        cateItem.value = res;
+        // ...
+      }
+    })
+    watch(cateItem, (newValue, oldValue) => {
+        console.log('值发生了变更', newValue, oldValue);
+        getCateList(newValue);
+      },
+      { deep: true, flush: 'post' }
+    );
+
+    // 获取文章类别
+    const getCateList = (value) => {
+      console.log(value);
+    }
+    // 返回值会暴露给模板和其他的选项式 API 钩子
+    return {
+      cateItem,
+      getCateList
+    }
+  },
+}
+```
+
 <ClientOnly>
   <Valine></Valine>
 </ClientOnly>

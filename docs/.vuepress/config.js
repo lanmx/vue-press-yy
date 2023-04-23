@@ -6,8 +6,8 @@ import { path, getDirname } from '@vuepress/utils'
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
 import { searchPlugin } from '@vuepress/plugin-search'
 import { backToTopPlugin } from '@vuepress/plugin-back-to-top'
+import getChildFloders from "../utils/get-child-floder"
 const __dirname = getDirname(import.meta.url)
-
 
 export default defineUserConfig({
   lang: 'zh-CN',
@@ -15,12 +15,16 @@ export default defineUserConfig({
   description: '女程序员，爱弹琴，爱发呆，爱coding，一个专注分享学习经验，记录前端知识的个人博客',
   head: [
       ['meta', { name: 'baidu-site-verification', content: 'codeva-CG1MKx50Sm'}],
+      ['meta', { name: 'baidu-site-verification', content: 'codeva-jIfosA0IJ1'}],
+      ['meta', { name: '360-site-verification', content: '1a0bfe04399601203667d7dcfa1c8e6c'}],
       ['meta', { name: 'keywords', content: '蓝敏晓'}],
       ['meta', { name: 'keywords', content: 'vuepress'}],
       ['meta', { name: 'keywords', content: '音乐'}],
       ['meta', { name: 'keywords', content: 'vue'}],
       ['meta', { name: 'keywords', content: 'angular'}],
       ['meta', { name: 'keywords', content: 'javascript'}],
+      // ['script', { src: "/utils/autopush-baidu.js" }],
+      // ['script', { src: "/utils/autopush-360.js" }]
   ],
   theme: defaultTheme({
     home: '/',
@@ -32,7 +36,7 @@ export default defineUserConfig({
       { text: '首页', link: '/' },
       { text: '前端', link: '/fore-end/' },
       { text: '后台', link: '/back-end/' },
-      { text: '音乐', link: '/music/' },
+      // { text: '音乐', link: '/music/' },
       { text: '关于', link: '/about/' },
     ],
     displayAllHeaders: false,
@@ -111,14 +115,21 @@ export default defineUserConfig({
         }
       ],
     },
-    subSidebar: 'auto',
+    // subSidebar: 'auto',
     smoothScroll: true,
     lastUpdatedText: '最近更新',
     contributorsText: '贡献者',
-    editLinkText: '在gitHub上编辑此页'
+    editLinkText: '在gitHub上编辑此页',
+    next: true,
+    // 默认值是 true 。设置为 false 来禁用所有页面的 上一篇 链接
+    prev: true,
+    backToHome: '返回首页'
   }),
   alias: {
     '@alias': path.resolve(__dirname, './../../docs/.vuepress/images'),
+    '@components': path.resolve(__dirname, './../../docs/.vuepress/components'),
+    '@layouts': path.resolve(__dirname, './../../docs/.vuepress/layouts'),
+    '@utils': path.resolve(__dirname, './../../docs/utils'),
   },
   colorMode: 'dark',
   plugins: [
@@ -181,4 +192,26 @@ export default defineUserConfig({
       }
     ] 
   ],
+  // define HOOK
+  define: {
+    __FOO__: 'st33333r',
+    __MENU__: {
+      'all': getChildFloders('docs/fore-end/').concat(getChildFloders('docs/back-end/')),
+      'fore-end': getChildFloders('docs/fore-end/'),
+      'back-end': getChildFloders('docs/back-end/'),
+    },
+    __ARTICLE__: {
+      'fore-end': {
+        list: getChildren('docs/fore-end/'),
+        cate: 'fore-end',
+        name: '前端'
+      },
+      'back-end': {
+        list: getChildren('docs/back-end/'),
+        cate: 'back-end',
+        name: '后台'
+      },
+      'number': getChildren('docs/fore-end/').concat(getChildren('docs/back-end/')).length,
+    }
+  },
 })

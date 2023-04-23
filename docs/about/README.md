@@ -27,3 +27,7 @@
 <ClientOnly>
   <Valine></Valine>
 </ClientOnly>
+
+<ClientOnly>
+  <Navbar></Navbar>
+</ClientOnly>

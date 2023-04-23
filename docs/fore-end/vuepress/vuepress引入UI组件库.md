@@ -1,9 +1,32 @@
 # vuepress引入UI组件库
 ## 一、下载ant design依赖
 下载依赖，我这里下载最新版本
-```js
+<CodeGroup>
+  <CodeGroupItem title="PNPM">
+
+```bash:no-line-numbers
+pnpm install ant-design-vue@next
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="YARN">
+
+```bash:no-line-numbers
 yarn add ant-design-vue@next
 ```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="NPM" active>
+
+```bash:no-line-numbers
+npm install ant-design-vue@next
+```
+
+  </CodeGroupItem>
+</CodeGroup>
+
 ## 二、引入ant design 
 在client.js文件
 ```ts

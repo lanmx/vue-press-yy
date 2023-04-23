@@ -9,8 +9,6 @@ import path from 'path'
  */
 var getChildFloders = function(dir, allFile) {
   var results = [];
-  const aa = filesystem.readdirSync(dir)
-  console.log(aa);
   filesystem.readdirSync(dir).forEach(function(file) {
       file = dir+'/'+file;
       var stat = filesystem.statSync(file);
@@ -30,7 +28,6 @@ var getChildFloders = function(dir, allFile) {
         }
       }
   });
-  console.log(results,":results");
   return results;
 };
 

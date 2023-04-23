@@ -65,7 +65,8 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import formatjs from '../../utils/format'
 import data from '../static/lrc'
 import _ from 'lodash'
-
+// 声明子传父 - 发射事件
+const emit = defineEmits(['getcurMusic'])
 const rhythmlist = ref(Array.from({ length: 28 }).map(() => Math.floor(Math.random() * 70)));
 let process = ref<number>(0);
 const musiclist = ref([
@@ -129,6 +130,8 @@ const init = () => {
   if(curmusic && status==='playing') {
     stopshow.value = false
   }
+  console.log(6666)
+  emit('getcurMusic', musiclist.value[0])
 }
 // 歌曲时长
 const format = (val: number) => {
@@ -225,6 +228,7 @@ const playMusic = (music?) => {
       setstatus('playing');
       clearTimeout(timer.value);
       timeInterval();
+      emit('getcurMusic', music)
       // lrcInterval();// 歌词滚动需要每一句歌词返回对应的时间点
       console.log('Playing...');
       resolve(true)
@@ -238,7 +242,7 @@ const playMusic = (music?) => {
 const getCurrent = () => {
   time.value.current = formatjs.secondsminute(Math.round(curmusic.currentTime))
   process.value = Math.floor((100* curmusic.currentTime) / curmusic.duration)
-  console.log(curmusic.currentTime,curmusic.duration);
+  // console.log(curmusic.currentTime,curmusic.duration);
   if(circleshow.value && curmusic.duration - curmusic.currentTime < 1) {
     next();
   }
@@ -327,6 +331,8 @@ const lrcInterval = () => {
   position: absolute;
   left: 0;
   z-index: 1;
+  bottom: 0;
+  top: 74px;
 }
 .title-music {
     font-weight: bold;
@@ -402,7 +408,7 @@ const lrcInterval = () => {
   margin: 0.3%;
   width: 2%;
   height: 2%;
-  background-image: linear-gradient(180deg, #1303f4, rgb(223, 221, 221));
+  background-image: linear-gradient(180deg, #e4e7ed, rgb(223, 221, 221));
 }
 .rhy-thm-item:nth-child(1) {
   background-image: linear-gradient(180deg, #0000FF, rgb(223, 221, 221));
@@ -669,5 +675,13 @@ svg {
 
 .el-popover.el-popper {
   margin-bottom: 10px !important;
+}
+</style>
+<style>
+.el-drawer__header {
+  padding-bottom: 32px;
+  margin-bottom: 0px;
+  background-color: #23282f;
+  color: #adbac7;
 }
 </style>

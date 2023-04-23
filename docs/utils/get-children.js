@@ -3,6 +3,7 @@ import path from 'path'
 function getChildren(path) {
   const root = []
   readDirSync(path,root)
+  console.log(root,"root")
   return root
 }
 
@@ -25,6 +26,7 @@ function checkFileType(path) {
 }
 
 function prefixPath(basePath,dirPath) {
+  let parent = basePath.substring(basePath.lastIndexOf('/')+1)
   let index = basePath.indexOf("/")
   // 去除一级目录地址
   basePath = basePath.slice(index,path.length)
@@ -34,7 +36,8 @@ function prefixPath(basePath,dirPath) {
   let title = basePath.substring(basePath.lastIndexOf('/')+1, basePath.indexOf("."))
   return {
     text: title,
-    link: basePath
+    link: basePath,
+    parent: parent
   }
 }
 
