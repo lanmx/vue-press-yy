@@ -632,7 +632,7 @@ svg {
 }
 @media screen and (max-height: 900px) and  (max-width:600px){ 
   .rhy-thm {
-    height: 20%;
+    height: 10%;
   }
   .title-music {
     font-size: 28px;
