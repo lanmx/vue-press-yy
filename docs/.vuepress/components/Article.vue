@@ -152,7 +152,7 @@ export default {
     height: 1.7rem;
   }
   .tab-name {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     line-height: 40px;
     cursor: pointer;
   }
@@ -167,8 +167,9 @@ export default {
     padding: 0 15px;
   }
 }
+
 .title {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 2rem;
   color: var(--c-text)
 }
@@ -188,7 +189,7 @@ export default {
   display: flex;
 }
 .line {
-  border: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 5px;
@@ -238,5 +239,13 @@ span.label-t {
 .el-card:hover {
   border: 3px solid #3eaf7c;
   transform: scale(1.05);
+}
+@media screen and (max-width: 540px){
+  .column-head {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow: auto;
+  }
+
 }
 </style>
