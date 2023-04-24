@@ -87,7 +87,12 @@ export default defineUserConfig({
           text: 'vuePress',
           collapsible: true,
           children: getChildren('docs/fore-end/vuepress/')
-        }
+        },
+        {
+          text: '前端面试集合',
+          collapsible: true,
+          children: getChildren('docs/fore-end/interview/')
+        },
       ],
       '/back-end/': [
         {

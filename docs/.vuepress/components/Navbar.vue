@@ -83,6 +83,7 @@ export default {
       'computer-basics': '计算机基础',
       'nodejs': 'Nodejs',
       'git': 'Git',
+      'interview': '前端面试集合',
     };
 
     // 初始化菜单
