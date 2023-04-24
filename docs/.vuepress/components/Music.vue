@@ -636,7 +636,9 @@ svg {
   }
   .title-music {
     font-size: 28px;
-    padding: 5% 15%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   .vol-bar {
     display: none;

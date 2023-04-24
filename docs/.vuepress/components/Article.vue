@@ -104,6 +104,7 @@ export default {
     const getCateList = (value) => {
       console.log(value)
       list.value = articleData.list.filter(item => item.parent === value.text);
+      window.scrollTo(0,0);
     }
 
     // 获取所有文章
@@ -117,6 +118,7 @@ export default {
         cateItem.value = item;
         getCateList(item);
       }
+      window.scrollTo(0,0);
     }
     // 返回值会暴露给模板和其他的选项式 API 钩子
     return {
@@ -158,6 +160,7 @@ export default {
   }
   .active-line {
     border-bottom: 3px solid #3eaf7c;
+    font-weight: bold;
   }
   .tab-box {
     padding: 0 15px;
