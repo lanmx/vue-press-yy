@@ -30,6 +30,7 @@
     :before-close="cancelClick"
     size="80%"
     :with-footer="false"
+    :append-to-body="true"
   >
     <template #header>
       <div class="header-box">
@@ -280,6 +281,7 @@ export default {
 <style>
 .drawer-outer {
   border-radius: 30px 30px 0 0;
+  width: 100%;
 }
 @media screen and  (max-width: 1000px){ 
   .article-nav-bar {
