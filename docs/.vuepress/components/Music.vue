@@ -135,7 +135,7 @@ const init = () => {
     // stopshow.value = false
   }
   emit('getcurMusic', musiclist.value[0])
-  play();
+  // play();
 }
 // 歌曲时长
 const format = (val: number) => {
