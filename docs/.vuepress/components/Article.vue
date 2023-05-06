@@ -72,13 +72,12 @@ export default {
         menu.forEach(m => {
           m.name = menuMap[m.text]
         })
-        console.log(menu);
+        // console.log(menu);
       }
     }
     onBeforeMount(() => {
       getMenu();
     })
-    console.log(cate, props.cate);
     const articleData = __ARTICLE__[cate];
     // onBeforeMount(() => {
     //   console.log('articleData', articleData, props)
@@ -89,21 +88,20 @@ export default {
     const instance = getCurrentInstance()
     instance?.proxy?.$Bus.on('getCurCate', (res) => {
       if (res) {
-        console.log(res)
+        // console.log(res)
         cateItem.value = res;
         all.value = false;
       }
     })
 
     watch(cateItem, (newValue, oldValue) => {
-        console.log('值发生了变更', newValue, oldValue);
+        // console.log('值发生了变更', newValue, oldValue);
         getCateList(newValue);
       },
       { deep: true, flush: 'post' }
     );
     // 获取文章类别
     const getCateList = (value) => {
-      console.log(value)
       list.value = articleData.list.filter(item => item.parent === value.text);
       window.scrollTo(0,0);
     }

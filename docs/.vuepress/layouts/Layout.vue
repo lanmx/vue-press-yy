@@ -1,6 +1,6 @@
 <script setup>
 import ParentLayout from '@vuepress/theme-default/layouts/Layout.vue'
-import Info from '../components/Info.vue'
+import MusicBtn from '../components/MusicBtn.vue'
 const foo = __FOO__
 </script>
 
@@ -25,9 +25,6 @@ const foo = __FOO__
     <!-- <template #navbar-before>
       蓝敏晓蓝敏晓蓝敏晓蓝敏晓 {{ foo }}
     </template>
-    <template #navbar-after>
-      蓝敏晓蓝敏晓蓝敏晓蓝敏晓
-    </template>
     <template #sidebar-top>
       蓝敏晓蓝敏晓蓝敏晓蓝敏晓
     </template>
@@ -37,6 +34,9 @@ const foo = __FOO__
     <template #page-content-bottom>
       蓝敏晓蓝敏晓蓝敏晓蓝敏晓
     </template> -->
+    <template #navbar-after>
+      <MusicBtn />
+    </template>
     <template #page-bottom>
       <div class="my-footer">
         <div class="tips">
