@@ -34,7 +34,7 @@ export default defineUserConfig({
     home: '/',
     logo: '/sculpture.jpg',
     logoDark: '/logoDark.png',
-    repo: 'https://github.com/lanmx/vue-press-yy',
+    repo: 'https://github.com/lanmx/',
     search: true,
     navbar: [
       { text: '首页', link: '/' },
