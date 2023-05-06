@@ -118,7 +118,7 @@ export default {
     }
   }
   .music-name {
-    width: 32px;
+    width: 40px;
     text-overflow: ellipsis;
     overflow: hidden;
   }
