@@ -381,11 +381,7 @@ const lrcInterval = () => {
 .song-word {
   height: 100%;
   text-align: center;
-  padding: auto;
   opacity: 0.7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .song-word-list {
   height: 100%;
@@ -394,7 +390,7 @@ const lrcInterval = () => {
   line-height: 40px;
   white-space: pre-wrap;
   overflow-y: auto;
-  margin-top: 5%;
+  margin-top: 10px;
 }
 #scroll-list-id {
   position: relative;
@@ -661,10 +657,6 @@ svg {
   .title-music {
     font-size: 24px;
     padding: 5% 15%;
-  }
-  .cover-div {
-    width: 170px;
-    height: 170px;
   }
 }
 </style>
