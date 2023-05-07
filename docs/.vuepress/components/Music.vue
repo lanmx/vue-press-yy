@@ -56,6 +56,7 @@
               </template>
               <div class="list-box">
                 <div class="list-item" :class="{ 'active-item': item.songname === songname }" v-for="item in musiclist" :key="item.songname" @click="changeMusic(item)">{{ item.songname }}</div>
+                <p v-if="musiclist.length===0" style="text-align: center;">暂无数据</p>
               </div>
             </el-popover>
           </client-only>
@@ -666,6 +667,7 @@ svg {
   border: 1px solid #22272e !important;
   max-height: 60% !important;;
   overflow-y: auto !important;
+  min-height: 160px !important;
 }
 
 .el-popper__arrow {
