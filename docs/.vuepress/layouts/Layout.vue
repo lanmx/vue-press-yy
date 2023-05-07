@@ -40,7 +40,7 @@ const foo = __FOO__
     <template #page-bottom>
       <div class="my-footer">
         <div class="tips">
-          <p>MIT Licensed | Copyright © 2018-2023 蓝敏晓</p>
+          <p>MIT Licensed | Copyright © 2023-2025 蓝敏晓</p>
           <a href="https://beian.miit.gov.cn" target="_blank">备案号：粤ICP备2023024899号-1</a> 
         </div>
       </div>

@@ -11,7 +11,7 @@ const __dirname = getDirname(import.meta.url)
 
 export default defineUserConfig({
   lang: 'zh-CN',
-  title: '蓝敏晓的博客',
+  title: '宽窄巷子和锦里',
   description: '女程序员，爱弹琴，爱发呆，爱coding，一个专注分享学习经验，记录前端知识的个人博客',
   head: [
       ['meta', { name: 'baidu-site-verification', content: 'codeva-CG1MKx50Sm'}],
@@ -24,7 +24,7 @@ export default defineUserConfig({
       ['meta', { name: 'keywords', content: 'vue'}],
       ['meta', { name: 'keywords', content: 'angular'}],
       ['meta', { name: 'keywords', content: 'javascript'}],
-      ['meta', { name: 'keywords', content: '嘟嘟在蓝色海底'}],
+      ['meta', { name: 'keywords', content: '宽窄巷子和锦里'}],
       ['meta', { name: 'keywords', content: '聪明的憨憨猪'}],
       ['meta', { name: 'keywords', content: '小憨憨'}],
       // ['script', { src: "/utils/autopush-baidu.js" }],
@@ -38,99 +38,97 @@ export default defineUserConfig({
     search: true,
     navbar: [
       { text: '首页', link: '/' },
-      { text: '前端', link: '/fore-end/' },
-      { text: '后台', link: '/back-end/' },
+      { text: '前端', link: '/front/' },
+      { text: '后台', link: '/back/' },
       // { text: '音乐', link: '/music/' },
       { text: '关于', link: '/about/' },
     ],
     displayAllHeaders: false,
     sidebar: {
-      '/fore-end/': [
+      '/front/': [
         {
           text: 'JavaScript基础',
           collapsible: true,
-          children: getChildren('docs/fore-end/javascript-basics/')
+          children: getChildren('docs/front/javascript-basics/')
         },
         {
           text: '高级JavaScript教程',   // 必要的
           collapsible: true,
           sidebarDepth: 3,    // 可选的, 默认值是 2
-          children: getChildren('docs/fore-end/javascript/')
+          children: getChildren('docs/front/javascript/')
         },
         {
           text: 'Vue',
           collapsible: true,
-          children: getChildren('docs/fore-end/vue/')
+          children: getChildren('docs/front/vue/')
         },
         {
           text: 'Angular',
           collapsible: true,
-          children: getChildren('docs/fore-end/angular/')
+          children: getChildren('docs/front/angular/')
         },
         {
           text: '经典例子',
           collapsible: true,
-          children: getChildren('docs/fore-end/classic-example/')
+          children: getChildren('docs/front/classic-example/')
         },
         {
           text: 'HTML CSS',
           collapsible: true,
-          children: getChildren('docs/fore-end/html-css/')
+          children: getChildren('docs/front/html-css/')
         },
         {
           text: '移动端',
           collapsible: true,
-          children: getChildren('docs/fore-end/mobile-terminal/')
+          children: getChildren('docs/front/mobile-terminal/')
         },
         {
           text: '打包工具',
           collapsible: true,
-          children: getChildren('docs/fore-end/packer-tool/')
+          children: getChildren('docs/front/packer-tool/')
         },
         {
           text: 'vuePress',
           collapsible: true,
-          children: getChildren('docs/fore-end/vuepress/')
+          children: getChildren('docs/front/vuepress/')
         },
         {
           text: '前端面试集合',
           collapsible: true,
-          children: getChildren('docs/fore-end/interview/')
+          children: getChildren('docs/front/interview/')
         },
       ],
-      '/back-end/': [
+      '/back/': [
         {
           text: '数据结构与算法',
           collapsible: true,
-          children: getChildren('docs/back-end/data-struct/')
-          // children: [
-          //   { text: '队列', link: '/data-struct/队列.md'  },
-          // ]
+          children: getChildren('docs/back/data-struct/')
         },
         {
           text: '计算机基础',
           collapsible: true,
-          children: getChildren('docs/back-end/computer-basics/')
+          children: getChildren('docs/back/computer-basics/')
         },
         {
           text: 'Nodejs',
           collapsible: true,
-          children: getChildren('docs/back-end/nodejs/')
+          children: getChildren('docs/back/nodejs/')
         },
         {
           text: 'Git',
           collapsible: true,
-          children: getChildren('docs/back-end/git/')
+          children: getChildren('docs/back/git/')
         }
       ],
     },
+
     // subSidebar: 'auto',
     smoothScroll: true,
     lastUpdatedText: '最近更新',
     contributorsText: '贡献者',
     editLinkText: '在gitHub上编辑此页',
-    next: true,
     // 默认值是 true 。设置为 false 来禁用所有页面的 上一篇 链接
+    next: true,
     prev: true,
     backToHome: '返回首页'
   }),
@@ -159,17 +157,17 @@ export default defineUserConfig({
         '/': {
           placeholder: '输入搜索',
         },
-        '/fore-end/': {
+        '/front/': {
           placeholder: '搜索',
         },
-        '/back-end/': {
+        '/back/': {
           placeholder: 'search',
         }
       },
       // 排除首页
       isSearchable: (page) => page.path !== '/',
     }),
-    backToTopPlugin(),
+    // backToTopPlugin(),
     ['@vuepress/last-updated'],
     ["vuepress-plugin-nuggets-style-copy", {
       copyText: "复制代码",
@@ -205,22 +203,22 @@ export default defineUserConfig({
   define: {
     __FOO__: 'st33333r',
     __MENU__: {
-      'all': getChildFloders('docs/fore-end/').concat(getChildFloders('docs/back-end/')),
-      'fore-end': getChildFloders('docs/fore-end/'),
-      'back-end': getChildFloders('docs/back-end/'),
+      'all': getChildFloders('docs/front/').concat(getChildFloders('docs/back/')),
+      'fore-end': getChildFloders('docs/front/'),
+      'back-end': getChildFloders('docs/back/'),
     },
     __ARTICLE__: {
       'fore-end': {
-        list: getChildren('docs/fore-end/'),
+        list: getChildren('docs/front/'),
         cate: 'fore-end',
         name: '前端'
       },
       'back-end': {
-        list: getChildren('docs/back-end/'),
+        list: getChildren('docs/back/'),
         cate: 'back-end',
         name: '后台'
       },
-      'number': getChildren('docs/fore-end/').concat(getChildren('docs/back-end/')).length,
+      'number': getChildren('docs/front/').concat(getChildren('docs/back/')).length,
     }
   },
 })

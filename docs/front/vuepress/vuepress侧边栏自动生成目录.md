@@ -67,17 +67,17 @@ export default getChildren
 import getChildren from "../utils/get-children"
 ...
 sidebar: {
-'/fore-end/': [
+'/front/': [
   {
     text: 'JavaScript基础',
     collapsible: true,
-    children: getChildren('docs/fore-end/javascript-basics/')
+    children: getChildren('docs/front/javascript-basics/')
   },
   {
     text: '高级JavaScript教程',   // 必要的
     collapsible: true,
     sidebarDepth: 3,    // 可选的, 默认值是 2
-    children: getChildren('docs/fore-end/javascript/')
+    children: getChildren('docs/front/javascript/')
   },
 ]
 }

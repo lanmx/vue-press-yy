@@ -29,21 +29,21 @@
 <script setup>
 import { ref } from 'vue'
 const list = ref([
-  { text: '作用域链', link: '/fore-end/javascript/浏览器工作原理和作用域链.md' },
-  { text: 'Set Map', link: '/fore-end/javascript/Set Map weakSet weakMap.md' },
-  { text: '事件循环', link: '/fore-end/javascript/Promise await async 宏微任务 事件循环.md' },
-  { text: '响应式原理', link: '/fore-end/javascript/Proxy Reflect vue2 vue3响应式原理.md' },
-  { text: '手写双向绑定原理', link: '/fore-end/vue/手写双向绑定原理.md' },
-  { text: 'this', link: '/fore-end/javascript/this call apply 箭头函数.md' },
-  { text: '原型链', link: '/fore-end/javascript/面向对象 构造函数 原型链 继承.md' },
-  { text: 'ES6', link: '/fore-end/javascript/ES6知识点.md' },
-  { text: '闭包', link: '/fore-end/javascript/闭包 内存泄漏.md' },
-  { text: '内存管理', link: '/fore-end/javascript/内存管理和垃圾回收机制.md' },
-  { text: 'Webpack', link: '/fore-end/packer-tool/Webpack.md'  },
-  { text: '队列', link: '/back-end/data-struct/队列.md'  },
-  { text: '链表', link: '/back-end/data-struct/链表.md'  },
-  { text: '栈', link: '/back-end/data-struct/栈.md'  },
-  { text: 'nodejs', link: '/back-end/nodejs/nodejs基础.md'  },
+  { text: '作用域链', link: '/front/javascript/浏览器工作原理和作用域链.md' },
+  { text: 'Set Map', link: '/front/javascript/Set Map weakSet weakMap.md' },
+  { text: '事件循环', link: '/front/javascript/Promise await async 宏微任务 事件循环.md' },
+  { text: '响应式原理', link: '/front/javascript/Proxy Reflect vue2 vue3响应式原理.md' },
+  { text: '手写双向绑定原理', link: '/front/vue/手写双向绑定原理.md' },
+  { text: 'this', link: '/front/javascript/this call apply 箭头函数.md' },
+  { text: '原型链', link: '/front/javascript/面向对象 构造函数 原型链 继承.md' },
+  { text: 'ES6', link: '/front/javascript/ES6知识点.md' },
+  { text: '闭包', link: '/front/javascript/闭包 内存泄漏.md' },
+  { text: '内存管理', link: '/front/javascript/内存管理和垃圾回收机制.md' },
+  { text: 'Webpack', link: '/front/packer-tool/Webpack.md'  },
+  { text: '队列', link: '/back/data-struct/队列.md'  },
+  { text: '链表', link: '/back/data-struct/链表.md'  },
+  { text: '栈', link: '/back/data-struct/栈.md'  },
+  { text: 'nodejs', link: '/back/nodejs/nodejs基础.md'  },
 ])
 const linkToDoc = () => {
   // console.log(this.$router);

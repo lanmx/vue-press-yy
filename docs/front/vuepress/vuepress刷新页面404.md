@@ -2,7 +2,7 @@
 
 访问地址 http://blog.pengxiao.xyz/   刷新页面可以正常访问
 
-访问地址 http://blog.pengxiao.xyz/fore-end/  刷新页面404
+访问地址 http://blog.pengxiao.xyz/front/  刷新页面404
 
 
 后来查了好多资料，后来发现是组件打包报错了，导致打包文件缺失，刷新部分缺失页面404；
