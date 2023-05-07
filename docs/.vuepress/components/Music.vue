@@ -65,10 +65,11 @@
 </keep-alive>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, onBeforeMount } from 'vue'
 import formatjs from '../../utils/format'
 import data from '../static/lrc'
 import _ from 'lodash'
+import { getMusic } from '../api/music'
 // 声明子传父 - 发射事件
 const emit = defineEmits(['getcurMusic'])
 const rhythmlist = ref(Array.from({ length: 28 }).map(() => Math.floor(Math.random() * 70)));
@@ -119,6 +120,20 @@ const full = ref(false)
 const defvolume = ref(0.2 * 100)
 const muted = ref(false)
 const lrcTimer = ref<TimerType>()
+onBeforeMount(() => {
+  getMusic()
+  .then(function (response) {
+    // 处理成功情况
+    console.log(response);
+  })
+  .catch(function (error) {
+    // 处理错误情况
+    console.log(error);
+  })
+  .then(function () {
+    // 总是会执行
+  });
+})
 onMounted(async () =>{
   time.value.duration = curmusic.duration ? formatjs.secondsminute(curmusic.duration) : '02:45'
   time.value.current = formatjs.secondsminute(curmusic.currentTime)
@@ -374,6 +389,10 @@ const lrcInterval = () => {
     border-radius: 50px;
     background-color: #67686a;
     overflow: hidden;
+    img {
+      width: 100px;
+      height: 100px;
+    }
 }
 .img-auto {
   animation: round 9s infinite linear;
