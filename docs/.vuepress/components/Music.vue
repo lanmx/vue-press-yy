@@ -50,12 +50,24 @@
         </div>
         <div class="music-list">
           <client-only>
-            <el-popover placement="top" :width="300" trigger="click" popper-class="popper-list">
+            <el-popover placement="top" :width="300" trigger="click" popper-class="popper-list">  
               <template #reference>
                 <svg t="1678588735035" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13064" width="200" height="200"><path d="M981.333333 917.333333a21.333333 21.333333 0 0 1-21.333333 21.333334H64a21.333333 21.333333 0 0 1 0-42.666667h896a21.333333 21.333333 0 0 1 21.333333 21.333333zM490.666667 170.666667h469.333333a21.333333 21.333333 0 0 0 0-42.666667H490.666667a21.333333 21.333333 0 0 0 0 42.666667z m469.333333 341.333333H64a21.333333 21.333333 0 0 0 0 42.666667h896a21.333333 21.333333 0 0 0 0-42.666667zM76.193333 446.32C96 461.16 121.953333 469.333333 149.333333 469.333333s53.333333-8.173333 73.14-23.013333c21.333333-16 33.526667-38.666667 33.526667-62.32V179.266667q3.206667 3.58 6.586667 6.813333a21.473333 21.473333 0 0 0 2.953333 2.366667 64.24 64.24 0 0 1 13.333333 12c8.666667 10.22 15.84 24.18 20.733334 40.373333a21.333333 21.333333 0 0 0 40.84-12.346667c-6.666667-22.053333-16.44-40.773333-29.04-55.626666a107.46 107.46 0 0 0-20.493334-18.78c-8.813333-8.806667-16.526667-20.666667-22.36-34.42-9.033333-21.333333-11.813333-42.666667-12.553333-56.78A21.333333 21.333333 0 0 0 234.666667 42.666667h-0.566667A21.333333 21.333333 0 0 0 213.333333 64v251.56C195 304.613333 172.666667 298.666667 149.333333 298.666667c-27.38 0-53.333333 8.173333-73.14 23.013333-21.333333 16-33.526667 38.666667-33.526666 62.32s12.22 46.34 33.526666 62.32z" fill="#333333" p-id="13065"></path></svg>
               </template>
               <div class="list-box">
-                <div class="list-item" :class="{ 'active-item': item.songname === songname }" v-for="item in musiclist" :key="item.songname" @click="changeMusic(item)">{{ item.songname }}</div>
+                <el-input
+                  v-model="searchVal"
+                  class="w-50 m-2"
+                  placeholder="输入歌名搜索"
+                  :prefix-icon="Search"
+                  @input="searchMusic"
+                />
+                <div class="list-item" :class="{ 'active-item': item.songname === songname }" 
+                  v-for="item in musiclist"
+                  :key="item.songname"
+                  @click="changeMusic(item)"
+                  >{{ item.songname + ' - ' + item.author }}
+                </div>
                 <p v-if="musiclist.length===0" style="text-align: center;">暂无数据</p>
               </div>
             </el-popover>
@@ -68,10 +80,11 @@
 </template>
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted, onBeforeMount } from 'vue'
+import { Search } from '@element-plus/icons-vue'
 import formatjs from '../../utils/format'
 // import data from '../static/lrc'
 import _ from 'lodash'
-import { getMusic } from '../api/music'
+import { getMusic, searchlist } from '../api/music'
 // 声明子传父 - 发射事件
 const emit = defineEmits(['getcurMusic'])
 const rhythmlist = ref(Array.from({ length: 28 }).map(() => Math.floor(Math.random() * 70)));
@@ -323,6 +336,18 @@ const lrcscroll = () => {
 const lrcInterval = () => {
   lrcTimer.value = setInterval(lrcscroll, 2400);
 }
+// 搜索音乐列表
+const searchVal = ref<string>('');
+const searchMusic =  _.debounce(() => {
+  const params = {
+    name: searchVal.value
+  };
+  searchlist(params).then((res) => {
+    if (res && res.status === 0) {
+      musiclist.value = res.data || []
+    }
+  })
+}, 300)
 </script>
 <style lang="less" scoped>
 .content-outer {
@@ -665,7 +690,7 @@ svg {
 .el-popper.is-light {
   background: #22272e !important;
   border: 1px solid #22272e !important;
-  max-height: 60% !important;;
+  height: 60% !important;;
   overflow-y: auto !important;
   min-height: 160px !important;
 }
@@ -679,7 +704,7 @@ svg {
 }
 .el-popper {
   right: 0px !important;
-  bottom: 90px !important;
+  bottom: -138px !important;
   left: auto !important;
 }
 </style>
@@ -694,5 +719,8 @@ svg {
   flex: 1;
   padding: 0;
   overflow: auto;
+}
+.el-input__wrapper {
+  margin-bottom: 5px;
 }
 </style>
