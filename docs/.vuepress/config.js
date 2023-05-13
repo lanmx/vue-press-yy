@@ -27,6 +27,7 @@ export default defineUserConfig({
       ['meta', { name: 'keywords', content: '宽窄巷子和锦里'}],
       ['meta', { name: 'keywords', content: '聪明的憨憨猪'}],
       ['meta', { name: 'keywords', content: '小憨憨'}],
+      ['link', { rel: 'icon', href: '/logolink.png' }]
       // ['script', { src: "/utils/autopush-baidu.js" }],
       // ['script', { src: "/utils/autopush-360.js" }]
   ],

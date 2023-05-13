@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.baseURL = 'http://127.0.0.1:3001';
+axios.defaults.baseURL = 'http://39.108.60.145:3001/';
 // 音乐列表
 export function getMusic() {
   return axios.get('/music/list')
