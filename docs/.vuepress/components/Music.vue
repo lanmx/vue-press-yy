@@ -701,10 +701,11 @@ svg {
 
 .el-popover.el-popper {
   margin-bottom: 10px !important;
+  padding-top: 0px !important;
 }
 .el-popper {
   right: 0px !important;
-  bottom: -138px !important;
+  bottom: 90px !important;
   left: auto !important;
 }
 </style>
@@ -722,5 +723,9 @@ svg {
 }
 .el-input__wrapper {
   margin-bottom: 5px;
+}
+.el-input {
+  position: sticky !important;
+  top: 0px !important;
 }
 </style>
