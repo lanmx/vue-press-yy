@@ -83,7 +83,8 @@ export default {
     //   console.log('articleData', articleData, props)
     // })
     const list = ref([])
-    list.value = articleData.list.filter(item => item.text !== 'README')
+    articleData.list = articleData.list.filter(item => item.text !== 'README');
+    list.value = articleData.list;
     const cateItem = ref({});
     const instance = getCurrentInstance()
     instance?.proxy?.$Bus.on('getCurCate', (res) => {

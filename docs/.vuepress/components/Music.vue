@@ -58,7 +58,7 @@
                 <el-input
                   v-model="searchVal"
                   class="w-50 m-2"
-                  placeholder="输入歌名搜索"
+                  placeholder="输入歌名或歌手搜索"
                   :prefix-icon="Search"
                   @input="searchMusic"
                 />
