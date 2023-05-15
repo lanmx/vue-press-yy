@@ -2,7 +2,7 @@
 
 ## 一、类型和条件语句
 
-#### 1、转数字类型
+###  1、转数字类型
 
 Number(其它类型)
 
@@ -16,13 +16,13 @@ parseFloat(将字符串转成浮点数)
 
 
 
-#### 2、转字符串
+###  2、转字符串
 
 toString()
 
 
 
-#### 3、隐式转换
+###  3、隐式转换
 
 == 会自动类型转换（隐式转换）
 
@@ -42,9 +42,9 @@ true/false && 执行语句
 
 
 
-#### 4、五个特殊值：""  0  undefined  null  NaN ;在if(NaN)都是false，其它都是true
+###  4、五个特殊值：""  0  undefined  null  NaN ;在if(NaN)都是false，其它都是true
 
-#### 5、case穿透的问题：每个case添加break解决穿透的问题,default可以不加，因为后面没有了！
+###  5、case穿透的问题：每个case添加break解决穿透的问题,default可以不加，因为后面没有了！
 
 ```js
 switch(value) {
@@ -59,7 +59,7 @@ switch(value) {
 }
 ```
 
-#### 6、while
+###  6、while
 
 ```js
 // while循环
@@ -68,7 +68,7 @@ while（true）{
 } 
 ```
 
-#### 7、for循环 
+###  7、for循环 
 
 在屏幕上显示一个♥的三角形
 
@@ -84,23 +84,23 @@ function triangle(length) {
 }
 ```
 
-#### 8、continue和break
+###  8、continue和break
 
-#### 9、断点调式：debugger，单步执行，watch,
+###  9、断点调式：debugger，单步执行，watch,
 
-#### 10、js输出空格
+###  10、js输出空格
 
 js代码里无论输入多少个空格，最终输出只会输出一个空格
 
 > 解决方法：1、使用html标签&nbsp； 2、通过css样式white-space: pre，空白会被浏览器保留
 
-#### 11. dom
+###  11、dom
 
 document.write  重绘
 
 innerHTML 往页面添加内容 
 
-#### 12. 立即执行函数
+###  12、立即执行函数
 
 ```js
 // 不会执行
@@ -124,7 +124,7 @@ var demo = function() {
 
 ## 二、String对象
 
-#### 1. trim()
+###  1、trim()
 
 > trim() 方法用于删除字符串头尾空白符，空白符包括：空格、制表符tab、换行符、其它空白符；
 >
@@ -142,23 +142,23 @@ javascript支持在数组中存放不同的数据类型，但开发建议存放�
 
 - 通过索引值获取某个位置的数据，Array[i]，若不存在不会报错，会输出undefined
 
-#### 1. pop()
+###  1、pop()
 
 删除数组最后一个元素并且返回删除的元素
 
-#### 2. shift()
+###  2、shift()
 
 删除并且返回数组的第一个元素
 
-#### 3. unshift()
+###  3、unshift()
 
 向数组的开头添加一个或者多个元素，且返回新长度
 
-#### 4. push()
+###  4、push()
 
 向数组的末尾添加一个或多个元素，并返回新长度
 
-#### 5. splice()
+###  5、splice()
 
 splice() 方法向/从数组添加/删除项目，并返回删除的项目。如果从 arrayObject 中删除了元素，则返回的是含有被删除的元素的数组。
 
@@ -173,7 +173,7 @@ array.splice(index, howmany, item1, ....., itemX)
 > | *howmany*           | 可选。要删除的项目数。如果设置为 0，则不会删除任何项目。     |
 > | *item1, ..., itemX* | 可选。要添加到数组中的新项目。                               |
 
-#### 6. toString()
+###  6、toString()
 
 把数组转换为字符串，并返回结果
 
@@ -181,11 +181,11 @@ array.splice(index, howmany, item1, ....., itemX)
 array.toString()
 ```
 
-#### 7. slice()
+###  7、slice()
 
 slice() 方法返回一个新的数组对象，这一对象是一个由 begin 和 end 决定的原数组的浅拷贝（包括 begin，不包括end）。原始数组不会被改变。
 
-#### 8. 数组拼接
+###  8、数组拼接
 
 最后一个数组的时候不需要拼接内容
 
@@ -201,7 +201,7 @@ function concatArr(arr) {
 }
 ```
 
-#### 9. 数组最大值
+###  9、数组最大值
 
 ```js
 let arr = [1,2,3,4,99,66,0]
@@ -216,7 +216,7 @@ function maxArr(arr) {
 }
 ```
 
-#### 10. 数组平均值
+###  10、数组平均值
 
 ```js
 let arr = [1,2,3,4]
@@ -231,7 +231,7 @@ function averageArr(arr) {
 }
 ```
 
-####  11. 数组取反
+###   11、数组取反
 
 ```js
 let arr = [1,2,3,4,5,6,7]
@@ -249,13 +249,13 @@ function reverseArr(arr) {
 
 
 
-#### 12. 数组排序
+###  12、数组排序
 
 > 冒泡排序、选择排序、插入排序
 >
 > 堆排序、希尔排序、快速排序
 
-##### （1）冒泡排序
+### （1）冒泡排序
 
 `9，2，4，8，1`从小到大排序
 
@@ -285,29 +285,29 @@ function bubbleSort(arr) {
 }
 ```
 
-##### （2）选择排序
+### （2）选择排序
 
-##### （3）快速排序
+### （3）快速排序
 
-##### （4）sort排序方法
+### （4）sort排序方法
 
-1. sort() 方法用于对数组的元素进行排序
+1、sort() 方法用于对数组的元素进行排序
 
-2. 排序顺序可以是字母或数字，并按升序或降序
+2、排序顺序可以是字母或数字，并按升序或降序
 
-3. 默认排序顺序为按字母升序
+3、默认排序顺序为按字母升序
 
-4. 这种方法会改变原始数组
+4、这种方法会改变原始数组
 
 **数字数组排序**
 
 ```js
-// 1. 升序
+// 1、升序
 var points = [40,100,1,5,25,10];
 points.sort(function(a,b){return a-b});
 // 1,5,10,25,40,100
 
-// 2. 降序
+// 2、降序
 var points = [40,100,1,5,25,10];
 points.sort(function(a,b){return b-a});
 // 100,40,25,10,5,1
@@ -317,9 +317,9 @@ points.sort(function(a,b){return b-a});
 
 ```js
 var fruits = ["Banana", "Orange", "Apple", "Mango"];
-// 1. 升序
+// 1、升序
 fruits.sort(); // Apple,Banana,Mango,Orange
-// 2. 降序
+// 2、降序
 fruits.reverse(); //  Orange,Mango,Banana,Apple
 ```
 
@@ -327,9 +327,9 @@ fruits.reverse(); //  Orange,Mango,Banana,Apple
 
 
 
-#### 13. 判断数组是否存在重复
+###  13、判断数组是否存在重复
 
-##### （1）利用哈希
+### （1）利用哈希
 
 ```js
 // 传入一个数组
@@ -350,7 +350,7 @@ function isRepeat(arr) {
 }
 ```
 
-##### （1）直接用for循环比较，需要先排序
+### （1）直接用for循环比较，需要先排序
 
 ```js
 // 函数需要传入一维数组，不能是对象数组
@@ -367,9 +367,9 @@ function isRepeat(sortArr) {
 }
 ```
 
-#### 14. 数组去重
+###  14、数组去重
 
-##### （1）map结构对象数组去重
+### （1）map结构对象数组去重
 
 ```js
 const unique = (arr) => {
@@ -378,13 +378,13 @@ const unique = (arr) => {
 }
 ```
 
-##### （2）非对象数组去重
+### （2）非对象数组去重
 
 ```js
 const newarr = Array.from(new Set(arr))
 ```
 
-##### （3）算法题拓展
+### （3）算法题拓展
 
  想办法先随机生成100个随机字符串整数扔到一个数组里，比如var arr = ['1'，'2'，'3' ....]，arr的长度是100，再设计一个算法去重，不允许用new set。
 
@@ -403,17 +403,17 @@ console.log(cloneArr);
 
 ## 四、Math对象
 
-#### 1. Math 构造器
+###  1、Math 构造器
 
 与其他全局对象不同，Math对象没有构造函数。方法和属性是静态的。
 
 可以在不首先创建Math对象的情况下使用所有方法和属性（常量）。
 
-#### 2. Math属性和方法
+###  2、Math属性和方法
 
 Math属性和方法有很多，参考[JavaScript 数学教程](https://www.w3school.com.cn/js/js_math.asp)
 
-#### （1） Math.floor()
+###  （1） Math.floor()
 
 floor() 方法将数字向下舍入为最接近的整数，并返回结果。
 
@@ -426,7 +426,7 @@ Math.floor(-5.1); //-6
 Math.floor(-5.9); //-6
 ```
 
-#### （2） Math.ceil()
+###  （2） Math.ceil()
 
 ceil() 方法将数字向上舍入为最接近的整数，并返回结果。
 
@@ -438,19 +438,19 @@ Math.ceil(5.1); //6
 Math.ceil(-5.1); //-5
 ```
 
-#### （3）Math.random()
+###  （3）Math.random()
 
 Math.random() 返回介于 0（包括） 与 1（不包括） 之间的随机数
 
 ## 五、深拷贝和浅拷贝
-#### 浅拷贝: Object.assign()
+###  1、浅拷贝: Object.assign()
 如果对象的属性值为简单类型`（string，number）`，通过`Object.assign({},srcobj)`，得到的新对象为深拷贝；
 
 如果属性值是对象或其他引用类型，那对于这个引用数据类型而言是浅拷贝的。
-#### 浅拷贝：_.clone()
-#### 深拷贝：JSON.parse(JSON.stringify())
+###  2、浅拷贝：_.clone()
+###  3、深拷贝：JSON.parse(JSON.stringify())
 
-#### 深拷贝：_.cloneDeep()
+###  4、深拷贝：_.cloneDeep()
 深拷贝建议用Lodash的_.cloneDeep()
 
 

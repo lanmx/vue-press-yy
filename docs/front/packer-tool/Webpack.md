@@ -34,13 +34,13 @@ npm install webpack --save dev
 // bundle.js打包文件里会生成一些函数代码来支持一些浏览器不支持的代码
 ```
 
-#### （1） 配置webpack打包命令
+### （1） 配置webpack打包命令
 
 需求：我只需要输入webpack命令就立刻帮我打包文件，这时候就需要先配置好webpack打包的入口以及打包目标文件
 
 通过webpack.config.js文件配置，把入口参数和打包目标文件配置好
 
-#### （2） webpack.config.js配置
+### （2） webpack.config.js配置
 
 ```js
 const path = require('path') // 路径动态获取依赖包
@@ -135,13 +135,13 @@ module.export = {
 
 `npm install`命令安装项目依赖的文件，`package.json`也会更新
 
-#### （3） npm run build
+### （3） npm run build
 
 需求：希望通过`npm run build`打包项目，希望通过`npm run serve`启动项目;
 
 在package.json配置文件的scripts脚本下加入`'build'`：'入口文件路径'即可
 
-#### （4）全局命令和局部命令
+### （4）全局命令和局部命令
 
 终端运行的命令：全局
 
@@ -180,7 +180,7 @@ git运行命令：局部，加上-g可以运行全局命令
 }
 ```
 
-#### （1）scripts脚本
+### （1）scripts脚本
 
 package.json的scripts的脚本在执行顺序：
 
@@ -193,18 +193,18 @@ webpack可以处理js代码，并且自动处理js之间的依赖关系；但在
 
 解决办法：给webpack拓展loader
 
-#### （1）loader使用
+### （1）loader使用
 
 1. npm安装
 2. 在webpack.config.js的modules关键字下配置
 
-#### （2）css-loader、style-loader（css文件处理）
+### （2）css-loader、style-loader（css文件处理）
 
-#### （3）css-loader、style-loader、less-loader（less文件处理）
+### （3）css-loader、style-loader、less-loader（less文件处理）
 
-#### （4）url-loader、file-loader（图片文件处理）
+### （4）url-loader、file-loader（图片文件处理）
 
-#### （5）babel-loader、babel-core、babel-preset-env（ES6转ES5）
+### （5）babel-loader、babel-core、babel-preset-env（ES6转ES5）
 
 ```js
 npm install -D babel-loader @babel/core @babel/preset-env webpack
@@ -217,15 +217,15 @@ npm install -D babel-loader @babel/core @babel/preset-env webpack
 
 ## 五、vue.js的配置
 
-#### 1. 安装vue
+### 1. 安装vue
 
-#### 2. runtime-only和runtime-compiler
+### 2. runtime-only和runtime-compiler
 
 - runtime-only:  代码中不能有template
 
 - runtime-compiler:  代码中，可以有template，因为compiler可以用于编译template
 
-#### 3. el和template
+### 3. el和template
 
 同时写el和template：
 
@@ -233,7 +233,7 @@ template变量里面可以写html代码或者引用组件，挂载时会替换id
 
 ![image-20220213180507245](@alias/image-20220213180507245.png)
 
-#### 4. .vue文件封装
+### 4. .vue文件封装
 
 下面代码的加载需要vue-loader和vue-template-complier处理，开发时依赖。
 
@@ -266,27 +266,27 @@ export default {
 
 webpack中的插件，是对webpack现有功能的各种扩展，例如打包优化，文件压缩；
 
-#### 1. 如何使用plugin:
+### 1. 如何使用plugin:
 
 1. npm下载需要的插件
 2. 在webpack.config.js中的plugins配置插件
 
-#### 2. plugin和loader的区别
+### 2. plugin和loader的区别
 
 loader类似转换器
 
 plugin对webpack本身的扩展
 
-#### 3. 版权声明的plugin
+### 3. 版权声明的plugin
 
-#### 4. 打包html入口文件的plugin
+### 4. 打包html入口文件的plugin
 
 index.html没有在dist文件里面，打包js就会没有意义，因此需要将index.html打包到dist文件中，可以使用HtmlWebpackPlugin插件。
 
 - HtmlWebpackPlugin可以自动生成index.html文件
 - HtmlWebpackPlugin可以将打包的js文件，自动通过script标签插入body中
 
-#### 5. 压缩js的插件
+### 5. 压缩js的插件
 
 uglifyjs-webpack-plugin（丑化js插件）
 
@@ -298,7 +298,7 @@ webpack提供了本地开发服务器，基于node.js，使用express框架
 
 webpack-dev-server（使用前需求安装）
 
-#### 1. 设置devserver
+### 1. 设置devserver
 
 - contentBase：为哪个文件提供本地服务，默认根文件夹
 - port：端口号
@@ -311,13 +311,13 @@ webpack-dev-server（使用前需求安装）
 
 开发环境和发布环境的配置分离成两个文件
 
-#### 1. base.config.js
+### 1. base.config.js
 
-#### 2. dev.config.js
+### 2. dev.config.js
 
-#### 3. prod.config.js
+### 3. prod.config.js
 
-#### 4. webpack-merge插件
+### 4. webpack-merge插件
 
 这个插件可以帮助我们将分离的配置文件合并
 
@@ -329,7 +329,7 @@ CLI（command-Line Interface）命令行界面，俗称脚手架
 
 脚手架可以快速搭建Vue开发环境以及对应的webpack配置，大型项目建议使用CLI，考虑代码目录结构，项目结构和部署、热加载、代码单元测试
 
-#### 1. Vue CLI使用前提一：node
+### 1. Vue CLI使用前提一：node
 
 安装node.js;
 
@@ -339,9 +339,9 @@ npm是Nodejs包管理和分发的管理工具
 
 npm下载很慢，可以安装cnpm淘宝镜像
 
-#### 2. Vue CLI使用前提二：webpack
+### 2. Vue CLI使用前提二：webpack
 
-#### 3. 安装Vue脚手架
+### 3. 安装Vue脚手架
 
 ```js
 npm install -g @vue/cli
@@ -349,7 +349,7 @@ npm install -g @vue/cli
 yarn global add @vue/cli
 ```
 
-#### 4. 脚手架初始化项目
+### 4. 脚手架初始化项目
 
 CLI2：
 
@@ -363,7 +363,7 @@ CLI3：
 vue create my_project
 ```
 
-#### 5. 脚手架2
+### 5. 脚手架2
 
 - Author：默认.gitconfig的配置
 - Vue build: 
@@ -375,7 +375,7 @@ vue create my_project
 
 ![image-20220213223346051](@alias/image-20220213223346051.png)
 
-#### 6. CLI2目录结构
+### 6. CLI2目录结构
 
 - static：这个文件夹下的内容会原封不动的打包
 - .babelrc：pressets env命令独立生成；（时长份额大于1%，最新两个版本，ie > 8）
@@ -404,7 +404,7 @@ vue create my_project
 
   ^ ~下载版本的范围
 
-#### 7. 脚手架3
+### 7. 脚手架3
 
 
 

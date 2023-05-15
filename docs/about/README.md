@@ -7,11 +7,9 @@
 - 2020毕业本科毕业于广东技术师范大学
 
 #### 关于博客
-基于vuepress2.0.0-beta.61构建的vuepress网站;
-
-前端技术栈：vuepress + vue + axios；
-
-后端技术栈：nodejs(express)；
+- 基于vuepress2.0.0-beta.61构建的vuepress网站;
+- 前端技术栈：vuepress + vue + axios；
+- 后端技术栈：nodejs(express)；
 
 技术文章会持续更新~~~
 

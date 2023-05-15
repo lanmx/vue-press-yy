@@ -9,13 +9,13 @@ meta:
 
 ## ES7-ES12
 
-### ES7
+## ES7
 
-#### 1. includes判断数组是否包含元素
+### 1. includes判断数组是否包含元素
 
 以前是使用`indexOf === -1`
 
-#### 2. 指数的运算方法 `**`
+### 2. 指数的运算方法 `**`
 
 ```js
 // ES7
@@ -24,9 +24,9 @@ meta:
 Math.pow(3,3) // 27
 ```
 
-### ES8
+## ES8
 
-#### 1. `Object.values`获取对象所有属性的值
+### 1. `Object.values`获取对象所有属性的值
 
 ```js
 Object.values(['aaa','bbb','ccc'])  // ['aaa','bbb','ccc']
@@ -36,7 +36,7 @@ Object.values('abc')  // ['a','b','c']
 `Object.keys`获取对象所有属性key
 ```
 
-#### 2.  `Object.entries` 获取对象的键值对`[[],[]]`
+### 2.  `Object.entries` 获取对象的键值对`[[],[]]`
 
 ```js
 Object.entries(item => {
@@ -44,33 +44,33 @@ Object.entries(item => {
 })
 ```
 
-#### 3. `padStart` / `padEnd`
+### 3. `padStart` / `padEnd`
 
 ```js
 str.padStart(lenth,"*")
 ```
 
-#### 4. 允许结尾逗号`foo(n,m,)`
+### 4. 允许结尾逗号`foo(n,m,)`
 
-#### 5. 属性描述符：`Object.getOwnPropertyDescriptors`
+### 5. 属性描述符：`Object.getOwnPropertyDescriptors`
 
-#### 6. `async function foo()`
+### 6. `async function foo()`
 
-### ES9
+## ES9
 
-#### 1. `Async iterators` 迭代器
+### 1. `Async iterators` 迭代器
 
-#### 2. `Object spread operators {...}`
+### 2. `Object spread operators {...}`
 
-#### 3. `Promise finally`
+### 3. `Promise finally`
 
-### ES10
+## ES10
 
-#### 1. `flat(n)`：n是可指定的深度
+### 1. `flat(n)`：n是可指定的深度
 
 flat()方法按照可指定的深度递归遍历数组，并将所有元素遍历到的子数组中的元素合并为一个新数组，例如`flat(2)`将二维数组遍历为一位数组；`flat(2)`将三维数组遍历为二位数组
 
-#### 2. `flatMap()`先使用映射映射每个元素，然后将结果压缩成一个新数组
+### 2. `flatMap()`先使用映射映射每个元素，然后将结果压缩成一个新数组
 
 - 注意：`flatMap`先进行`map`操作，再进行`flat`操作
 - 注意：`flatMap`的flat相当于深度为`1`
@@ -85,7 +85,7 @@ const words = messages.flatMap(item => {
 // ['hello','world', 'good','night', 'good','noon']
 ```
 
-#### 3. `Object.fromEntries`
+### 3. `Object.fromEntries`
 
 将多维数组对象转换为对象属性`key-value`
 
@@ -112,17 +112,17 @@ const newO = Object.fromEntries(entries)
 const queryParams = new URLSearchParams('name=lan&age=18')
 ```
 
-#### 4. `trimStart`: 去掉头部的空格
+### 4. `trimStart`: 去掉头部的空格
 
-#### 5. `trimEnd`: 去掉尾部的空格
+### 5. `trimEnd`: 去掉尾部的空格
 
-#### 6. `Symbol description`
+### 6. `Symbol description`
 
-#### 7. `Option catch binding`
+### 7. `Option catch binding`
 
-### ES11
+## ES11
 
-#### 1. `BigInt`
+### 1. `BigInt`
 
 早期的JavaScript不能表示过大的数字，大于MAX_SAFE_INTEGER数值可能不正确
 
@@ -133,7 +133,7 @@ console.log(bigInt + bigInt(num))
 // 如果转换为小的数字Number(bigInt)有可能出错
 ```
 
-#### 2. `Nullish Coalescing Operator`空值合并操作
+### 2. `Nullish Coalescing Operator`空值合并操作
 
 逻辑或 `||` 会把`0`,`''`转换为`false，`空值合并操作用来替代空值操作
 
@@ -146,7 +146,7 @@ const foo = 0
 const bar = foo ?? 'default value' // 0
 ```
 
-#### 3. `Optional Chaining` : 可选链
+### 3. `Optional Chaining` : 可选链
 
 属性点没有值的时候会`undefined`，直接报错，可选链可以避免
 
@@ -154,19 +154,19 @@ const bar = foo ?? 'default value' // 0
 info.friend?.girlfriend // ,没有的话返回undefined,不会报错
 ```
 
-#### 4. `GlobalThis`: 全局指向
+### 4. `GlobalThis`: 全局指向
 
-#### 5. `for(const item in obj)`: item 是key
+### 5. `for(const item in obj)`: item 是key
 
-#### 6. `Dynamic import`
+### 6. `Dynamic import`
 
-#### 7. `Promise.allSettled`
+### 7. `Promise.allSettled`
 
-#### 8. `import meta`
+### 8. `import meta`
 
-### ES12
+## ES12
 
-#### 1. `FinalizationRegistry`
+### 1. `FinalizationRegistry`
 
 `FinalizationRegistry`对象让对象被垃圾回收时请求一个回调：当一个在注册表中注册的对象被回收时，请求在某个时间点上调用一个清理回调（`finalizer`）
 
@@ -174,17 +174,17 @@ info.friend?.girlfriend // ,没有的话返回undefined,不会报错
 
 ![image-20220205141349040](@alias/image-20220205141349040.png)
 
-#### 2. `WeakRef.prototype.deref`
+### 2. `WeakRef.prototype.deref`
 
 - `obj.deref().name`
 - 如果原对象没有销毁，可以获取原对象
 - 如果已销毁，`undefined`
 
-#### 3.` A||=B  &&=  ??=`
+### 3.` A||=B  &&=  ??=`
 
-#### 4. Numeric Separator
+### 4. Numeric Separator
 
-#### 5. `String/replaceAll`: 字符串替换
+### 5. `String/replaceAll`: 字符串替换
 
 <ClientOnly>
   <Valine></Valine>

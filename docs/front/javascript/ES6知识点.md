@@ -9,7 +9,7 @@ meta:
 
 ## es6类的使用、ES6知识点
 
-### 一、class定义类
+##    一、class定义类
 
 按照前面构造函数形式创建类，和普通函数相似，代码不易理解，所以es6用class关键字定义类；但是class person{}创建类只是构造函数、原型链的语法糖，最终还是要转换为原型链，框架的源码基本都是用funtion Person原型链写的。
 
@@ -28,7 +28,7 @@ meta:
    var Person = class {}
    ```
 
-### 二、类的构造函数
+##    二、类的构造函数
 
 方法名固定是constructor
 
@@ -53,7 +53,7 @@ class Person {
 var p = new Person('lmx', 18)
 ```
 
-### 三、类的实例方法
+##    三、类的实例方法
 
 ```js
 class Person {
@@ -89,13 +89,13 @@ class Person {
 var p = new Person('lmx', 18)
 ```
 
-### 四、class实现继承
+##    四、class实现继承
 
 class类默认继承Object类型
 
 js中类只能继承一个父类：单继承
 
-#### （1）. super关键字
+##      （1）. super关键字
 
 - JS引擎在解析子类时，要求如果有继承，在子类的构造方法之前，在使用this之前，或者return this之前,必须调用父类方法super()
 
@@ -133,7 +133,7 @@ class Student extends Person {
 
 
 
-### 五、ES6转ES5代码
+##    五、ES6转ES5代码
 
 官方网站babeljs.io
 
@@ -360,7 +360,7 @@ var Student = /*#__PURE__*/ (function (_Person) {
 
 
 
-### 六、创建类继承内置类
+##    六、创建类继承内置类
 
 自己定义的类也可继承内置类的方法
 
@@ -373,7 +373,7 @@ class Arr extends Array {}
 
 
 
-### 七、js类的混入mixin
+##    七、js类的混入mixin
 
 因为在JS中类是单继承，只能继承一个父类
 
@@ -406,17 +406,17 @@ np.running()
 
 react中的高级组件方法推荐去学。
 
-### 八、JavaScript的多态
+##    八、JavaScript的多态
 
 面向对象的三大属性：封装、继承、多态（Java/C++/TypeScript）
 
-#### （1）多态的定义
+##      （1）多态的定义
 
 维基百科：多态（polymorphism）指的是不同数据类型的实体提供统一的接口，或使用单一的符号来表示多个不同的类型
 
 简单的说：不同的数据类型进行同一个操作，表现不同的行为，就是多态的体现
 
-#### （2）传统面向对象多态
+##      （2）传统面向对象多态
 
 传统面向对象多态有三个条件：
 
@@ -448,7 +448,7 @@ function calArea(shape: Shape) {
 }
 ```
 
-##### （3）JS面向对象多态
+##     （3）JS面向对象多态
 
 ```js
 function sum(m,n) {
@@ -461,9 +461,9 @@ sum('lan', 'mx')
 
 
 
-### 九、es6知识点
+##    九、es6知识点
 
-#### （1）字面量增强写法（Enhanced object literals）
+##      （1）字面量增强写法（Enhanced object literals）
 
 1. 属性简写 property shorthand
 2. 方法简写 method shorthand
@@ -491,7 +491,7 @@ var obj = {
 }
 ```
 
-#### （2）数组解构
+##      （2）数组解构
 
 ```js
 let arr = [1,3,4]
@@ -505,7 +505,7 @@ let [item1, ...newArr] = arr
 letlet [item1, item2, item3, item4] = arr  // 1,3,4, undefined
 ```
 
-#### （3）对象解构
+##      （3）对象解构
 
 对象通过key值解构
 
@@ -532,7 +532,7 @@ function foo({name, age}) {
 }
 ```
 
-#### （4）var / let / const
+##      （4）var / let / const
 
 ES5声明变量用var关键字，从ES6开始新增let / const
 
@@ -542,7 +542,7 @@ ES5声明变量用var关键字，从ES6开始新增let / const
 
 优先使用const，这样可以保证数据的安全性不会被随意修改，明确一个变量后面会被重新赋值时才是用let
 
-#### （5）const
+##      （5）const
 
 - const常量，一旦被赋值，不可修改；本质上是传递的值不可修改；
 - 如果const保存的是引用地址，那么地址不能修改，可以通过引用地址找到对象修改对象的值
@@ -557,7 +557,7 @@ const obj = {
 obj.name = '可爱'
 ```
 
-#### （6）let / const 作用域提升
+##      （6）let / const 作用域提升
 
 - 作用域提升：在声明变量的作用域中，如果这个变量可以在声明之前被访问，那么就称之为作用域提升
 - let / const 和 var 的重要区别是作用域提升
@@ -580,7 +580,7 @@ obj.name = '可爱'
   >
   > 这些变量会被创建在包含他们的词法环境被实例化，（也就是在创建执行上下文的时候已经创建了），但是不可以访问它们，直到词法绑定被求值
 
-#### （7）var块级作用域
+##      （7）var块级作用域
 
 var特点：作用域提升，window全局对象，没有块级作用域
 
@@ -614,7 +614,7 @@ var特点：作用域提升，window全局对象，没有块级作用域
 
   
 
-#### （8）window对象添加属性
+##      （8）window对象添加属性
 
 - var声明变量，事实上会在window上添加一个属性
 
@@ -628,11 +628,11 @@ var特点：作用域提升，window全局对象，没有块级作用域
 
 - window早期的对象是GO，现在是浏览器添加的全局对象，保持window和var相等性，实际上window和var不是同一个对象。
 
-#### （9）暂时性死区
+##      （9）暂时性死区
 
 es6中，使用let / const 声明的变量，在声明之前，变量不能被访问；这种现象称为temporal dead zone（暂时性死区，TDZ）
 
-#### （10）字符串模板
+##      （10）字符串模板
 
 > ${expression}
 
@@ -649,7 +649,7 @@ console.log(`age is ${age * 2}`)
 console.log(`age is ${doulbleAge()}`)
 ```
 
-#### （11）标签模板字符串（Tagged Template Literals）
+##      （11）标签模板字符串（Tagged Template Literals）
 
 - 第一个参数是模板字符串整个字符串，只是被切成了多块，放到了一个数组
 - 第二个参数是模板字符串第一个${ }
@@ -675,7 +675,7 @@ foo`hello${name}Good${time}girl`
 
 ![image-20220121170745581](@alias/image-20220121170745581.png)
 
-#### （12）函数默认参数
+##      （12）函数默认参数
 
 ```js
 // ES5:
@@ -693,7 +693,7 @@ function foo(m = '0',n = '100') {
 }
 ```
 
-#### （13）对象参数和默认值以及解构
+##      （13）对象参数和默认值以及解构
 
 ```js
 // ES6:
@@ -702,7 +702,7 @@ function foo({name, age} = { name: 'mx', age: 20}}) {
 }
 ```
 
-#### （14）有默认值的参数建议放在最后
+##      （14）有默认值的参数建议放在最后
 
 ```js
 function foo(x, y, z = 30) {
@@ -722,7 +722,7 @@ foo(undefined,10,20)
   console.log(foo.length) // 2
   ```
 
-#### （15）函数的剩余参数
+##      （15）函数的剩余参数
 
 - ES6引用了rest parameter，可以将不定数量的参数放在一个数组中
 - 剩余参数必须放在最后
@@ -739,11 +739,11 @@ foo(1,2,3,4,5)
   2. 剩余参数rest是一个数组，arguments为对象
   3. arguments是早期ECMAScript中为了方便去获取所有参数提供的数据结构，而rest是ES6中提供并且希望以此来替代arguments的
 
-#### （16）箭头函数
+##      （16）箭头函数
 
 - 箭头函数没有显式原型prototype，也没有this，没有arguments，this和arguments都是往上层作用域找。
 
-#### （17）展开语法 / 展开运输算符 （spread syntax）
+##      （17）展开语法 / 展开运输算符 （spread syntax）
 
 - 展开运算符是浅拷贝
 
@@ -763,7 +763,7 @@ const obj = {...info, ...names}
 // 把names的索引值当成key,值为value
 ```
 
-#### （18）数值表示
+##      （18）数值表示
 
 ```js
 // 十进制
@@ -782,7 +782,7 @@ const num4 = 0x100
 const = num5 = 10_000_000_000
 ```
 
-#### （18）Symbol
+##      （18）Symbol
 
 symbol是ES6新增的基本数据类型，符号。
 

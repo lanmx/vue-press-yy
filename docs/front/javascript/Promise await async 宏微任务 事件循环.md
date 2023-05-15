@@ -418,7 +418,7 @@ for (const stu of classroom) {
 
 `yield*` 可以生成一个可迭代对象
 
-#### （1）生成器函数执行顺序
+###   （1）生成器函数执行顺序
 
 ```js
 function* foo(m) {
@@ -443,7 +443,7 @@ function* foo(m) {
 
 
 
-#### （2）生成器的next方法可以传递参数
+###   （2）生成器的next方法可以传递参数
 
 ```js
 function* foo(m) {
@@ -462,7 +462,7 @@ function* foo(m) {
 
 
 
-#### （3）生成器终止return
+###   （3）生成器终止return
 
 ```js
 function* foo(num) {
@@ -483,7 +483,7 @@ console.log(generator.return(15))
 
 
 
-#### （4）生成器可以抛出异常throw
+###   （4）生成器可以抛出异常throw
 
 ```js
 function* foo() {
@@ -504,7 +504,7 @@ generator.throw("error message")
 
 ```
 
-#### （5）生成器替代迭代器
+###   （5）生成器替代迭代器
 
 ```js
 function createArrayIterator(arr) {
@@ -514,7 +514,7 @@ function createArrayIterator(arr) {
 }
 ```
 
-#### （6）`yield*` 可以生成一个可迭代对象
+###   （6）`yield*` 可以生成一个可迭代对象
 
 `yield*` 可以生成一个可迭代对象，下面代码同上，更加简洁
 
@@ -524,7 +524,7 @@ function createArrayIterator(arr) {
 }
 ```
 
-#### （7）生成器函数可迭代有范围的数字
+###   （7）生成器函数可迭代有范围的数字
 
 ```js
 function createRangeIterator(start,end) {
@@ -650,11 +650,11 @@ foo.then((A) =>{A}).catch((B) => {B})
 
 - 进程是线程的容器
 
-#### 1. 进程（process）
+###   1. 进程（process）
 
 进程指计算机已经在运行的程序，是操作系统管理程序的一种方式
 
-#### 2. 线程（thread）
+###   2. 线程（thread）
 
 线程是计算机中最小的计算单位，操作系统能够运行运算调度的最小单位，通常被包含在进程中
 
@@ -666,7 +666,7 @@ JavaScript是单进程，同一个时刻只能做一件事情，JavaScript的线
 
 JavaScript的axios.get请求只是js发送给浏览器的指令，处理网络请求的事情并不是js执行的，而是浏览器，浏览器执行完时后告诉js回调拿到结果
 
-#### 1. 事件队列
+###   1. 事件队列
 
 setTimeOut()实现定时，本质是浏览器处理，浏览器是把回调事件放进事件队列queue（函数调用栈），到时间了再取出来执行。
 
@@ -678,11 +678,11 @@ js线程 -> 其它线程 -> js线程
 
 ## 十、事件队列：宏任务和微任务
 
-#### 1. 事件队列
+###   1. 事件队列
 
 **事件队列**，维护着两个队列：宏任务队列（macrotask queue）和微任务队列（microtask queue）
 
-#### 2. 规范
+###   2. 规范
 
 在执行任何宏任务之前，都必须先保证微任务队列是否还有任务需要执行，如果微任务有任务，优先执行微任务队列中的任务；必须执行完所有的微任务，才执行宏任务
 
@@ -696,7 +696,7 @@ main script ->微任务队列 -> 宏任务队列
 
 如果执行宏任里面还有微任务，就会把微任务放在微任务队列，优先执行微任务
 
-#### 3. 面试题一
+###   3. 面试题一
 
 await紧跟的普通表达式不是异步函数，await如果紧跟new Promise，new Promise的then里面的代码是异步执行，await后面的代码也会当作异步执行
 
@@ -719,7 +719,7 @@ foo()
 console.log('4')
 ```
 
-#### 4. 面试题二
+###   4. 面试题二
 
 ```js
 async function async1 () {
@@ -752,9 +752,9 @@ script start
 // setTimeout
 ```
 
-#### 5. 面试题三
+###   5. 面试题三
 
-##### (1) return 4
+###   (1) return 4
 
 return 4；返回普通值
 
@@ -787,7 +787,7 @@ Promise.resolve().then(() => {
 // 6
 ```
 
-##### (2) return thenable
+###   (2) return thenable
 
 原生promise.then()如果return了一个thenable，微任务的执行顺序会往后退一位
 
@@ -823,7 +823,7 @@ Promise.resolve().then(() => {
 // 6
 ```
 
-##### (3) return Promise
+###   (3) return Promise
 
 return了promsie，会推迟两次微任务
 
@@ -855,7 +855,7 @@ Promise.resolve().then(() => {
 // 6
 ```
 
-##### (4) 为什么会推迟微任务
+###   (4) 为什么会推迟微任务
 
 如果返回的是一个普通的值会直接执行，但是如果返回的是`thenable`，为了让后面的队列先执行，于是往后推后一个微任务；如果是`Promise`，则推后两个微任务
 
@@ -869,12 +869,12 @@ Promise.resolve().then(() => {
 
 像`setTimeout`,文件读取，网络请求是由`node`的其它线程处理；（`node`的事件循环和浏览器的事件循环相似）
 
-#### 1. 浏览器的事件循环 VS node的事件循环：
+###   1. 浏览器的事件循环 VS node的事件循环：
 
 - 浏览器的`EventLoop`是根据HTML5定义的规范实现
 - Node的`EventLoop`是由libuv实现
 
-#### 2. Node环境图解
+###   2. Node环境图解
 
 `libuv`主要维护了`EvenLoop`和`worker threads`（线程池）
 
@@ -882,7 +882,7 @@ Promise.resolve().then(() => {
 
 ![image-20220210162904804](@alias/image-20220210162904804.png)
 
-#### 3. Node事件循环的阶段图解
+###   3. Node事件循环的阶段图解
 
 `Node`的事件循环更复杂
 
@@ -890,7 +890,7 @@ Promise.resolve().then(() => {
 
 （Node的详细学习笔记我以后会记录在nodejs文件夹，在这里就不写了。）
 
-#### 4. Node的宏任务和微任务
+###   4. Node的宏任务和微任务
 
 - 宏任务：`setTimeout`、`setInterval`、`IO`事件、`setImmediate`、`close`事件
 - 微任务：`Promise`的`then`回调、`process.nextTick`、`queueMicrotask`
@@ -903,7 +903,7 @@ Promise.resolve().then(() => {
   3. **check queue**：setImmediate
   4. **close queue**：close事件
 
-#### 5. Node事件循环顺序
+###   5. Node事件循环顺序
 
 每次事件循环Tick中，会按照下面顺序执行代码
 

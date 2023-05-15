@@ -34,7 +34,7 @@ public list:Array<any>=[1,3,4,5]
 
 ## 四、angular模块属性
 
-#### 1. title
+### 1. title
 
 鼠标以上该DOM显示`title`内容
 
@@ -43,7 +43,7 @@ public list:Array<any>=[1,3,4,5]
 <div [title]="msg"></div>
 ```
 
-#### 2. innerHTML
+### 2. innerHTML
 
  innerHTML绑定html
 
@@ -52,7 +52,7 @@ public list:Array<any>=[1,3,4,5]
 <div [innerHTML]="msghtml"></div>
 ```
 
-#### 3. *ngFor
+### 3. *ngFor
 
 数据循环，遍历
 
@@ -66,24 +66,24 @@ public list:Array<any>=[1,3,4,5]
 </ul>
 ```
 
-#### 4. *ngIf
+### 4. *ngIf
 
 条件判断，是否显示，用法和vue的v-if类似
 
-#### 5. src
+### 5. src
 
 ```html
 <img src="assets/images/01.png" />
 <img [src]="url" />
 ```
 
-#### 6. class
+### 6. class
 
 ```html
 <span class="red">文字样式变红色</span>
 ```
 
-#### 7. *ngSwitch
+### 7. *ngSwitch
 
 ```html
 <ul [ngSwitch]="score">
@@ -95,15 +95,15 @@ public list:Array<any>=[1,3,4,5]
 
 
 
-#### 8.  (click)="getData"
+### 8.  (click)="getData"
 
-#### 9.  (change)="changeData"
+### 9.  (change)="changeData"
 
 
 
-#### 9. 表单事件
+### 9. 表单事件
 
-#### （1）keydown
+### （1）keydown
 
 ```html
 <input type="text" (keydown)="keyDown($event)">
@@ -132,9 +132,9 @@ clickButton(event) {
 }
 ```
 
-#### 10. 双向数据绑定
+### 10. 双向数据绑定
 
-#### （1）导入
+### （1）导入
 
 ```typescript
 // app.module.ts
@@ -151,7 +151,7 @@ import { FromsModule } from '@angular/forms'
 export class AppModule {}
 ```
 
-#### （2）使用
+### （2）使用
 
 ```html
 <input type="text" [ngModel]="inputValue">
@@ -163,7 +163,7 @@ export class AppModule {}
 
 
 
-#### 11. [ngClass]
+### 11. [ngClass]
 
 ```html
 <div [ngClass]="{'orange': true, 'red': false}">
@@ -173,7 +173,7 @@ export class AppModule {}
 
 
 
-#### 12. [ngStyle]
+### 12. [ngStyle]
 
 ```html
 <div [ngStyle]="{'color: green'}">
@@ -188,11 +188,11 @@ export class AppModule {}
 public attr='red'
 ```
 
-#### 13. 管道（pipe）
+### 13. 管道（pipe）
 
 管道是用来对输入的数据进行处理，如大小写转换，数值和日期格式化
 
-#### （1）日期格式转换
+### （1）日期格式转换
 
 ```html
 <div>
@@ -200,7 +200,7 @@ public attr='red'
 </div>
 ```
 
-#### （2）JavaScript对象序列化
+### （2）JavaScript对象序列化
 
 ```html
 <div>
@@ -208,7 +208,7 @@ public attr='red'
 </div>
 ```
 
-#### （3）大小写转换
+### （3）大小写转换
 
 ```html
 <!-- 转成大写 -->
@@ -217,7 +217,7 @@ public attr='red'
 <p> {{ str | lowercase }} </p>
 ```
 
-#### （4）小数位数
+### （4）小数位数
 
 保留2~4位小数
 
@@ -226,21 +226,21 @@ public attr='red'
 <p> {{ number | number: '1.2-4' }} </p>
 ```
 
-#### （5）slice
+### （5）slice
 
 ```html
 <!-- 字符串切割: lan -->
 <p> {{ 'lanmx' | slice: 0:3 }} </p>
 ```
 
-#### （6）管道链
+### （6）管道链
 
 ```html
 <!-- 字符串切割: LAN -->
 <p> {{ 'lanmx' | slice: 0:3 | uppercase}} </p>
 ```
 
-#### （7）自定义管道
+### （7）自定义管道
 
 1. 新建sex-reform管道文件
 
@@ -409,19 +409,19 @@ this.header.run()
 
 父组件不仅可以传数据，也可以传方法和整个组件实例
 
-#### 1. 父组件绑定变量传值
+### 1. 父组件绑定变量传值
 
 ```html
 <app-header [msg]="msg" [run]="run" [home]="this"></app-header>
 ```
 
-#### 2. 子组件引入Input模块
+### 2. 子组件引入Input模块
 
 ```typescript
 import { Input } from '@angular/core'
 ```
 
-#### 3. 子组件@Input接收父组件传过来的数据
+### 3. 子组件@Input接收父组件传过来的数据
 
 ```typescript
 export class HeaderComponent implements OnInit {
@@ -441,19 +441,19 @@ export class HeaderComponent implements OnInit {
 
 父组件获取子组件的数据和方法：通过@ViewChild
 
-#### 1. 给调用组件定义一个名称
+### 1. 给调用组件定义一个名称
 
 ```html
 <app-footer #footerChild></app-footer>
 ```
 
-#### 2.父组件引入@ViewChild
+### 2.父组件引入@ViewChild
 
 ```
 import { ViewChild } from '@angular/core'
 ```
 
-#### 3. 父组件接收和获取
+### 3. 父组件接收和获取
 
 ```typescript
 export class HeaderComponent implements OnInit {
@@ -467,7 +467,7 @@ export class HeaderComponent implements OnInit {
 }
 ```
 
-#### 父组件监听子组件的事件
+### 父组件监听子组件的事件
 
 子组件暴露一个EventEmitter属性，当事件发生时，子组件利用该属性emits发射事件，父组件绑定这个事件属性，就会在事件发生时做出反应。
 
@@ -477,7 +477,7 @@ export class HeaderComponent implements OnInit {
 
 ## 十、 服务Service
 
-#### 1. 创建服务
+### 1. 创建服务
 
 服务于服务之间可以相互调用；
 
@@ -634,7 +634,7 @@ this.getDate().subscribe(() => {
 - 发射多个值
 - Rxjs提供多种工具函数
 
-#### 1. 中途撤回：取消订阅unsbusctibe
+### 1. 中途撤回：取消订阅unsbusctibe
 
 Promise不可以中途撤回。
 
@@ -651,7 +651,7 @@ setTimeout(() => {
 
 
 
-#### 1. 订阅后多次执行
+### 1. 订阅后多次执行
 
 Promise要么resolve，要么reject，而且都只能触发一次。
 
@@ -745,7 +745,7 @@ fromEvent(button, 'click').pipe(
 
 ## 十五、Angular 中 get / post / json
 
-#### 1. get
+### 1. get
 
 Angular 5.x后使用get / post和服务器交互的是 HttpClientModule模块
 
@@ -777,11 +777,11 @@ this.http.get(api,params, httpOptions).subscribe(res => {
 })
 ```
 
-#### 2. post / put 
+### 2. post / put 
 
 看源码就会用了
 
-#### 3. jsonp
+### 3. jsonp
 
 在app.module.ts中引入HttpClientJsonpModule并注入
 
@@ -798,7 +798,7 @@ export class AppModule{}
 
 
 
-#### 4. angular中使用axios
+### 4. angular中使用axios
 
 安装
 
@@ -831,7 +831,7 @@ getData() {
 
 根据不同url，动态地让根组件挂载其它组件，来实现单页面应用
 
-#### 1. 使用路由
+### 1. 使用路由
 
 app-routing.module.ts：配置路由的模块
 
@@ -869,9 +869,9 @@ app-component.html
 <router-outlet></router-outlet>
 ```
 
-#### 2. 路由传参
+### 2. 路由传参
 
-#### （1）get传值
+### （1）get传值
 
 ```html
 <div *ngFor="let item of list; let key = index">
@@ -879,7 +879,7 @@ app-component.html
 </div>
 ```
 
-#### （2）获取路由传值
+### （2）获取路由传值
 
 ```typescript
 import { ActivatedRoute } from '@angular/router'
@@ -894,7 +894,7 @@ ngOnInit() {
 }
 ```
 
-#### （3）动态路由传值
+### （3）动态路由传值
 
 动态路由配置
 
@@ -926,7 +926,7 @@ ngOnInit() {
 }
 ```
 
-#### 3. 普通路由和动态路由跳转
+### 3. 普通路由和动态路由跳转
 
 ```typescript
 import { Router } from '@angular/router'
@@ -941,7 +941,7 @@ export class PageComponent {
 }
 ```
 
-#### 4. get传值的动态路由
+### 4. get传值的动态路由
 
 ```typescript
 import { Router, NavigationExtras } from '@angular/router'
@@ -962,7 +962,7 @@ export class PageComponent {
 
 
 
-#### 5. 父子路由
+### 5. 父子路由
 
 ```typescript
 const routes: Routes = [
