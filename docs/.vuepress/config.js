@@ -28,8 +28,7 @@ export default defineUserConfig({
       ['meta', { name: 'keywords', content: '聪明的憨憨猪'}],
       ['meta', { name: 'keywords', content: '小憨憨'}],
       ['link', { rel: 'icon', href: '/logolink.png' }],
-      ['meta', { httpEquiv: 'Content-Security-Policy', content: 'upgrade-insecure-requests' }]
-      // <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+      ['meta', { 'http-quiv': 'Content-Security-Policy', content: 'upgrade-insecure-requests' }]
       // ['script', { src: "/utils/autopush-baidu.js" }],
       // ['script', { src: "/utils/autopush-360.js" }]
   ],
@@ -117,20 +116,16 @@ export default defineUserConfig({
           collapsible: true,
           children: getChildren('docs/back/nodejs/')
         },
-        // {
-        //   text: 'Nodejs',
-        //   collapsible: true,
-        //   children: [{
-        //     text: 'nodejs基础',
-        //     link: '/back/nodejs/nodejs.md',
-        //     parent: 'nodejs'
-        //   }]
-        // },
         {
           text: 'Git',
           collapsible: true,
           children: getChildren('docs/back/git/')
-        }
+        },
+        {
+          text: '工作笔记',
+          collapsible: true,
+          children: getChildren('docs/back/work/')
+        },
       ],
     },
 

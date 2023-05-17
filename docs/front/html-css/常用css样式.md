@@ -174,6 +174,14 @@ this.text = res.data.replace(/\n/g,'<br>')
   transform: scale(1.05);
 }
 ```
+### 12、关于table宽度样式不生效
+
+th标签宽度不生效，必须设置table的宽度th宽度才能生效，别问为什么，源码里就是这样计算的。
+
+table的th td标签的宽度设置受其它th td宽度影响，设置table标签样式 table-layout: fixed。
+
+colspan和rowspan不接受小数值，所以如果你想在两个列里面分三个平均列，那么把colspan或者rowspan的最大计量单位改为其最小公倍数。例如，两列里面需分三个平均列，那么把两列改为最小公倍数，也就是为2和3的公倍数6。
+
 <ClientOnly>
   <Valine></Valine>
 </ClientOnly>

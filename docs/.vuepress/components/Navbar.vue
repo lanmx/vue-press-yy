@@ -57,6 +57,7 @@ export default {
       'nodejs': 'Nodejs',
       'git': 'Git',
       'interview': '前端面试集合',
+      'work': '工作笔记',
     };
 
     // 初始化菜单
