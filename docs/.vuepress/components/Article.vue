@@ -80,9 +80,9 @@ export default {
       getMenu();
     })
     const articleData = __ARTICLE__[cate];
-    // onBeforeMount(() => {
-    //   console.log('articleData', articleData, props)
-    // })
+    onBeforeMount(() => {
+      console.log('articleData', articleData, props)
+    })
     const list = ref([])
     articleData.list = articleData.list.filter(item => item.text !== 'README');
     list.value = articleData.list;

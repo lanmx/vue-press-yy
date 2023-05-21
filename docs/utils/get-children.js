@@ -1,9 +1,14 @@
 import fs from 'fs'
 import path from 'path'
+import { getDirname } from '@vuepress/utils'
+const __dirname = getDirname(import.meta.url)
+import fileUrlMap from './md-url-map'
+
 function getChildren(path) {
   const root = []
   readDirSync(path,root)
-  console.log(root,"root")
+  // console.log(root,"root")
+  getFileTitle(root)
   return root
 }
 
@@ -34,11 +39,22 @@ function prefixPath(basePath,dirPath) {
   basePath = path.join(basePath,dirPath).replace(/\\/g,"/")
   // 获取文件标题
   let title = basePath.substring(basePath.lastIndexOf('/')+1, basePath.indexOf("."))
+  const mdDirPath = path.join(__dirname, '../' + basePath).replace(/\\/g,"/")
   return {
     text: title,
     link: basePath,
-    parent: parent
+    parent: parent,
+    mdDirPath: mdDirPath
   }
+}
+
+function getFileTitle(root) {
+  root.forEach(e => {
+    const target = fileUrlMap.find(item => item.link === e.link)
+    if (target) {
+      e.text = target.text
+    }
+  })
 }
 
 export default getChildren
