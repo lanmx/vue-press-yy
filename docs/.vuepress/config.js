@@ -9,6 +9,14 @@ import { backToTopPlugin } from '@vuepress/plugin-back-to-top'
 import getChildFloders from "../utils/get-child-floder"
 const __dirname = getDirname(import.meta.url)
 
+const autometa_options = {
+  site: {
+    name: 'lanmx Blog',
+    twitter: 'lanmx',
+  },
+  canonical_base: 'https://blog.pengxiao.xyz',
+};
+
 export default defineUserConfig({
   lang: 'zh-CN',
   title: '蓝敏晓的博客',
@@ -28,7 +36,10 @@ export default defineUserConfig({
       ['meta', { name: 'keywords', content: '聪明的憨憨猪'}],
       ['meta', { name: 'keywords', content: '小憨憨'}],
       ['link', { rel: 'icon', href: '/logolink.png' }],
-      ['meta', { 'http-quiv': 'Content-Security-Policy', content: 'upgrade-insecure-requests' }]
+      ['meta', { name: 'msvalidate.01', content: '4FCEF54952698D58CA1C2AA1D082C8E7' }],
+      ['meta', { 'http-quiv': 'Content-Security-Policy', content: 'upgrade-insecure-requests' }],
+      ['meta', { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge'}],
+      ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1'}],
       // ['script', { src: "/utils/autopush-baidu.js" }],
       // ['script', { src: "/utils/autopush-360.js" }]
   ],
@@ -204,7 +215,14 @@ export default defineUserConfig({
         // 悬浮窗样式 
         floatStyle:{ bottom: '10px', 'z-index': '999999' } 
       }
-    ] 
+    ],
+    ['sitemap', {
+      hostname: "https://blog.pengxiao.xyz",
+      // 排除无实际内容的页面
+      exclude: ["/404.html"]
+    }],
+    ['vuepress-plugin-baidu-autopush'],
+    ['autometa', autometa_options],
   ],
   // define HOOK
   define: {
