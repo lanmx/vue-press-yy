@@ -71,7 +71,7 @@ antd 1.8.1版本的UI组件库，由于版本过低，不支持多选只显示�
 
 > 多选只显示一个选中标签，其余选中内容+N显示，鼠标移上显示所有选中内容。
 
-![img](工作笔记.assets/企业微信截图_16836167546093.png)
+![img](@alias/企业微信截图_16836167546093.png)
 
 引入Directive模块，定义指令标签名称和事件方法
 
@@ -111,28 +111,37 @@ export class MaxTagCountDirective implements AfterViewInit, OnChanges {
     @Input() ngChecked;  // 必填参数，ngModel双向绑定的值
     @Input() checkedName;  // 选填参数：string[];，开启鼠标移上显示的标签；ngModel双向绑定的值,名称，用于显示鼠标移上显示的标签
     El;
-    lastNodeLen: Number = 0;
+    lastNodeLen: number = 0;
     lastChecked: string[];
-    lastIndex: Number;
+    lastIndex: number;
     domId = null;
     input = null;
     init = true;
     tagDomId = null;
+    countNum: number = 0;
     constructor(private Ele: ElementRef,
         private zone: NgZone,
         private renderer: Renderer2) { }
 
     ngAfterViewInit() {
         this.El = this.Ele.nativeElement;
+        if (this.El && this.El.querySelector('.ant-select-selection')) {
+            const uls = this.El.querySelector('ul');
+            uls.setAttribute('style', 'display: none;');
+        }
         setTimeout(() => {
-            this.tagCountChange();
+            if (this.El && this.El.querySelector('.ant-select-selection')) {
+                this.tagCountChange();
+            }
         }, 1000);
     }
 
     ngOnChanges(changes) {
         // console.log(changes);
         // console.log(this.ngChecked, this.checkedName);
-        this.tagCountChange();
+        if (this.El && this.El.querySelector('.ant-select-selection')) {
+            this.tagCountChange();
+        }
     }
 
     tagCountChange() {
@@ -151,9 +160,6 @@ export class MaxTagCountDirective implements AfterViewInit, OnChanges {
                 }
                 if (!this.ngChecked) {
                     this.ngChecked = [];
-                }
-                if (!this.checkedName) {
-                    this.checkedName = [];
                 }
                 // 判断是否存在+1
                 const existli = document.getElementById(this.domId);
@@ -302,12 +308,20 @@ export class MaxTagCountDirective implements AfterViewInit, OnChanges {
                     }
                 }
             }
-            ulList.setAttribute('style', 'display: block;');
+            if (this.checkedName && this.checkedName.length > 0) {
+                ulList.setAttribute('style', 'display: block;');
+            } else if (this.checkedName && this.countNum > 1 && this.init) {
+                ulList.setAttribute('style', 'display: block;');
+            }
+            if (!this.checkedName) {
+                ulList.setAttribute('style', 'display: block;');
+            }
         }
         // 记录上一次选中的长度
         this.lastNodeLen = this.ngChecked ? this.ngChecked.length : 0;
         // 记录上一次选中的内容
         this.lastChecked = this.ngChecked;
+        this.countNum++;
     }
 
     click(e) {
@@ -319,6 +333,7 @@ export class MaxTagCountDirective implements AfterViewInit, OnChanges {
 
     // 鼠标移上hover/leave事件，tag显示+n具体内容
     onMouse(dom, checkedName, ulList) {
+        checkedName = checkedName || [];
         if (checkedName.length > 1) {
             dom.onmouseover = function() {
                 const hoverDiv = document.createElement('div');
@@ -326,7 +341,7 @@ export class MaxTagCountDirective implements AfterViewInit, OnChanges {
                 hoverDiv.id = this.tagdomId;
                 hoverDiv.setAttribute('style',
                 `background-color:#404040; border-radius:3px; border-radius: 3px; position: absolute;
-                top: 36px; right: -20%; padding: 5px 12px;`);
+                top: 36px; right: -20%; padding: 5px 12px; z-index: 9; `);
                 // console.log(hoverDiv);
                 checkedName.forEach(tag => {
                     const childDiv = document.createElement('div');
@@ -338,7 +353,7 @@ export class MaxTagCountDirective implements AfterViewInit, OnChanges {
                 const traigle = document.createElement('div');
                 traigle.setAttribute('style',
                 `height: 0px; width: 0px; border: 8px solid #000; border-color: transparent transparent #404040 transparent;
-                position: absolute; top: -16px; left: 50%;`);
+                position: absolute; top: -16px; left: 50%; z-index: 9;`);
                 hoverDiv.appendChild(traigle);
                 ulList.appendChild(hoverDiv);
                 // console.log('onmouseover');
@@ -352,7 +367,6 @@ export class MaxTagCountDirective implements AfterViewInit, OnChanges {
         }
     }
 }
-
 ```
 
 模块引入写好的自定义指令：
@@ -383,7 +397,7 @@ export class SharedModule { }
 
 ```
 
-HTML上使用改指令<maxTagCount ngChecked  checkedName>
+HTML上使用改指令`maxTagCount ngChecked  checkedName`
 
 ```html
 <div class="button-select">
