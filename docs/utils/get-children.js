@@ -52,7 +52,8 @@ function getFileTitle(root) {
   root.forEach(e => {
     const target = fileUrlMap.find(item => item.link === e.link)
     if (target) {
-      e.text = target.text
+      e.text = target.text;
+      e['url'] = 'https://blog.pengxiao.xyz' + target.link.replace('.md', '.html')
     }
   })
 }
