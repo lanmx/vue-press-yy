@@ -2,68 +2,19 @@
 import ParentLayout from '@vuepress/theme-default/layouts/Layout.vue'
 import MusicBtn from '../components/MusicBtn.vue'
 const foo = __FOO__
-</script>
+const created = (() => {
+  var siteUrl = this.$site.themeConfig.domain;      
+  if (typeof this.$ssrContext !== "undefined") {    
+    var pageTitle = this.$page.title ? this.$page.title.toString().replace(/["|'|\\]/g, '') : null;
+    var imageUrl = this.$page.frontmatter.image ? this.$page.frontmatter.image : 'https://cdn.jsdelivr.net/gh/dbdgs/images@main/dabai.jpg';
+    var siteName = this.$site.title || null;
+    var publishedTime = dayjs(this.$page.frontmatter.date).toISOString() || dayjs(this.$page.lastUpdated).toISOString() || moment().toISOString();
+    var modifiedTime = dayjs(this.$page.lastUpdated).toISOString() || moment().toISOString();
+    var pageUrl = siteUrl + this.$page.path;
+    var pageType = this.$page.path.length <= 1 ? 'website' : 'article' ;
+    // var author = this.$site.themeConfig.personalInfo ? this.$site.themeConfig.personalInfo : null;    
 
-<template>
-  <ParentLayout>
-    <!-- 默认主题插槽：
-      navbar
-      navbar-before
-      navbar-after
-      sidebar
-      sidebar-top
-      sidebar-bottom
-      page
-      page-top
-      page-bottom
-      page-content-top
-      page-content-bottom
-     -->
-    <!-- <template #sidebar-bottom>
-      <Info></Info>
-    </template> -->
-    <!-- <template #navbar-before>
-      蓝敏晓蓝敏晓蓝敏晓蓝敏晓 {{ foo }}
-    </template>
-    <template #sidebar-top>
-      蓝敏晓蓝敏晓蓝敏晓蓝敏晓
-    </template>
-    <template #page-content-top>
-      蓝敏晓蓝敏晓蓝敏晓蓝敏晓
-    </template>
-    <template #page-content-bottom>
-      蓝敏晓蓝敏晓蓝敏晓蓝敏晓
-    </template> -->
-    <template #navbar-after>
-      <MusicBtn />
-    </template>
-    <template #page-bottom>
-      <div class="my-footer">
-        <div class="tips">
-          <p>MIT Licensed | Copyright © 2023-2025 蓝敏晓</p>
-          <a href="https://beian.miit.gov.cn" target="_blank">备案号：粤ICP备2023024899号-1</a> 
-        </div>
-      </div>
-    </template>
-  </ParentLayout>
-</template>
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  created() {
-    var siteUrl = this.$site.themeConfig.domain;      
-    if (typeof this.$ssrContext !== "undefined") {    
-      var pageTitle = this.$page.title ? this.$page.title.toString().replace(/["|'|\\]/g, '') : null;
-      var imageUrl = this.$page.frontmatter.image ? this.$page.frontmatter.image : 'https://cdn.jsdelivr.net/gh/dbdgs/images@main/dabai.jpg';
-      var siteName = this.$site.title || null;
-      var publishedTime = dayjs(this.$page.frontmatter.date).toISOString() || dayjs(this.$page.lastUpdated).toISOString() || moment().toISOString();
-      var modifiedTime = dayjs(this.$page.lastUpdated).toISOString() || moment().toISOString();
-      var pageUrl = siteUrl + this.$page.path;
-      var pageType = this.$page.path.length <= 1 ? 'website' : 'article' ;
-      // var author = this.$site.themeConfig.personalInfo ? this.$site.themeConfig.personalInfo : null;    
-
-      const data =
+    const data =
       {
           "@context": "https://schema.org",
           "@graph": [
@@ -185,14 +136,58 @@ export default defineComponent({
               }
           ]
       };
-
-      //creating the script element and storing the JSON-LD
-      var my_jsonld = '\n<script type="application/ld+json">\n' + JSON.stringify(data, null, 2) + "\n<\/script>\n";
-      this.$ssrContext.userHeadTags += my_jsonld;
-    }
+    //creating the script element and storing the JSON-LD
+    var my_jsonld = '\n<script type="application/ld+json">\n' + JSON.stringify(data, null, 2) + "\n<\/script>\n";
+    this.$ssrContext.userHeadTags += my_jsonld;
   }
 })
+created();
+
 </script>
+
+<template>
+  <ParentLayout>
+    <!-- 默认主题插槽：
+      navbar
+      navbar-before
+      navbar-after
+      sidebar
+      sidebar-top
+      sidebar-bottom
+      page
+      page-top
+      page-bottom
+      page-content-top
+      page-content-bottom
+     -->
+    <!-- <template #sidebar-bottom>
+      <Info></Info>
+    </template> -->
+    <!-- <template #navbar-before>
+      蓝敏晓蓝敏晓蓝敏晓蓝敏晓 {{ foo }}
+    </template>
+    <template #sidebar-top>
+      蓝敏晓蓝敏晓蓝敏晓蓝敏晓
+    </template>
+    <template #page-content-top>
+      蓝敏晓蓝敏晓蓝敏晓蓝敏晓
+    </template>
+    <template #page-content-bottom>
+      蓝敏晓蓝敏晓蓝敏晓蓝敏晓
+    </template> -->
+    <template #navbar-after>
+      <MusicBtn />
+    </template>
+    <template #page-bottom>
+      <div class="my-footer">
+        <div class="tips">
+          <p>MIT Licensed | Copyright © 2023-2025 蓝敏晓</p>
+          <a href="https://beian.miit.gov.cn" target="_blank">备案号：粤ICP备2023024899号-1</a> 
+        </div>
+      </div>
+    </template>
+  </ParentLayout>
+</template>
 
 <style lang="css">
 .tips {
