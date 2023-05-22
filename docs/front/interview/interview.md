@@ -1163,6 +1163,177 @@ type User = Name & {
 ## 50. angular的路由导航，可以说说吗
 
 ## 51. 如何判断一个数据的类型
+javascript中数据类型有: 
+
+基本数据类型: String, Number, Boolean, null, undefined, Symbol
+
+引用数据类型: Object, 包含Array, Function, Array, Date, Error, RegExp等都是属于Object类型
+
+### （1）typeof
+
+- typeof通常用来检测基本数据类型，它返回表示数据类型的字符串，返回的结果只能包含(number, string, boolean, undefined, function, object)
+
+- typeof检测引用数据类型只能返回Object或function，所以不能用typeof检测引用类型是属于Array还是Date
+- 可以使用typeof判断变量是否存在，`if(typeof a!== "undefined") {...}`
+
+```ts
+typeof 1   // "number"
+typeof '1'  // "string"
+typeof true  // "boolean"
+typeof undefined  // undefined
+typeof null  // "object"
+typeof {}  // "object"
+typeof [1,2,3] // "object"
+function Fn(){}
+typeof Fn   // "function"
+typeof new Fn()  // "object"
+typeof new Array() // "object"
+```
+
+可以发现，typeof检测通过对象实例出来的变量，均是Object
+
+### （2）instanceof
+
+```ts
+let date = new Date()
+date instanceof Date  // true
+Date.prototype === date.__proto__  // true
+```
+
+对象实例 instanceof 对象，如 date instanceof Date
+
+instanceof前面是该对象的实例，后面是对象类型，注意对象类型的大小写不能写错
+
+根据instanceof的定义：判断参照对象的prototype属性所指向的对象是否在对象实例的原型链上，instanceof只能用来判断两个对象是否属于实例关系，而不能判断一个对象实例具体属哪种类型
+
+ instanceof的本质是通过原型链去判断实例原型是否在对象类型的原型上，如`Date.prototype === date.__proto`__
+
+```ts
+let a = new Object() // 创建一个空对象
+let b = {} // 或者通过字面量创建
+a instanceof Object // true
+b instanceof Object // true
+
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+// 创建一个Person实例
+const c = new Person('mx', 22);
+c instanceof Person  // true
+
+// 创建一个数组
+const arr = new Array();
+arr instanceof Array  // true
+
+const date = new Date();
+date instanceof Date // true
+```
+
+但是instanceof这种方法判断数据类型有弊端，对于基本数据类型number, string, boolean这三种基本数据类型，
+
+只有通过构造函数定义才能检测出，例如: 
+
+```ts
+let num = new Number(1)
+num instanceof Number // true
+
+// 对于这种定义，instanceof无法检测出来，
+let number = 1
+number instanceof Number // false
+```
+
+### 简单实现instanceof 
+
+```ts
+function myInstanceof(L, R) {
+    const O = R.prototype;
+    if (L === null) {
+        return false;
+    }
+    L = L.__proto__;
+    while(true) {
+        if (L === null) {
+            return false;
+        }
+        if (L === O) {
+            return true;
+        }
+        L = L.__proto__;
+    }
+    
+}
+myInstanceof(true, Boolean) // true
+myInstanceof('1', Boolean) // false
+myInstanceof('1', String) // true
+```
+
+### （3）constructor
+
+根据constructor判断
+
+- 针对instanceof的弊端，我们可以使用constructor，constructor是原型对象的属性指向构造函数
+
+- 这种方法解决了instanceof的弊端，可以检测出除了undefined和null的9种类型（因为undefined和null没有原生构造函数）
+
+```ts
+let num = 2;
+num.constructor // ƒ Number() { [native code] }
+
+let date = new Date();
+date.constructor // ƒ Date() { [native code] }
+
+let bool = true
+bool.constructor  // ƒ Boolean() { [native code] }
+
+let str = '2'
+str.constructor  // ƒ String() { [native code] }
+
+let array = new Array(1,2,3)  // [1, 2, 3]
+array.constructor  // ƒ Array() { [native code] }
+
+let unde = undefined
+unde.constructor  // Uncaught TypeError: Cannot read property 'constructor' of undefined at <anonymous>:1:6
+
+let nul = null
+nul.constructor  // Uncaught TypeError: Cannot read property 'constructor' of null at <anonymous>:1:5
+
+let fn = function(){}
+fn.constructor  // ƒ Function() { [native code] }
+```
+
+### （4）Object.prototype.toString.call()
+
+在《你不知道的javaScript》(中卷)中讲到：所有typeof返回值为"object"的对象，都包含一个内部属性[[class]]，我们可以把他看做一个内部的分类而非传统意义上面向对象的类，这个属性无法直接访问，一般通过`Object.prototype.toString.call()`来查看。并且对于基本数据类型null,undefined这样没有原生构造函数，内部的[[class]]属性值仍然是Null和undefined
+
+```ts
+Object.prototype.toString.call()  // "[object Undefined]"
+Object.prototype.toString.call('ccc')  // "[object String]"
+toString.call('abc')  // "[object String]"
+toString.call(12)  // "[object Number]"
+toString.call(true)  // "[object Boolean]"
+toString.call(null)  // "[object Null]"
+toString.call(undefined)  // "[object Undefined]"
+toString.call([1,2.3])  // "[object Array]"
+toString.call({})  // "[object Object]"
+toString.call(function(){})  // "[object Function]"
+```
+
+### （5）js中提供的判断类型的方法
+
+- Array.isArray()  判断是否为数组
+
+```ts
+Array.isArray([]) // true
+```
+
+-  isNaN() 判断是否为非数字类型（非数值，**N**ot-**a**-**N**umber）
+
+```ts
+isNaN('-') // true
+isNaN(12) // fasle
+```
+
 
 
 
