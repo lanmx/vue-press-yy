@@ -37,7 +37,7 @@
 </template>
 <script>
 import { ref, onMounted } from 'vue'
-import Music from '../components/Music.vue'
+import Music from './Music.vue'
 
 
 export default {

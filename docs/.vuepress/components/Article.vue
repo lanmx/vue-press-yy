@@ -16,20 +16,9 @@
         <router-link class="card-inner" :to="item.link">
           <div class="title">{{ item.text }}</div>
           <!-- <div class="label-box">
-            <div class="label-item" v-for="item in item.parent" :key="item">{{ item }}</div>
-            <div class="label-item">{{ item.parent }}</div>
+            <div class="label-item" v-for="item in item.label" :key="item">{{ item }}></span></div>
           </div> -->
-          <!-- <div class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div> -->
-          <!-- <div class="label-footer">
-            <div class="icon-item">
-              <svg t="1682077266481" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3249" width="200" height="200"><path d="M510.548 105.582c-129.797 0-235.386 105.593-235.386 235.39 0 93.999 55.509 175.067 135.354 212.767-147.613 43.35-255.793 179.825-255.793 341.273 0 10.275 8.327 18.594 18.594 18.594 10.267 0 18.594-8.319 18.594-18.594 0-175.702 142.956-318.65 318.636-318.65 129.797 0 235.395-105.593 235.395-235.39s-105.598-235.39-235.395-235.39z m0 433.591c-109.294 0-198.197-88.917-198.197-198.202 0-109.29 88.903-198.202 198.197-198.202 109.298 0 198.206 88.912 198.206 198.202 0 109.29-88.903 198.202-198.206 198.202z m0 0z m215.838 72.907c-8.175-6.229-19.83-4.686-26.057 3.487-6.245 8.17-4.686 19.826 3.484 26.074 79.681 60.886 125.367 153.241 125.367 253.366 0 10.279 8.332 18.598 18.595 18.598 10.275 0 18.594-8.319 18.594-18.598 0-111.818-51.024-214.941-139.984-282.927z m0 0z" fill="#707070" p-id="3250"></path></svg>
-              <span class="label-t">author</span><span><a>author</a></span>
-            </div>
-            <div class="icon-item">
-              <svg t="1682077186764" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2296" width="200" height="200"><path d="M821.248 400.896c-66.56-100.352-180.224-166.912-309.248-166.912-129.024 0-243.2 66.56-309.248 166.912-16.896 25.6-30.208 52.736-40.448 81.92 10.24 28.672 23.552 56.32 40.448 81.92 66.56 100.352 180.224 166.912 309.248 166.912 129.024 0 243.2-66.56 309.248-166.912 16.896-25.6 30.208-52.736 40.448-81.92-9.728-28.672-23.552-56.32-40.448-81.92z m-309.248 286.72c-138.752 0-258.56-84.48-309.76-204.8 51.2-120.32 171.008-204.8 309.76-204.8s258.56 84.48 309.76 204.8c-51.2 120.32-171.008 204.8-309.76 204.8z" p-id="2297" fill="#707070"></path><path d="M512 346.112c-75.264 0-136.704 61.44-136.704 136.704S436.736 619.52 512 619.52s136.704-61.44 136.704-136.704-61.44-136.704-136.704-136.704z m0 229.376c-51.2 0-92.672-41.472-92.672-92.672S460.8 390.144 512 390.144s92.672 41.472 92.672 92.672-41.472 92.672-92.672 92.672z" p-id="2298" fill="#707070"></path></svg>
-              <span class="label-t">阅读量</span><span>9999+</span>
-            </div>
-          </div> -->
+          <div class="content">{{ item.describe }}</div>
         </router-link>
       </div>
       <div class="line"></div>
@@ -80,9 +69,9 @@ export default {
       getMenu();
     })
     const articleData = __ARTICLE__[cate];
-    onBeforeMount(() => {
-      console.log('articleData', articleData, props)
-    })
+    // onBeforeMount(() => {
+    //   console.log('articleData', articleData, props)
+    // })
     const list = ref([])
     articleData.list = articleData.list.filter(item => item.text !== 'README');
     list.value = articleData.list;
@@ -148,8 +137,8 @@ export default {
   z-index: 9;
   border-bottom: 1px solid var(--c-border);
   svg {
-    width: 1.7rem;
-    height: 1.7rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
   .tab-name {
     font-size: 1.1rem;
@@ -157,7 +146,8 @@ export default {
     cursor: pointer;
   }
   .tab-icon {
-    padding-right: 10px;
+    padding-right: 3px;
+    padding-top: 3px;
   }
   .active-line {
     border-bottom: 3px solid #3eaf7c;
@@ -167,23 +157,25 @@ export default {
     padding: 0 15px;
   }
 }
-
 .title {
   font-size: 1.1rem;
   line-height: 2rem;
-  color: var(--c-text)
+  color: var(--c-text);
+  font-weight: bolder;
 }
 .label-box {
   display: flex;
+  padding-bottom: 2px;
   .label-item {
-    border: 1px solid #3eaf7c;
     border-radius: 5px;
-    background-color: #eaeceb;
+    // background-color: #eaeceb;
     margin-right: 10px;
     padding-left: 5px;
     padding-right: 5px;
-    transform: skew(-10deg);
-}
+    color: #8a919f;
+    font-size: 14px;
+    // color: var(--c-text);
+  }
 }
 .info {
   display: flex;
@@ -198,9 +190,10 @@ export default {
 // 内容超出三行显示省略号
 .content {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  color: var(--c-text);
 }
 .label-footer {
   display: flex;
@@ -230,8 +223,10 @@ span.label-t {
   padding-top: 10px;
 }
 .card-box:hover {
-  color: red !important;
   background-color: #fafafa;
+}
+.card-inner {
+  text-decoration: none !important;
 }
 .el-card {
   transition: background .3s ease-in-out,transform .3s ease-in-out;

@@ -54,6 +54,8 @@ function getFileTitle(root) {
     if (target) {
       e.text = target.text;
       e['url'] = 'https://blog.pengxiao.xyz' + target.link.replace('.md', '.html')
+      e['describe'] = target.describe ? target.describe : target.text
+      e['label'] = target.label.split(',')
     }
   })
 }
