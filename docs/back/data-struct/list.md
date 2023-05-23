@@ -1,3 +1,10 @@
+---
+title: 链表
+description: 认识链表
+meta:
+  - name: keywords
+    content: 链表 link
+---
 # 链表
 
 ## 一、认识链表

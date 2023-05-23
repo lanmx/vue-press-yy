@@ -1,3 +1,10 @@
+---
+title: git pull 时提示 Please enter a commit message to explain why this merge is necessary
+description: git pull 时提示 Please enter a commit message to explain why this merge is necessary
+meta:
+  - name: keywords
+    content: git pull
+---
 ## 一、git pull 时提示 Please enter a commit message to explain why this merge is necessary
 
 如何退出：

@@ -1,3 +1,10 @@
+---
+title: nodejs项目部署到云服务器（完整教程）
+description: nodejs项目部署到云服务器（完整教程）
+meta:
+  - name: keywords
+    content: nodejs 云服务器
+---
 ## nodejs项目部署到云服务器（完整教程）
 提前购买好云服务器，和搭建服务器环境和nodejs项目
 - 使用宝塔面板搭建云服务器:[【官方教程】宝塔Linux面板安装教程](https://www.bt.cn/bbs/thread-19376-1-1.html)

@@ -1,3 +1,10 @@
+---
+title: Git重命名分支名称
+description: Git重命名分支名称
+meta:
+  - name: keywords
+    content: Git 重命名
+---
 ## 一、Git重命名分支名称
 
 ### 1. 本地分支重命名（还没有推送到远程仓库）

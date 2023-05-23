@@ -1,12 +1,9 @@
 ---
-# NavLink
-# prev:
-#   text: Get Started
-#   link: /guide/getting-started.html
-# # NavLink - 外部 URL
-# next:
-#   text: GitHub
-#   link: https://github.com
+title: 常用cmd命令
+description: 常用cmd命令，环境变量
+meta:
+  - name: keywords
+    content: cmd命令 cmd
 ---
 ## 常用cmd命令，环境变量
 

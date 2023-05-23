@@ -1,3 +1,10 @@
+---
+title: 冒泡，选择，快速选择排序
+description: 三种排序方法：冒泡，选择，快速选择
+meta:
+  - name: keywords
+    content: 冒泡 选择 快速选择 排序
+---
 ## 冒泡排序 O(n2)
 ```js
 function bubblingSort() {

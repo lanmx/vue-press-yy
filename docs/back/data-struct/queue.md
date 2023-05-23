@@ -1,3 +1,11 @@
+---
+title: 队列
+description: 认识队列结构，队列的实现
+meta:
+  - name: keywords
+    content: 队列 Queue
+---
+
 # 队列（Queue）
 
 ## 一、认识队列结构

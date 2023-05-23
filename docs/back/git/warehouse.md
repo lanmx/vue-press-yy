@@ -1,3 +1,10 @@
+---
+title: 搭建属于自己github仓库
+description: 搭建属于自己github仓库
+meta:
+  - name: keywords
+    content: github 仓库 git
+---
 # 搭建属于自己github仓库
 ## 一、安装git
 ## 二、git配置

@@ -1,3 +1,10 @@
+---
+title: 栈
+description: 认识栈
+meta:
+  - name: keywords
+    content: 栈 stack
+---
 # 栈（stack）
 
 ## 一、认识栈结构
