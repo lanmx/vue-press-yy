@@ -1,7 +1,7 @@
 <template>
 	<div class="pic">
-		<div id="midground" class="wall"></div>
-		<div id="foreground" class="wall"></div>
+		<!-- <div id="midground" class="wall"></div>
+		<div id="foreground" class="wall"></div> -->
 		<div class="show">
 			<img src="@alias/a.jpg" alt="" class="box">
 			<img src="@alias/b.jpg" alt="" class="box">
@@ -20,6 +20,7 @@
   
 </template>
 <script setup>
+
 </script>
 <style scoped>
 *{
