@@ -28,9 +28,11 @@ next:
   text: GitHub
   link: https://github.com
 ---
+
 <ClientOnly>
   <ThreeD />
 </ClientOnly>
+
 
 <ClientOnly>
   <Footer></Footer>

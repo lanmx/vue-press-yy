@@ -477,4 +477,34 @@ HTML上使用改指令`maxTagCount ngChecked checkedName`
     </nz-select>
 </div>
 ```
+## 7. 项目运行或打包报错echarts.d.ts(10728,69): error TS1005: ';' expected.
 
+项目npm run start 或者npm build报错，导致部分模块编译失败，部分页面打不开。
+
+![image-20230530110822120](@alias/image-20230530110822120.png)
+
+在网上搜索量很多资料，大部分答案都说是typescript版本过低的问题，重新按照最新版本的typescript。但是我按步骤操作，依然报错。
+
+最后大佬帮忙解决了，解决步骤如下：
+
+### 解决方法
+
+1. 打开../../node_modules/echarts/types/dist/echarts.d.ts文件，把所有代码注释掉~
+
+   ![image-20230530111119995](@alias/image-20230530111119995.png)
+
+2. 在该文件的最后加上这一行代码
+
+   ```ts
+   declare module 'echarts' {
+       const init: any;
+       export { init }
+   }
+   ```
+
+   ![image-20230530111228363](@alias/image-20230530111228363.png)
+
+3. 重新npm run start，编译成功了
+
+   ![image-20230530111346676](@alias/image-20230530111346676.png)
+   

@@ -8,6 +8,7 @@ import { searchPlugin } from '@vuepress/plugin-search'
 import { backToTopPlugin } from '@vuepress/plugin-back-to-top'
 import getChildFloders from "../utils/get-child-floder"
 const __dirname = getDirname(import.meta.url)
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
 const autometa_options = {
   site: {
@@ -236,5 +237,23 @@ export default defineUserConfig({
       },
       'number': getChildren('docs/front/').concat(getChildren('docs/back/')).length,
     }
+  },
+  vue: {
+    // 在这里设置自定义模板，例如
+    templates: {
+      DocsLayout: '/path/to/DocsLayout.vue'
+    }
+  },
+  configureServer: function(app) {
+    app.use(
+      '/music',
+      createProxyMiddleware({
+        target: 'http://39.108.60.145:3001/',  // 目标服务器地址
+        changeOrigin: true,  // 是否跨域
+        // pathRewrite: {
+        //   '^/api': '',  // 重写路径，去掉 /api 前缀
+        // },
+      })
+    );
   },
 })

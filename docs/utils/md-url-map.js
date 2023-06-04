@@ -95,6 +95,8 @@ const fileUrlMap = [
   { text: "浏览器前端https网站接口请求http报错", link: "/back/nodejs/https-http-error.md", parent: "nodejs", label: 'nodejs', describe: '前端项目配置了SSL hhtps安全访问，接口调用node项目用的http报错app-e3a33bd9.js:83 Mixed Content: The page at xxx was loaded over HTTPS, but requested an insecure XMLHttpRequest endpoint xxx. This request has been blocked; the content must be served over HTTPS.' },
   { text: "阿里云免费申请SSL证书https安全访问网站", link: "/back/nodejs/ssl-https.md", parent: "nodejs", label: 'nodejs', describe: '步骤整理：阿里云免费申请SSL证书https安全访问网站~' },
   { text: "工作笔记", link: "/back/work/work-notes.md", parent: "work", label: 'javascript', describe: '我的一些工作笔记~~~~' },
+  { text: "今天学习angular路由", link: "/front/angular/angular-router.md", parent: "angular", label: 'angular', describe: 'back、forward、go方法会触发页面刷新，pushState、replaceState方法不会刷新页面' },
+  { text: "git最基础的必会操作", link: "/back/git/git-basics.md", parent: "git", label: 'git', describe: '有时候会忘记切分支，导致代码提交在了master或者其他人分支上，这时候可以使用check-pick把commit 复制过来。' },
 ]
 
 export default fileUrlMap

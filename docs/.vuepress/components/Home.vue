@@ -1,10 +1,10 @@
 <template>
-  111
-  <!-- <Article cate="back-end" /> -->
+  <div>
+    ccccccccccc
+  </div>
 </template>
 <script>
 import { ref, onMounted } from 'vue'
-import Article from './Article.vue'
 
 export default {
   props: {
