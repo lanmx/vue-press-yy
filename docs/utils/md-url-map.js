@@ -35,7 +35,6 @@ const fileUrlMap = [
   { text: "translate3d()", link: "/front/html-css/translate3d.md", parent: "html-css", label: 'css', describe: ' CSS 函数在3D空间内移动一个元素的位置。这个移动由一个三维向量来表达，分别表示他在三个方向上移动的距离' },
   { text: "常用css样式", link: "/front/html-css/common-css.md", parent: "html-css", label: 'css', describe: '整理一些常用的css样式，很nice~' },
   { text: "苹果内核吸顶字体变形", link: "/front/html-css/ios-font-warp.md", parent: "html-css", label: 'css', describe: '为了避免 2D transform 动画在开始和结束时发生的 repaint 操作，我们可以硬编码一些样式来解决这个问题' },
-  { text: "面试问题集合", link: "/front/interview/interview.md", parent: "interview", label: '面试', describe: '面试问题和答案整理' },
   { text: "ES6知识点", link: "/front/javascript/es6.md", parent: "javascript", label: 'es6', describe: 'class person{}创建类只是构造函数、原型链的语法糖，最终还是要转换为原型链' },
   { text: "ES7-ES12", link: "/front/javascript/es7-es12.md", parent: "javascript", label: 'javascript', describe: 'includes判断数组是否包含元素，Object.values获取对象所有属性的值' },
   { text: "Promise await async 宏微任务 事件循环", link: "/front/javascript/promise-event-loop.md", parent: "javascript", label: '事件循环,promise', describe: 'Promise是异步编程的一种解决方案；简单的说，Promise是一个容器，里面保存着某个未来才会结束的事情' },
@@ -97,6 +96,14 @@ const fileUrlMap = [
   { text: "工作笔记", link: "/back/work/work-notes.md", parent: "work", label: 'javascript', describe: '我的一些工作笔记~~~~' },
   { text: "今天学习angular路由", link: "/front/angular/angular-router.md", parent: "angular", label: 'angular', describe: 'back、forward、go方法会触发页面刷新，pushState、replaceState方法不会刷新页面' },
   { text: "git最基础的必会操作", link: "/back/git/git-basics.md", parent: "git", label: 'git', describe: '有时候会忘记切分支，导致代码提交在了master或者其他人分支上，这时候可以使用check-pick把commit 复制过来。' },
+  { text: "vue面试题整理", link: "/front/interview/vue.md", parent: "interview", label: 'vue,面试', describe: 'vue面试题' },
+  { text: "nodejs面试题整理", link: "/front/interview/nodejs.md", parent: "interview", label: 'nodejs,面试', describe: 'nodejs面试题整理' },
+  { text: "http面试题整理", link: "/front/interview/http.md", parent: "interview", label: 'http,面试', describe: 'http面试题整理' },
+  { text: "webpack面试题整理", link: "/front/interview/webpack.md", parent: "interview", label: 'webpack,面试', describe: 'webpack面试题整理' },
+  { text: "flutter面试题整理", link: "/front/interview/flutter.md", parent: "interview", label: 'flutter,面试', describe: 'flutter面试题整理' },
+  { text: "css面试题整理", link: "/front/interview/css.md", parent: "interview", label: 'css,面试', describe: 'css面试题整理' },
+  { text: "angular面试题整理", link: "/front/interview/angular.md", parent: "interview", label: 'angular,面试', describe: 'angular面试题整理' },
+  { text: "前端面试必问", link: "/front/interview/interview.md", parent: "interview", label: '面试', describe: '前端面试问题和答案整理，牢记！' },
 ]
 
 export default fileUrlMap
