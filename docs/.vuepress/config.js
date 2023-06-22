@@ -20,7 +20,7 @@ const autometa_options = {
 
 export default defineUserConfig({
   lang: 'zh-CN',
-  title: '蓝敏晓的博客',
+  title: '小蓝的笔记',
   description: '女程序员，爱弹琴，爱发呆，爱coding，一个专注分享学习经验，记录前端知识的个人博客',
   head: [
       ['meta', { name: 'baidu-site-verification', content: 'codeva-CG1MKx50Sm'}],
@@ -28,6 +28,7 @@ export default defineUserConfig({
       ['meta', { name: '360-site-verification', content: '1a0bfe04399601203667d7dcfa1c8e6c'}],
       ['meta', { name: 'keywords', content: '蓝敏晓,蓝敏晓的博客'}],
       ['meta', { name: 'keywords', content: '前端'}],
+      ['meta', { name: 'keywords', content: '小蓝的笔记'}],
       ['link', { rel: 'icon', href: '/logolink.png' }],
       ['meta', { name: 'msvalidate.01', content: '4FCEF54952698D58CA1C2AA1D082C8E7' }],
       ['meta', { 'http-quiv': 'Content-Security-Policy', content: 'upgrade-insecure-requests' }],
