@@ -37,7 +37,7 @@ tagline: Javascript基础，高级JavaScript，vue和angular框架学习，Nodej
 :hand_over_mouth:	如果你使用vuepress框架搭建网站，也遇到了某些问题，希望这里可以帮助到你：:point_right: <a class="link" href="/front/vuepress/reflesh404.html">【vuepress笔记】</a> :heart_eyes:
 
 
-:smiling_face_with_three_hearts: 如果你也在准备面试前端，希望这里可以帮助到你： :point_right: <a class="link" href="/front/interview/interview.html">【vuepress笔记】</a>
+:smiling_face_with_three_hearts: 如果你也在准备面试前端，希望这里可以帮助到你： :point_right: <a class="link" href="/front/interview/interview.html">【前端面试必问】</a>
 
 
 ##### 入坑前端以来，整理的笔记，希望可以帮助到你，笔芯 :heartpulse: :star_struck: :stuck_out_tongue: :stuck_out_tongue_winking_eye: 
