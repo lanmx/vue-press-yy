@@ -26,7 +26,8 @@ export default defineUserConfig({
       ['meta', { name: 'baidu-site-verification', content: 'codeva-CG1MKx50Sm'}],
       ['meta', { name: 'baidu-site-verification', content: 'codeva-jIfosA0IJ1'}],
       ['meta', { name: '360-site-verification', content: '1a0bfe04399601203667d7dcfa1c8e6c'}],
-      ['meta', { name: 'keywords', content: '蓝敏晓,蓝敏晓的博客,蓝敏晓个人博客,宽窄巷子和锦里,javascript,angular,vue,nodejs,蓝敏晓的学习笔记,蓝敏晓前端开发,蓝敏晓前端开发工程师'}],
+      ['meta', { name: 'keywords', content: '蓝敏晓,蓝敏晓的博客'}],
+      ['meta', { name: 'keywords', content: '前端'}],
       ['link', { rel: 'icon', href: '/logolink.png' }],
       ['meta', { name: 'msvalidate.01', content: '4FCEF54952698D58CA1C2AA1D082C8E7' }],
       ['meta', { 'http-quiv': 'Content-Security-Policy', content: 'upgrade-insecure-requests' }],
@@ -37,7 +38,7 @@ export default defineUserConfig({
   ],
   theme: defaultTheme({
     home: '/',
-    logo: '/sculpture.jpg',
+    logo: '/sculpture.png',
     logoDark: '/logoDark.png',
     repo: 'https://github.com/lanmx/',
     search: true,
@@ -234,6 +235,11 @@ export default defineUserConfig({
         list: getChildren('docs/back/'),
         cate: 'back-end',
         name: '后台'
+      },
+      'all': {
+        list: getChildren('docs/front/').concat(getChildren('docs/back/')),
+        cate: 'all',
+        name: '所有文章'
       },
       'number': getChildren('docs/front/').concat(getChildren('docs/back/')).length,
     }

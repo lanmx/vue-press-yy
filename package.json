@@ -29,6 +29,7 @@
     "http-proxy-middleware": "^2.0.6",
     "leancloud-storage": "^4.14.0",
     "lodash": "^4.17.21",
+    "markdown-it-emoji": "^2.0.2",
     "mitt": "^3.0.0",
     "moment": "^2.29.4",
     "path-browserify": "^1.0.1",

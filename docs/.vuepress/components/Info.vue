@@ -1,7 +1,7 @@
 <template>
   <div class="info-outer">
     <div class="image">
-      <img src="../public/sculpture.jpg" alt="">
+      <img src="../public/sculpture.png" alt="">
     </div>
     <div class="label">
       <div class="label-item">

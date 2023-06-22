@@ -30,6 +30,7 @@ const fileUrlMap = [
   { text: "用户选择器全局组件实现", link: "/front/classic-example/user-selector.md", parent: "classic-example", label: 'vue', describe: 'vue组件开发封装全局用户选择器组件，so easy' },
   { text: "BFC", link: "/front/html-css/bfc.md", parent: "html-css", label: 'css', describe: 'Dlock Formatting Context：格式化上下文，指一个独立的渲染区域，可以理解为一个独立的空间，不会影响到外面的元素' },
   { text: "box-shadow", link: "/front/html-css/box-shadow.md", parent: "html-css", label: 'css', describe: 'css: 盒子阴影box-shadow' },
+  { text: "穿透样式", link: "/front/html-css/penetrate-css.md", parent: "html-css", label: 'css', describe: '常用框架vue，angular穿透样式' },
   { text: "css响应式布局", link: "/front/html-css/css-self-layout.md", parent: "html-css", label: 'css', describe: 'cSS3媒体查询可以让我们针对不同的媒体类型定义不同的样式， 当重置浏览器窗口大小的过程中，页面也会根据浏览器的宽度和高度重新渲染页面。' },
   { text: "overflow属性", link: "/front/html-css/overflow.md", parent: "html-css", label: 'css', describe: 'css: 如果内容溢出一个元素的框，通过overflow属性设置效果' },
   { text: "translate3d()", link: "/front/html-css/translate3d.md", parent: "html-css", label: 'css', describe: ' CSS 函数在3D空间内移动一个元素的位置。这个移动由一个三维向量来表达，分别表示他在三个方向上移动的距离' },

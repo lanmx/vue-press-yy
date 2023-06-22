@@ -725,7 +725,7 @@ javascript中数据类型有:
 
 - 引用数据类型: Object, 包含Array, Function, Array, Date, Error, RegExp等都是属于Object类型
 
-内置**函数对象**的构造函数都是 Function，例如 Array、Map等；内置**普通对象**的构造函数是Object，**例如：**JSON、Atomic、Intl、Reflect、WebAssembly 等
+内置**函数对象**的构造函数都是 Function，例如 Array、Map等；内置**普通对象**的构造函数是Object，例如：JSON、Atomic、Intl、Reflect、WebAssembly 等
 
 ### 一、typeof
 
@@ -757,7 +757,7 @@ typeof new Array() // "object"
 ```ts
 function myType(value) {
   let type = typeof value;
-  if (type !== 'object') {
+  if (type !== 'object' || type !=='function') {
       return type
   }
   return Object.prototype.toString.call(value);
@@ -914,12 +914,320 @@ isNaN('-') // true
 isNaN(12) // fasle
 ```
 
+### 六、类型转换
+[引用类型转化规则](https://www.jianshu.com/p/3dcd26229e1f)
+引用类型进行类型转化时会调用本身的Symbol.toPrimitive、valueOf、toString三个方法进行转化，其中Symbol.toPrimitive的优先级最高，如果要进行转化的引用类型上有这个方法，那么直接调用这个方法，如果没有，再根据转化的情况决定优先调用valueOf还是toString。
+### （一）Number()转换
+> 原始值为字符串
+```js
+Number('')  // 0
+Number()  // 0
+Number('0')  // 0
+Number('00')  // 0 无论多少个0都会转成一个
+Number('a') // NaN // 非空字符串且非数字字符串都会变成NaN
+```
+> 原始值为布尔值
+```js
+Number(true) // 1
+Number(false) // 0
+```
+> 原始值为undefined或null
+```js
+Number(undefined) // NaN
+Number(null)  // 0
+```
+> 原始值为数组（默认情况）
+```js
+Number([])  // 0
+Number([1])  // 1
+Number(['1'])  // 1
+Number(['1'])  // 1
+Number([1,2])  // NaN, / 除了只有一个元素且元素为数字或数字字符串外，都是NaN
+Number(['1','2'])  // NaN
+Number(['1',2])  // NaN
+```
+> 原始值为函数或对象（默认情况）
+```js
+Number({}) // NaN
+Number(function(){}) // NaN
+```
+### （二）String()转换
+> 原始值为基础类型
+```js
+String(1) // "1"
+String(NaN) // "NaN"
+String(true) // "true"
+String(false) // "false"
+String(undefined) // "undefined"
+String(null) // "null"
+```
+> 原始值为引用类型（默认情况）
+```js
+String([]) // ""
+String([1]) // "1"
+String([1,2]) // "1,2"
+String(['1','a']) // "1,a" 相当于join()
+String({}) // "[object Object]"
+String({a: 1}) // "[object Object]"
+```
+### （三）Boolean()转换
+> 原始值为基础类型
+```js
+Boolean(1) // true
+Boolean() // false
+Boolean('') // false
+Boolean(NaN) // false
+Boolean('0') // true 非空字符串都是true
+Boolean(undefined) // false
+Boolean(null) // false
+```
+> 原始值为基础类型: 全部为true
+
+**上面在写引用类型进行类型转化的时候，都加上了一个默认情况，那什么情况是特殊的呢，先来看看引用类型转化规则。**
+### （四）引用类型转化规则
+来看个栗子: 
+```js
+const obj = {
+  [Symbol.toPrimitive]: function() {
+    return '超人鸭'
+  },
+  valueOf: function() {
+    return '1'
+  },
+  toString: function() {
+    return '2'
+  }
+}
+console.log(Number(obj)) // NaN
+console.log(String(obj)) // '超人鸭'
+console.log(obj == '超人鸭') // true
+```
+这个打印结果对应上面三个方法的哪一个的返回结果呢，很明显是Symbol.toPrimitive
+
+现在对象去掉了 Symbol.toPrimitive 方法，打印结果
+```js
+const obj = {
+  valueOf: function() {
+    return '1'
+  },
+  toString: function() {
+    return '2'
+  }
+}
+console.log(Number(obj)) // 1
+console.log(String(obj)) // '2'
+console.log(obj == '1') // true
+```
+从结果上看Number(obj)和obj == '1'对应的是valueOf方法，String(obj)对应的是toString方法。
+
+valueOf返回值返回一个空对象，那么此时的结果是什么呢？
+```js
+const obj = {
+  valueOf: function() {
+    return {}
+  },
+  toString: function() {
+    return '2'
+  }
+}
+console.log(Number(obj)) // 2
+console.log(String(obj)) // '2'
+console.log(obj == '2') // true
+```
+很明显对应的是toString方法，好乱了，原始值不一样，valueOf方法和toString方法的优先级也不一样。
+### （五）引用类型转化规则总结
+通过看（三）引用类型转化规则的例子，总结很清晰：
+
+引用类型进行类型转化时会调用本身的Symbol.toPrimitive、valueOf、toString三个方法进行转化，其中Symbol.toPrimitive的优先级最高，如果要进行转化的引用类型上有这个方法，那么直接调用这个方法，如果没有，再根据转化的情况决定优先调用valueOf还是toString。
+
+转化的情况是指？
+1. 期待转化为字符串的（优先调用toString方法）
+2. 转化为其他的（优先调用valueOf方法）
+
+1. 期待转化为字符串的（优先调用toString方法）例如显示转换String(),alert方法,模板字符串,对象的键名,字符串加号运算符
+再看看个例子
+```js
+const obj = {
+  toString: function() {
+    return '我是超人鸭'
+  },
+  valueOf: function() {
+    return '我爱你'
+  }
+}
+
+alert(obj)  // 界面显示：我是超人鸭
+console.log(`${obj}`)  // 我是超人鸭
+```
+2. 转化为其他的（除此之外其他会导致类型转化的操作，都是优先调用valueOf方法），看个例子
+```js
+const obj = {
+  toString: function() {
+    return '我是超人鸭'
+  },
+  valueOf: function() {
+    return '1'
+  }
+}
+
+console.log(obj == '1') // true
+console.log(+obj) // 1
+console.log(obj + 1) // '11'
+console.log(obj < 2) // true
+```
+还有一种情况，再来看个例子
+```js
+const obj = {
+  toString: function() {
+    return {}
+  },
+  valueOf: function() {
+    return '我爱你'
+  }
+}
+
+alert(obj)  // 界面显示：我爱你
+console.log(`${obj}`)  // 我爱你
+```
+调用的就是valueOf方法，虽然优先调用toString，但是toString没有返回基础类型，所以会调用valueOf。
+
+二次总结：
+
+- 如果有Symbol.toPrimitive方法，则直接调用这个方法，且这个方法不能返回引用类型，否则报错。
+- 根据转化的情况决定优先调用toString还是valueOf，如果期待的是返回字符串，那么优先调用toString方法，其他情况优先调用valueOf方法。
+- 如果toString或valueOf返回的不是基础类型的数据，那么就调用下一个，如果两个方法都没有返回基础类型数据，则报错。
 
 
+**引用类型默认情况的valueOf和toString**
+```js
+const obj = {
+  a: '1'
+}
+const arr = [1,2]
+console.log(obj.toString()) // '[object Object]'
+console.log(obj.valueOf()) // {a: '1'}
+console.log(arr.toString()) // '1,2' // 相当于join()
+console.log(arr.valueOf()) // [1, 2]
+```
+默认情况下，valueOf都是返回引用类型，基于上面引用类型进行类型转化的规则，在默认情况下，引用类型进行转化都是调用了toString方法。
 
+### （六）更多转换例子
+> 加号运算符
+两个变量相加的情况，引用类型基于上面的规则，调用的是toString方法，而基础类型有相加有一个规律，如果是有一个变量是字符串，那么就会转为字符串，其余情况全部转为数字。
+有字符串的情况：
+```js
+console.log('1' + 1) // '11'
+console.log('1' + undefined) // '1undefined'
+console.log('1' + null) // '1null'
+console.log('1' + false) // '1false'
+```
+> 其余情况都是转为数字：
+```js
+console.log(1 + false) // 1
+console.log(1 + undefined) // NaN
+console.log(1 + null) // 1
+console.log(undefined + false) // NaN
+console.log(undefined + null) // NaN
+console.log(null + false) // 0
+```
+> 非加号运算符类型转化
+一元运算符和其他数学运算符都可以把类型转为number类型
+```js
+console.log(+'1') // 1
+console.log(+true) // 1
+console.log(+undefined) // NaN
+console.log(+null) // 0
+console.log(true - null) // 1
+console.log('1' * true) // 1
+```
+> 双取反号将变量转为布尔值，引用类型固定转为true，不会调用toString和valueOf方法：
+```js
+console.log(!!'1') // true
+console.log(!!0) // false
+console.log(!!null) // false
+console.log(!!undefined) // false
+console.log(!![]) // true
+console.log(!!{}) // true
+```
+> 不严格相等类型转化
+- null == undefined返回true
+- null和undefined除了和自身、对方比较，与其他类型比较全部返回false
+- 比较两边如果有NaN，那么返回false，包括NaN == NaN
+- 两个引用类型比较除非引用地址相同，不然返回false
+- 其余情况下，引用类型基于上面的规律，默认情况下调用toString方法；基础类型转为number再进行比较。
+```js
+console.log(null == undefined) // true
+console.log(null == 0) // false
+console.log(undefined == 'undefined') // false
+console.log(NaN == NaN) // false
+console.log([] == []) // false，地址不同
+console.log([] == 0) // true，[]调用toString变为''，''转为number变为0
+console.log(['1'] == 1) // true，[]调用toString变为'1'，'1'转为number变为1
+console.log({} == '[object Object]') // true
+console.log(1 == '1') // true
+console.log(1 == true) // true
+```
+> [] == ! [] 的结果为什么会是true
+```js
+console.log([] == ![]) // true 
 
+```
+首先要明白==和===的区别
 
-## 24、undefined和null的区别
+==是判断值是否相等,===判断值及类型是否完全相等。
+
+前者会自动转换类型，后者不会。所以在判断[]==![]会转换两者的类型。
+
+根据运算符优先级 ，!的优先级是大于 == 的，所以先会执行 ![]
+
+```js
+typeof []  //Object 
+typeof ![] //Boolean
+```
+两者类型不同，比较的时候会尝试将Boolean转换为Number，而Object转换成Number或String，取决于另外一个对比量的类型。这里因为比较的对象是Boolean，所以也会转化为Number。
+
+```js
+console.log(![]) //false 因为任何对象Boolean值都为true，所以![]就为false
+```
+Boolean与Number的转换，true为1，false为0，所以![]在比较的时候转换为Number值为0。
+
+而[]是很明显的空对象了。
+对于对象，当将其转换成Number时，会先调用对象的valueOf()方法及toString()，返回对象的原始值，再进行转换。最终[]会返回""空字符串，""会转化Number值为0。
+最后0==0所以两者以比较就为true了
+
+## 24、前端面试题(a === 1 && a === 2 && a === 3 && a == 4 && a == 5 && a == 6)输出为ture 
+```js
+let b = 1;
+Object.defineProperty(window, 'a', {
+  get() {
+    console.log('获取a值')
+    return b++
+  },
+})
+console.log(a === 1 && a === 2 && a === 3 && a == 4 && a == 5 && a == 6)
+// 获取a值
+// 获取a值
+// 获取a值
+// 获取a值
+// 获取a值
+// 获取a值
+// true
+```
+另外 假设if(b==1&&b==2&&b==3)是等于 true的，也可以这样实现
+```js
+const arr = [1, 2, 3]
+let index = 0
+
+const b = {
+    valueOf() {
+        return arr[index ++]
+    }
+}
+
+console.log(b == 1 && b == 2 && b == 3)
+```
+
+## 25、undefined和null的区别
 
 定义
 
@@ -952,7 +1260,7 @@ isNaN(12) // fasle
    
 
 
-## 25、TS里interface和type的区别
+## 26、TS里interface和type的区别
 
 ### （1）都可以描述对象和函数
 
@@ -1006,21 +1314,20 @@ type User = Name & {
 - interface 能够声明合并而type不行
 
 
-## 26、table表格的虚拟滚动怎么实现
+## 27、table表格的虚拟滚动怎么实现
 
-## 27、从零搭建项目，需要做什么准备
+## 28、从零搭建项目，需要做什么准备
 
-## 28、懒加载
+## 29、懒加载
 
-## 29、如何做权限控制
+## 30、如何做权限控制
 
-## 30、token jwt
+## 31、token jwt
 
 ## 字节一轮面试题
 *字节一轮面试---start*
 ### （一）手写双向绑定原理
-
-emmm
+[手写双向绑定原理](https://blog.pengxiao.xyz/front/vue/v-model.html)
 
 ### （二）微任务宏任务代码面试题
 

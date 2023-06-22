@@ -100,16 +100,16 @@ devServer：实现本地服务，包括http  模块热替换  sourse map等服�
 ### （一）loader
 loader直译为“加载器”。Webpack将一切文件视为模块，但是webpack原生是只能解析js文件，如果想将其他文件也打包的话，就会用到loader。 所以Loader的作用是让webpack拥有了加载和解析非JavaScript文件的能力。
 
-loader它只专注于转化文件（transform）这一个领域，完成压缩，打包，语言翻译; 而plugin不仅只局限在打包，资源的加载上，还可以打包优化和压缩，重新定义环境变量等
-
 loader用于对模块源码的转换，loader描述了webpack如何处理非javascript模块，并且在buld中引入这些依赖。loader可以将文件从不同的语言（如TypeScript）转换为JavaScript，或者将内联图像转换为data URL。比如说：CSS-Loader，Style-Loader等。
 
-loader运行在打包文件之前（loader为在模块加载时的预处理文件）；plugins在整个编译周期都起作用
+一个loader的职责是单一的，只需要完成一种转换。一个loader其实就是一个Node.js模块。当需要调用多个loader去转换一个文件时，每个loader会链式的顺序执行。
 
-一个loader的职责是单一的，只需要完成一种转换。一个loader其实就是一个Node.js模块。当需要调用多个loader去转换一个文件时，每个loader会链式的顺序执行
-
+loader它只专注于转化文件（transform）这一个领域，完成压缩，打包，语言翻译
+; 而plugin不仅只局限在打包，资源的加载上，还可以打包优
+化和压缩，重新定义环境变量等。
 ### （二）plugin
-plugin可以为loader带来更多特性。loader可以进行压缩，打包，语言翻译等等。
+plugin可以为loader带来更多特性。
+
 Plugin直译为“插件”。Plugin可以扩展webpack的功能，让webpack具有更多的灵活性。 在 Webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。
 
 目的在于解决loader无法实现的其他事，从打包优化和压缩，到重新定义环境变量，功能强大到可以用来处理各种各样的任务。
@@ -119,10 +119,14 @@ webpack提供了很多开箱即用的插件：CommonChunkPlugin主要用于提�
 ### （三）用法不同
 Loader在module.rules中配置，也就是说他作为模块的解析规则而存在。 类型为数组，每一项都是一个Object，里面描述了对于什么类型的文件（test），使用什么加载(loader)和使用的参数（options）
 
-Plugin在plugins中单独配置。 类型为数组，每一项是一个plugin的实例，参数都通过构造函数传入
+Plugin在plugins中单独配置。 类型为数组，每一项是一个plugin的实例，参数都通过构造函数传入。
 
+### （四）运作时间不同
+
+loader运行在打包文件之前（loader为在模块加载时的预处理文件）；plugins在整个编译周期都起作用。
 
 ## 3、如何优化webpack
+
 打包后，dist文件目录过大怎么解决：
 - dist中生成的.map，可以把这个map文件去掉，在vue.config.js配置文件中：productionSourceMap:false
 
@@ -343,7 +347,7 @@ plugins: [
 ### （8）CommonChunkPlugin
 CommonChunkPlugin主要用于提取第三方库和公共模块，避免首屏加载的bundle文件，或者按需加载的bundle文件体积过大，导致加载时间过长，是一把优化的利器。而在多页面应用中，更是能够为每个页面间的应用程序共享代码创建bundle。
 
-## 5、webpack的热更新
+## 5、理解webpack的热更新
 
 `HMR`全称 `Hot Module Replacement`，可以理解为模块热替换，指在应用程序运行过程中，替换、添加、删除模块，而无需重新刷新整个应用
 
@@ -398,7 +402,7 @@ webpack监听源文件的变化，即当开发者保存文件时触发webpack的
 不一致则通过ajax和jsonp向服务端获取最新资源
 使用内存文件系统去替换有修改的内容实现局部刷新
 
-## 6、webpack proxy代理
+## 6、理解webpack proxy代理
 
 （本地开发请求另一个服务器的资源会因为浏览器安全策略的问题跨域，可以利用中间服务器实现代理，把请求转交给代理服务器，代理服务器响应请求，并把请求转交给目标服务器，目标服务器响应数据后返回给代理服务器，代理服务器再转交给本地。解决浏览器跨域的问题。）
 
@@ -486,7 +490,7 @@ vite是基于esbulid预构建依赖，esbulid是采用go语言编写的，go语�
 
 ### （2）打包过程
 
-webpack：分析各个模块之间的依赖=>然后进行编译打=>打包后的代码在本地服务器渲染。随着模块增多，打包的体积变大，造成热更新速度变慢。
+webpack：分析各个模块之间的依赖=>然后进行编译打包=>打包后的代码在本地服务器渲染。随着模块增多，打包的体积变大，造成热更新速度变慢。
 ![](@alias/20210417225533423.png)
 
 vite：启动服务器=>请求模块时按需动态编译显示。是先启动开发服务器，请求某个模块时再对该模块进行实时编译，因为现代游览器本身支持ES-Module，所以会自动向依赖的Module发出请求。所以vite就将开发环境下的模块文件作为浏览器的执行文件，而不是像webpack进行打包后交给本地服务器。（vite遵循的是ES Modlues模块规范来执行代码，不需要打包编译成es5模块即可在浏览器运行。）
@@ -512,6 +516,97 @@ webpack是bundle，自己实现了一套模块导入导出机制。vite是利用
 vite开发阶段，打包快。
 vite相关生态没有webpack完善，vite可以作为开发的辅助。
 
-## 8、如何提高webpack打包速度，讲一下打包过程
 
-## 9、webpack如何加快热更新
+
+## 8、webpack如何加快热更新速度
+### （一）在开发服务器中使用 watchOptions 配置进行优化：
+```js
+devServer: {
+  watchOptions: {
+    ignored: /node_modules/,
+    poll: 1000, // 轮询文件变化
+    aggregateTimeout: 300, // 延迟处理
+  },
+}
+```
+其中，ignored 选项可用于忽略某些目录，如 node_modules，减少了无用扫描；poll 选项用于轮询文件变化的时间间隔，可以根据实际情况调整，可适用不同的文件系统和 CPU 处理器；aggregateTimeout 选项是延迟处理时间，在这段时间内，如果有多个文件变化，Webpack 可以只重编译一次，减少重复编译的效果。
+
+### （二）使用 HotModuleReplacementPlugin 插件：
+在 Webpack 配置文件中添加 HotModuleReplacementPlugin 插件，它可以使 Webpack 支持模块热替换：
+```js
+const webpack = require('webpack');
+module.exports = {
+  // ...
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    // ...
+  ],
+  // ...
+};
+```
+### （三）使用 webpack-dev-server：
+webpack-dev-server 是一个快速的开发服务器，并支持热更新：
+```js
+npm install webpack-dev-server --save-dev
+```
+在 Webpack 配置文件中，可以设置 devServer 选项：
+```js
+module.exports = {
+  // ...
+  devServer: {
+    hot: true, // 启用热更新
+    // ...
+  },
+  // ...
+};
+```
+### （四）启用 cache 缓存：
+可以使用 cache 缓存来加快速度：
+```js
+module.exports = {
+  // 将选项设置为 true 或传递一个对象，以手动控制缓存方式以及存储位置等。
+  cache: true,
+  // ...
+};
+```
+### （五）使用 DllPlugin 或 hard-source-webpack-plugin：
+DllPlugin 或 hard-source-webpack-plugin 插件可使用预编译的模块，以提高构建速度。使用它们可以避免在每次构建中都重新编译相同的模块。
+
+## 9、优化webpack打包速度的插件有哪些
+- **thread-loader**：在多个 worker 池中运行 Loader 以加快构建速度，提高 CPU 利用率。
+
+- **happypack**：允许并行处理多个 Loader 实例，也可用于加速 Babel 转换。
+
+- **cache-loader**：缓存 Loader 执行结果，以减少资源处理时间。
+
+- **hard-source-webpack-plugin**：通过缓存和共享单个缓存来加速重复构建。可以在 CI/CD 或本地使用。
+
+- **uglifyjs-webpack-plugin**：并行压缩生成的 JS 文件，降低构建所需时间。
+
+- **webpack-parallel-uglify-plugin**：基于 UglifyJS 压缩 JS 文件，可以并行化优化构建速度。
+
+- **auto-dll-webpack-plugin**：用于提前编译部分代码，提高构建性能，减少构建所需时间。
+
+- **webpack-bundle-analyzer**：可视化分析打包后的文件大小和依赖关系，以便于优化打包结果。
+
+这些插件都可以通过不同方式来优化 Webpack 打包速度，提高项目的构建效率。使用它们可以将 Webpack 打包时间缩短到最小，并在开发过程中提高代码运行效率。
+
+## 10、优化webpack打包体积的插件有哪些
+
+- **tree-shaking：** Webpack 内置了 tree-shaking 检测并删除无用代码。
+
+- **code-splitting：** 将代码拆分为多个块以减少初始下载和未使用的代码。
+
+- **optimize-css-assets-webpack-plugin：** 压缩 CSS 代码并删除未使用的 CSS 规则。
+
+- **terser-webpack-plugin：** 用于压缩 JavaScript 代码并删除未使用的代码。
+
+- **webpack-bundle-analyzer：** 分析打包的 bundle 所需要的模块，找出其中使用重复代码块并进行移除。
+
+- **compression-webpack-plugin：** 在生成生产构建时使用 gzip 压缩文本文件，减少文件大小。
+
+- **purgecss-webpack-plugin：** 删除未使用的 CSS，减少 CSS 文件大小。
+
+- **webpack-cdn-plugin：** 自动生成 CDN 路径，以便于优化打包效果，减少文件大小。
+
+这些插件都是常用的用于优化 Webpack 打包体积的插件，它们可以帮助您减少打包的文件大小，并缩短页面的加载时间，优化您的项目性能。

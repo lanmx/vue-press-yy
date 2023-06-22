@@ -156,6 +156,9 @@ export default {
   .tab-box {
     padding: 0 15px;
   }
+  .tab-box:hover {
+    color: #42b983;
+  }
 }
 .title {
   font-size: 1.1rem;
