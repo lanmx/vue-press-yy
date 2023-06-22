@@ -2,9 +2,9 @@
   <div>
     <div class="footer-nav">
       <div class="left">
-        <div class="title">嘟嘟在蓝色海底的技术博客</div>
+        <div class="title">小蓝的技术博客</div>
         <div class="l-text">
-          这是一个专注分享学习经验，记录前端知识的个人博客。我想做属于自己的产品。
+          这是一个专注分享学习经验，记录前端知识的个人博客。
         </div>
         <p>网站日常记录和分享技术。（所有权归作者所有）</p>
       </div>
@@ -20,7 +20,7 @@
   </div>
   <div class="line"></div>
   <div class="tips">
-    <p>MIT Licensed | Copyright © 2018-2023 蓝敏晓</p>
+    <p>MIT Licensed | Copyright © 2022-2023 蓝敏晓</p>
     <a href="https://beian.miit.gov.cn" target="_blank">备案号：粤ICP备2023024899号-1</a> 
   </div>
 </template>
