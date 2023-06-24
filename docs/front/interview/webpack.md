@@ -1,3 +1,4 @@
+:frowning_man: 前端面试webpack打包工具必问，特别是面试中高级工程师，回答问题时要全面，深度也要够:muscle:，才能深的面试官认可噢~加油鸭ヾ(◍°∇°◍)ﾉﾞ :duck::duck::duck:
 ## 1、webpack的构建流程
 webpack的构建流程是一个串行的过程。从启动到结束会依次执行下面过程：
 ![](@alias/1b1f6127fd15fb8cf4557aa078febce2.png)

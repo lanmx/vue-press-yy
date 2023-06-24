@@ -67,29 +67,23 @@ vue2没有用defineProperty对数组拦截，而是对数组重写，数组中�
 
 ## 6. Vue的watch实现原理
 
-## 7. Vue2、vue3的响应式原理和区别
-
-## 8. vue的生命周期
-
-## 9. vue模板的渲染过程
-
-## 10. vue2和vue3的最大区别，性能上有什么变化
-## 11. 说说vue-router的使用，讲一下路由钩子函数，beforeEach的实现原理
-
-
-## 12. 说一下vue mixin的用法 好处和优点
-
-## 13. vue2和vue3框架的区别，vue3相对比vue2做了哪些优化
+## 7. vue2和vue3框架的区别，vue3相对比vue2做了哪些优化
 ### 1、源码管理
-vue3整个源码是通过 monorepo 的方式维护的，根据功能将不同的模块拆分到packages 目录下面不同的子目录中
+vue2.x的源码托管在src目录中，然后依据功能拆分出了complier(模板编译的相关代码)，core(与平台无关的通用运行时代码)，platforms(平台专有代码)，server（服务端渲染的相关代码）、sfc（.vue 单文件解析相关代码）、shared（共享工具代码） 等目录。
+
+vue3整个源码是通过 monorepo 的方式维护的，根据功能将不同的模块拆分到packages 目录下面不同的子目录中，每一个package有各自的api，类型定义和测试，
 这样使得模块拆分更细化，职责划分更明确，模块之间的依赖关系也更加明确，开发人员也更容易阅读、理解和更改所有模块源码，提高代码的可维护性
 
 另外一些 package（比如 reactivity 响应式库）是可以独立于 Vue 使用的，这样用户如果只想使用 Vue3 的响应式能力，可以单独依赖这个响应式库而不用去依赖整个 Vue
 ### 2、TypeScript
+在vue1.x中当时没有采用类型语言。但是对于开发大型框架的时候，使用类型语言非常有利于IDE对于类型推导。
+
+尤雨溪在vue2.x使用的是Flow来进行开发，Flow是facebook出品的javascript的静态类型检查工具，但是flow对于一些复杂的场景flow支持的不是很好。
+
 Vue3是基于typeScript编写的，提供了更好的类型检查，能支持复杂的类型推导
 ### 3、性能上的优化
 ### （1）体积优化
-相比Vue2，Vue3整体体积变小了，除了移出一些不常用的API，任何一个函数，如ref、reavtived、computed等，仅仅在用到的时候才打包，没用到的模块都被摇掉，打包的整体体积变小. 最重要的是Tree shanking
+相比Vue2，Vue3整体体积变小了，除了移出一些不常用的API，移除了冷门API，任何一个函数，如ref、reavtived、computed等，仅仅在用到的时候才打包，没用到的模块都被摇掉，打包的整体体积变小. 最重要的是Tree shanking
 
 Tree shaking 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 Dead code elimination
 
@@ -130,15 +124,43 @@ export function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 同时 _hoisted_1 被打上了 PatchFlag ，静态标记值为 -1 ，特殊标志是负整数表示永远不会用于 Diff
 
-### 4、事件监听缓存
-默认情况下绑定事件行为会被视为动态绑定，所以每次都会去追踪它的变化, 开启了缓存后，没有了静态标记。也就是下次diff算法的时候直接使用
+### 4、cacheHandler事件监听缓存
+在Vue3.0中，提供了事件缓存对象cacheHandlers，当cacheHandlers开启的时候，编译会自动生成一个内联函数，将其变成一个静态节点，当事件再次触发时，就无需重新创建函数直接调用缓存的事件回调方法即可。
+
+默认情况下绑定事件行为会被视为动态绑定，所以每次都会去追踪它的变化, 开启了缓存后，没有了静态标记。也就是下次diff算法的时候直接使用。
+```js
+<div>
+  <button @click = 'onClick'>点我</button>
+</div>
+```
+上述的例子中，默认情况下onClick会被视为动态绑定，所以每次都会去追踪它的变化，但是因为是同一个函数，所以没必要去追踪它的变化，想办法将它直接缓存起来复用就会提升性能。因此要打开事件监听缓存，这样静态标记就不存在了，这部分内容也就不会进行比较了。
+
+没开启事件监听缓存之前：
+```js
+export const render = /*#__PURE__*/_withId(function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (_openBlock(), _createBlock("div", null, [
+    _createVNode("button", { onClick: _ctx.onClick }, "点我", 8 /* PROPS */, ["onClick"])
+                                             // PROPS=1<<3,// 8 //动态属性，但不包含类名和样式
+  ]))
+})
+```
+开启事件监听缓存之后：
+```js
+export function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (_openBlock(), _createBlock("div", null, [
+    _createVNode("button", {
+      onClick: _cache[1] || (_cache[1] = (...args) => (_ctx.onClick(...args)))
+    }, "点我")
+  ]))
+}
+```
 ### 5、优化逻辑复用
 在vue2中，我们是通过mixin实现功能混合，如果多个mixin混合，会存在两个非常明显的问题：命名冲突和数据来源不清晰
 
 而通过composition这种形式，可以将一些复用的代码抽离出来作为一个函数，只要的使用的地方直接进行调用即可
 ### 6、数据劫持(响应式系统)优化
 在vue2中，数据劫持是通过Object.defineProperty ，这个 API 有一些缺陷:
-检测不到对象属性的添加和删除
+检测不到对象属性的添加和删除（vue为了解决这个问题，出现了$set和$delete实例方法。另外还存在一个问题，就是如果存在多个对象进行嵌套问题，需要深层监听，造成性能问题。）
 数组API方法无法监听到
 需要对每个属性进行遍历监听，如果嵌套对象，需要深层监听，造成性能问题
 ```js
@@ -210,8 +232,63 @@ Options API 碎片化使得理解和维护复杂组件变得困难, 选项的分
 
 Compositon API 将某个逻辑关注点相关的代码全都放在一个函数里，这样当需要修改一个功能时，就不再需要在文件中跳来跳去
 
+### 8. SSR优化
+当静态内容达到一定量级的时候，会用createStaticVNode方法在客户端去生成一个static node，这些静态node，会直接innerHtml，就不需要创建对象，然后根据对象渲染。
 
-## 14. vue的nextTick原理
+当你在开发中使用 SSR 开发时，Vue 3.0 会将静态标签直接转化为文本，相比 React 先将 jsx 转化为虚拟 DOM，再将虚拟 DOM 转化为 HTML，Vue 3.0 已经赢了。
+### 9. StaticNode(静态节点)
+上述 SSR 服务端渲染，会将静态标签直接转化为文本。
+
+在客户端渲染的时候，只要标签嵌套得足够多，编译时也会将其转化为 HTML 字符串，如下图所示：
+![](@alias/11112222.png)
+```js
+import { mergeProps as _mergeProps } from "vue"
+import { ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from "@vue/server-renderer"
+
+export function ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  const _cssVars = { style: { color: _ctx.color }}
+  _push(`<div${
+    _ssrRenderAttrs(_mergeProps(_attrs, _cssVars))
+  }><div><span>你好</span>...<div><span>你好</span><div><span>${
+    _ssrInterpolate(_ctx.message)
+  }</span></div></div>`)
+}
+```
+### 10. 编译优化：Fragment
+模板内不用再创建一个唯一根节点，可以直接放同级标签和内容。就相当于少了一个节点嵌套渲染。
+### 11. 引入RFC：使得每一个版本改动可控
+作为一个流行开源框架的作者，尤雨溪可能每天都受到很多的 feature request。但是并不是社区一存在新的功能的需求，框架就会马上实现，因为随着 Vue.js 的用户越来越多，小右会更加重视稳定性，会仔细考虑所做的每一个可能对最终用户影响的更改，以及有意识去防止新 API 对框架本身实现带来的复杂性的提升。
+
+因此 vuejs2.x 版本开发到后期的阶段，尤雨溪就启动了RFC，他的全称为Request for comments。当社区有一些新需求的想法时，它可以提交一个 RFC，然后由社区和 Vue.js 的核心团队一起讨论，如果这个 RFC 最终被通过了，那么它才会被实现。
+
+到了vuejs3.0实现代码前就大规模启用 RFC，来确保他的改动和设计都是经过讨论并确认的，这样可以避免走弯路。Vue.js 3.0 版本有很多重大的改动，每一条改动都会有对应的 RFC，通过阅读这些 RFC，你可以了解每一个 feature 采用或被废弃掉的前因后果。
+### 总结：Vue3对于Vue2有什么更新
+Vue2在使用过程中，随着项目越来越复杂，项目代码维护起来也越来越困难，主要原因是Vue2使用的是Options API，这种方式把同一个功能的数据、方法、请求都分开写在data、methods等Options中。并且组件之间相同功能的复用比较也比较困难，同时响应式也没有那么灵活，因此，Vue3做出了如下的更新：
+- 用Composition API代理Options API，正如刚刚所说，Options API 将相同的功能的不同部分都分开写，不仅不利于阅读和维护，也和原生JS的思想相悖，缺乏灵活性，Vue3采用的Composition API按照功能将代码分割开，这样方便维护，也方便复用。
+- 采用Proxy代理Object.defineProperty，Vue2通过defineProperty的get、set和发布订阅来完成响应式，但是defineProperty的get、set并不能监控深层的对象与数组的变化，需要手动调用set来增加、删除响应式属性，还是造成了一些麻烦。Vue3采用Proxy监控整个对象，无论多深的属性都可以被监控到。
+- Vue3增加了tree shaking，能在打包的时候只打包用到的组件，可以让运行速度更快和打包文件更小。
+- Vue3还改变了虚拟DOM的diff策略，在Vue2中，diff策略不会区别节点是静态节点还是动态节点，而对比过多的静态节点会造成资源的浪费。因此Vue3给每一个节点都打上了标签，如果标签不为-1，则证明是动态节点，在比较的时候也只需要比较动态节点，使diff算法的效率更高。
+- Vue3还增加了静态提升和事件监听缓存，将不需要重复创建的节点和方法单独提出、进行缓存，避免重复创建和加载。
+- Vue3还做了SSR优化。如果增加的静态内容过多，就会直接使用innerHTML的方法插入，而不会一个一个的创建的节点。
+
+## 8. vue2和vue3的生命周期和区别
+
+## 9. vue模板的渲染过程
+
+## 10. vuex是什么？
+**vuex有哪些属性？(重点)**
+Store:是一个大容器，包含以下所有的内容；
+- state：用来读取状态，存放公共数据的地方；(附带mapState辅助函数)
+- getter：用来读取派生状态，获取根据业务场景处理返回的数据；(附带mapGetters辅助函数)
+- mutations：用于同步提交状态变更，唯一修改state的方法；(附带mapMutations辅助函数)
+- action：用于处理异步变更状态，通过分发操作触发mutation，不是直接变更状态；
+- module：给store划分模块，减少代码臃肿，方便维护代码；
+
+## 11. 说说vue-router的使用，讲一下路由钩子函数，beforeEach的实现原理
+
+## 12. 说一下vue mixin的用法 好处和优点
+
+## 13. vue的nextTick原理
 
 nextTick的回调函数在下一次DOM更新循环结束执行回调，用于获取更新后的DOM；
 
@@ -219,13 +296,24 @@ vue中的数据更新是异步的，使用nextTick可以保证拿到更新后的
 
 例如修改了三个变量，是每修改一次，DOM就更新一次吗？不是的，Vue采用的是异步更新的策略，通俗点说就是，同一事件循环内多次修改，会统一进行一次视图更新。
 
-## 15. 只用watch，不用computed监听对象
+事件循环说明：简单来说，vue在修改数据后，视图不会立刻更新，而是等同一事件循环中的所有数据变化完成之后，再统一进行视图更新。
+
+只要侦听到数据变化，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据变更。如果同一个 watcher 被多次触发，只会被推入到队列中一次。这种在缓冲时去除重复数据对于避免不必要的计算和 DOM 操作是非常重要的。然后，在下一个的事件循环“tick”中，Vue 刷新队列并执行实际 (已去重的) 工作。
+所以为了在数据变化之后等待 Vue 完成更新 DOM，可以在数据变化之后立即使用 Vue.nextTick(callback)。这样回调函数将在 DOM 更新完成后被调用。
+
+## 14. computed和watch的区别
 
 ### （1）computed
 
 惰性求值；computed的值在getter执行后是会被缓存的。如果所依赖的数据发生改变时候，就会重新调用getter来计算最新的结果。
 
 而且计算属性的值是会被缓存的，只有当依赖的响应式数据更新后才会被重新计算求值。
+
+- 它支持缓存，只有依赖的数据发生了变化，才会重新计算
+- 不支持异步监听，当Computed中有异步操作时，无法监听数据的变化
+- computed的值会默认走缓存，计算属性是基于它们的响应式依赖进行缓存的，也就是基于data声明过，或者父组件传递过来的props中的数据进行计算的。
+- 如果一个属性是由其他属性计算而来的，这个属性依赖其他的属性，一般会使用computed
+- 如果computed属性的属性值是函数，那么默认使用get方法，函数的返回值就是属性的属性值；在computed中，属性有一个get方法和一个set方法，当数据发生变化时，会调用set方法。
 
 ### （2）watch
 
@@ -235,11 +323,14 @@ watch用于侦听data的数据。watch属性可以是字符串、函数、对象
 
 这因为watch不会监听第一次变化，可以通过immediate：true开启
 
-拥有deep，immediate两属性：
+监听数据必须是data中声明的或者父组件传递过来的props中的数据，当发生变化时，会触发回调函数，该函数拥有deep，immediate两属性：
 
-- 当deep：true 会监听到obj对象的所有内部属性，默认值为false
-
+- 当deep：true 会监听到obj对象的所有内部属性，默认值为false；深度监听，发现数据内部的变化，在复杂数据类型中使用，例如数组中的对象发生变化。需要注意的是，deep无法监听到数组和对象内部的变化。
 - 当 immediate：true 时，回调函数会在监听开始后立刻执行，可以监听到到第一次变化。
+
+它不支持缓存，数据变化时，它就会触发相应的操作
+
+支持异步监听
 
 ### （3）watch和computed的区别
 
@@ -250,7 +341,7 @@ watch用于侦听data的数据。watch属性可以是字符串、函数、对象
 
 
 
-## 16. watch和computed的生命周期阶段
+## 15. watch和computed的生命周期阶段
 
 所以watch和computed的初始化是在created之前，beforeCreate之后。
 
@@ -271,7 +362,7 @@ methods => 父watch => 父computed => 子watch => 子computed
 
 ![image-20220217154607121](@alias/image-20220217154607121.png)
 
-## 17. vue手写自定义指令，说说如何实现的
+## 16. vue手写自定义指令，说说如何实现的
 
 ### （1）自定义指令钩子函数
 
@@ -344,7 +435,7 @@ directives: {
 
 
 
-## 18. vue的动态指令和参数
+## 17. vue的动态指令和参数
 
 ```js
 <template>
@@ -368,4 +459,6 @@ directives: {
 </script>
 ```
 
-## 19. vue的双向绑定原理
+## 18. vue的双向绑定原理
+- [vue2双向绑定原理](/front/vue/vue-response-principle.html)
+- [手写双向绑定原理](/front/vue/v-model.html)

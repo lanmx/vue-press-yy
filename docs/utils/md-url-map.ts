@@ -105,6 +105,7 @@ const fileUrlMap = [
   { text: "css面试题整理", link: "/front/interview/css.md", parent: "interview", label: 'css,面试', describe: 'css面试题整理' },
   { text: "angular面试题整理", link: "/front/interview/angular.md", parent: "interview", label: 'angular,面试', describe: 'angular面试题整理' },
   { text: "前端面试必问", link: "/front/interview/interview.md", parent: "interview", label: '面试', describe: '前端面试问题和答案整理，牢记！' },
+  { text: "leetcode算法题", link: "/front/interview/leetcode.md", parent: "interview", label: '算法题,leetcode', describe: 'leetcode算法题，多种解题思路和复盘笔记~' },
 ]
 
 export default fileUrlMap

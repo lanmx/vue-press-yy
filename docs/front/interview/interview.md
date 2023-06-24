@@ -1,6 +1,7 @@
 <!-- ---
 sidebar: 'auto'
 --- -->
+:pouting_man: 这里整理了一些前端面试常问的问题，面试回答问题的时候注意回答的全面，深度和广度都要够:muscle:，才更能体现个人的能力噢 :clap: :muscle: ~，才能得到面试官的认可，顺利拿下心仪offer ~ :clap::thumbsup:
 ## 1、浏览器输入url，到界面显示，这个过程发生了什么
 ### 一、简单的过程总体概览
 ①DNS域名解析
@@ -317,7 +318,7 @@ console.log(lanmx.__proto__ === Person.prototype) // true
 
 ## 4、es6的语法用过哪些flat, 赋值解构,箭头函数，const let ，set，map,
 ## 5、讲一下promise和promise的几个方法，怎么实现的，有试过自己去实现吗
-[promise](http://localhost:8080/front/javascript/promise-event-loop.html)
+[promise](/front/javascript/promise-event-loop.html)
 
 ## 6、说说js的mixin
 ## 7、js精度丢失

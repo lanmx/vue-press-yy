@@ -9,6 +9,13 @@
     <div class="tab-box" v-for="item in menu" :key="item.text">
       <div class="tab-name" :class="{'active-line': !all && item.name == cateItem.name }" @click="getAllAct(item)">{{ item.name }}</div>
     </div>
+    <!-- <div class="tab-box search-i">
+      <el-input v-model="searchValue" class="w-50 m-2" placeholder="请输入搜索文章" @change="search()">
+        <template #prefix>
+          <el-icon class="el-input__icon"><search /></el-icon>
+        </template>
+      </el-input>
+    </div> -->
   </div>
   <div class="article-box" >
     <div v-for="item in list" :key="item.text">
@@ -28,7 +35,7 @@
 <script>
 import { ref, onBeforeMount, getCurrentInstance, watch  } from 'vue'
 import _ from 'lodash'
-
+import { Calendar, Search } from '@element-plus/icons-vue'
 export default {
   props: {
     cate: String
@@ -110,6 +117,12 @@ export default {
       }
       window.scrollTo(0,0);
     }
+
+    const searchValue = ref('');
+    const searchlist = ref([])
+    const search = () => {
+      // console.log(1111);
+    }
     // 返回值会暴露给模板和其他的选项式 API 钩子
     return {
       articleData,
@@ -117,8 +130,11 @@ export default {
       all,
       list,
       menu,
+      searchValue,
+      searchlist,
       getAllAct,
-      getCateList
+      getCateList,
+      search
     }
   },
 }
@@ -158,6 +174,9 @@ export default {
   }
   .tab-box:hover {
     color: #42b983;
+  }
+  .search-i {
+    margin-top: 8px;
   }
 }
 .title {

@@ -4,7 +4,7 @@ search: true
 heroImage: /sculpture.png
 heroImageDark: /logoDark.png
 heroText: 小蓝的笔记-蓝敏晓的博客
-tagline: Javascript基础，高级JavaScript，vue和angular框架学习，Nodejs基础，Webpack打包工具使用，一名前端程序员的学习笔记分享。
+tagline: Javascript基础，高级JavaScript，vue和angular框架学习，Nodejs基础，Webpack打包工具使用等，一名前端程序员的日常学习笔记分享。
 # actions:
 #   - text: 前端
 #     link: /front/
@@ -23,7 +23,7 @@ tagline: Javascript基础，高级JavaScript，vue和angular框架学习，Nodej
 # footer: MIT Licensed | Copyright © 2018-present Evan You (https://github.com/yyx990803)
 ---
 
-#### hi，如果，
+#### hi~:grinning:，如果，
 :smiling_face_with_three_hearts: 如果你想入门JavaScript基础：:point_right: <a class="link" href="/front/javascript-basics/javascript-basic.html">【入门JavaScript基础】</a>
 
 :smiling_face_with_three_hearts: 如果你想深入学习高级JavaScript的更多用法和原理：:point_right: <a class="link" href="/front/javascript/browser-scope.html">【高级JavaScrip教程】</a>
@@ -37,10 +37,12 @@ tagline: Javascript基础，高级JavaScript，vue和angular框架学习，Nodej
 :hand_over_mouth:	如果你使用vuepress框架搭建网站，也遇到了某些问题，希望这里可以帮助到你：:point_right: <a class="link" href="/front/vuepress/reflesh404.html">【vuepress笔记】</a> :heart_eyes:
 
 
-:smiling_face_with_three_hearts: 如果你也在准备面试前端，希望这里可以帮助到你： :point_right: <a class="link" href="/front/interview/interview.html">【前端面试必问】</a>
+:smiling_face_with_three_hearts: 如果你在准备面试前端，希望这里可以帮助到你： :point_right: <a class="link" href="/front/interview/interview.html">【前端面试必问】</a>
+
+:hugs: 如果你在刷算法题，解题思路和复盘笔记，希望这里可以帮助到你：:point_right: <a class="link" href="/front/interview/leetcode.html">【leetcode算法题解题】</a>
 
 
-##### 入坑前端以来，整理的笔记，希望可以帮助到你，笔芯 :heartpulse: :star_struck: :stuck_out_tongue: :stuck_out_tongue_winking_eye: 
+##### 入坑前端以来，整理的笔记，感兴趣可以时常翻阅查看，希望可以帮助到你，笔芯 :heartpulse: :star_struck: :stuck_out_tongue: :stuck_out_tongue_winking_eye: 
  
 <ClientOnly>
   <ThreeD />
