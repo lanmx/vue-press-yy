@@ -84,7 +84,7 @@ const linkToDoc = () => {
     cursor: pointer;
 }
 .r-item:hover {
-  color: rgb(50, 142, 223)
+  color: var(--c-text-accent);
 }
 .tips {
     padding: 1.5rem;

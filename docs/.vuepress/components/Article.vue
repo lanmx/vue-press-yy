@@ -166,14 +166,16 @@ export default {
     padding-top: 3px;
   }
   .active-line {
-    border-bottom: 3px solid #3eaf7c;
+    border-bottom: 3px solid var(--c-text-accent);
     font-weight: bold;
+    color: var(--c-text-accent);
   }
   .tab-box {
     padding: 0 15px;
   }
   .tab-box:hover {
-    color: #42b983;
+    color: var(--c-text-accent);
+    font-weight: bold;
   }
   .search-i {
     margin-top: 8px;
@@ -254,7 +256,7 @@ span.label-t {
   transition: background .3s ease-in-out,transform .3s ease-in-out;
 }
 .el-card:hover {
-  border: 3px solid #3eaf7c;
+  border: 3px solid var(--c-text-accent);
   transform: scale(1.05);
 }
 @media screen and (max-width: 540px){

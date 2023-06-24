@@ -170,7 +170,7 @@ this.text = res.data.replace(/\n/g,'<br>')
   transition: background .3s ease-in-out,transform .3s ease-in-out;
 }
 .el-card:hover {
-  border: 3px solid #3eaf7c;
+  border: 3px solid var(--c-text-accent);
   transform: scale(1.05);
 }
 ```

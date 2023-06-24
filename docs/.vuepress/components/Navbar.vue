@@ -135,14 +135,15 @@ export default {
   cursor: pointer;
 }
 .nav-item:hover {
-  color: #42b983;
+  color: var(--c-text-accent);
   text-decoration: none;
+  font-weight: bold;
   &::before{
     content:'';
     display: block;
     width: 5px;
     height: 5px;
-    background:#42b983;
+    background:var(--c-text-accent);
     border-radius: 50%;
     margin-right: 10px;
     margin-left: 6px;
@@ -151,14 +152,15 @@ export default {
   }
 }
 .nav-item-active {
-  color: #42b983;
+  color: var(--c-text-accent);
   text-decoration: none;
+  font-weight: bold;
   &::before{
     content:'';
     display: block;
     width: 5px;
     height: 5px;
-    background:#42b983;
+    background:var(--c-text-accent);
     border-radius: 50%;
     margin-right: 10px;
     margin-left: 6px;

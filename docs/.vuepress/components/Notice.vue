@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <el-button type="success" @click="dialogVisible = true">加入我们</el-button> &nbsp; QQ群：743092907
+    <el-button type="primary" @click="dialogVisible = true">加入我们</el-button> &nbsp; QQ群：743092907
     <el-dialog
       v-model="dialogVisible"
       title="QQ群：743092907"
