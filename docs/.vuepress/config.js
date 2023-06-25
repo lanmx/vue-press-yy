@@ -50,10 +50,14 @@ export default defineUserConfig({
       { text: '后台', link: '/back/' },
       // { text: '音乐', link: '/music/' },
       { text: '关于', link: '/about/' },
-    ],
-    displayAllHeaders: false,
+    ],  
     sidebar: {
       '/front/': [
+        {
+          text: 'HTML CSS',
+          collapsible: true,
+          children: getChildren('docs/front/html-css/')
+        },
         {
           text: 'JavaScript基础',
           collapsible: true,
@@ -76,16 +80,6 @@ export default defineUserConfig({
           children: getChildren('docs/front/angular/')
         },
         {
-          text: '经典例子',
-          collapsible: true,
-          children: getChildren('docs/front/classic-example/')
-        },
-        {
-          text: 'HTML CSS',
-          collapsible: true,
-          children: getChildren('docs/front/html-css/')
-        },
-        {
           text: '移动端',
           collapsible: true,
           children: getChildren('docs/front/mobile-terminal/')
@@ -94,6 +88,11 @@ export default defineUserConfig({
           text: '打包工具',
           collapsible: true,
           children: getChildren('docs/front/packer-tool/')
+        },
+        {
+          text: '经典例子',
+          collapsible: true,
+          children: getChildren('docs/front/classic-example/')
         },
         {
           text: 'vuePress',
@@ -131,7 +130,7 @@ export default defineUserConfig({
           text: '工作笔记',
           collapsible: true,
           children: getChildren('docs/back/work/')
-        },
+        }
       ],
     },
 

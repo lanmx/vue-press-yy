@@ -7,8 +7,8 @@ import fileUrlMap from './md-url-map'
 function getChildren(path) {
   const root = []
   readDirSync(path,root)
-  // console.log(root,"root")
   getFileTitle(root)
+  // console.log(root,"root")
   return root
 }
 

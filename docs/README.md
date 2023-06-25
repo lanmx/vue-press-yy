@@ -4,7 +4,7 @@ search: true
 heroImage: /sculpture.png
 heroImageDark: /logoDark.png
 heroText: 小蓝的笔记-蓝敏晓的博客
-tagline: Javascript基础，高级JavaScript，vue和angular框架学习，Nodejs基础，Webpack打包工具使用等，一名前端程序员的日常学习笔记分享。
+tagline: Javascript基础，高级JavaScript，vue和angular框架学习，Nodejs基础，Webpack打包工具使用等，一名前端程序员的日常学习笔记分享！
 # actions:
 #   - text: 前端
 #     link: /front/

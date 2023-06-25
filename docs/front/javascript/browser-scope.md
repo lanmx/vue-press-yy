@@ -50,7 +50,7 @@ blink：Google Chrome, Edge, Opera、
 
 ## 三、浏览器渲染过程
 
-![image-20211116100009311](@alias/image-20211116100009311.png)
+![浏览器渲染过程图解](@alias/image-20211116100009311.png)
 
 HTML ---> HTML paster  --->  DOM Tree  ---> 
 
@@ -70,13 +70,13 @@ js代码由javascript引擎执行
 
 ## 五、浏览器内核与JS引擎的关系
 
-![image-20211116103713639](@alias/image-20211116103713639.png)
+![浏览器内核与JS引擎的关系图解](@alias/image-20211116103713639.png)
 
 
 
 ## 六、V8引擎(重要)
 
-![image-20211116104717360](@alias/image-20211116104717360.png)
+![V8引擎图解](@alias/image-20211116104717360.png)
 
 计算机不认识JavaScript代码，所以需要通过引擎转换为就计算机认识的代码；
 
@@ -102,7 +102,7 @@ Ignition：https://v8.dev/blog/ignition-interpreter
 
 TurboFan：https://v8.dev/blog/turbofan-jit
 
-![image-20211116110701805](@alias/image-20211116110701805.png)
+![V8引擎的架构图解](@alias/image-20211116110701805.png)
 
 
 
@@ -110,7 +110,7 @@ TurboFan：https://v8.dev/blog/turbofan-jit
 
 官方V8引擎解释图
 
-![image-20211116111854416](@alias/image-20211116111854416.png)
+![官方V8引擎解释图](@alias/image-20211116111854416.png)
 
 preParser：预解释
 
