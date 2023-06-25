@@ -48,7 +48,6 @@ export default defineUserConfig({
       { text: '首页', link: '/' },
       { text: '前端', link: '/front/' },
       { text: '后台', link: '/back/' },
-      // { text: '音乐', link: '/music/' },
       { text: '关于', link: '/about/' },
     ],  
     sidebar: {
@@ -133,7 +132,6 @@ export default defineUserConfig({
         }
       ],
     },
-
     // subSidebar: 'auto',
     smoothScroll: true,
     lastUpdatedText: '最近更新',
