@@ -21,7 +21,7 @@ const autometa_options = {
 export default defineUserConfig({
   lang: 'zh-CN',
   title: '小蓝的笔记',
-  description: '女程序员，爱弹琴，爱发呆，爱coding，一个专注分享学习经验，记录前端知识的个人博客',
+  description: '女程序员，爱coding，一个专注分享学习经验，记录前端知识的个人博客',
   head: [
       ['meta', { name: 'baidu-site-verification', content: 'codeva-CG1MKx50Sm'}],
       ['meta', { name: 'baidu-site-verification', content: 'codeva-jIfosA0IJ1'}],
@@ -38,6 +38,7 @@ export default defineUserConfig({
       // ['script', { src: "/utils/autopush-baidu.js" }],
       // ['script', { src: "/utils/autopush-360.js" }]
   ],
+  // theme: 'vdoing',
   theme: defaultTheme({
     home: '/',
     logo: '/sculpture.png',
@@ -261,4 +262,9 @@ export default defineUserConfig({
       })
     );
   },
+  
+  themeConfig: {
+    // 自动生成结构化侧边栏, 注意最多支持4级目录,切文件名前需要指定序号
+   sidebar: 'structuring' //  'structuring' | { mode: 'structuring', collapsable: Boolean} | 'auto' | 自定义
+  }
 })

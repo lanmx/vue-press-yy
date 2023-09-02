@@ -14,7 +14,7 @@
     "vuepress-plugin-copyright": "^1.0.2",
     "vuepress-plugin-feed": "^0.1.9",
     "vuepress-plugin-nuggets-style-copy": "^1.0.3",
-    "vuepress-theme-vdoing": "^1.12.8"
+    "vuepress-theme-vdoing": "^1.12.9"
   },
   "scripts": {
     "dev": "vuepress dev docs",
@@ -26,7 +26,6 @@
     "aplayer": "^1.10.1",
     "axios": "^1.4.0",
     "element-plus": "^2.2.33",
-    "http-proxy-middleware": "^2.0.6",
     "leancloud-storage": "^4.14.0",
     "lodash": "^4.17.21",
     "markdown-it-emoji": "^2.0.2",
