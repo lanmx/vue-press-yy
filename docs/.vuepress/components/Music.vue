@@ -85,6 +85,7 @@ import formatjs from '../../utils/format'
 // import data from '../static/lrc'
 import _ from 'lodash'
 import { getMusic, searchlist } from '../api/music'
+import { readAdd } from '../api/read'
 // 声明子传父 - 发射事件
 const emit = defineEmits(['getcurMusic'])
 const rhythmlist = ref(Array.from({ length: 28 }).map(() => Math.floor(Math.random() * 70)));
@@ -136,9 +137,18 @@ onBeforeMount(() => {
       init();
     }
   })
+  const param = {
+    article_id: 1
+  }
+  readAdd(param).then(res => {
+    console.log(res);
+  }).catch((err) => {
+    console.log(err);
+  })
 })
 onUnmounted(() => {
   curmusic.pause();
+  
 })
 // 初始化
 const init = () => {

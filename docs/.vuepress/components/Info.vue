@@ -12,15 +12,45 @@
         <div class="num">{{ label }}</div>
         <div class="text">标签</div>
       </div>
+      <div class="label-item">
+        <div class="num">{{ total }}</div>
+        <div class="text">阅读</div>
+      </div>
+      <div class="label-item">
+        <div class="num">{{ like }}</div>
+        <div class="text">点赞</div>
+      </div>
     </div>
     <div class="nav-box">
-
     </div>
   </div>
 </template>
 <script setup>
+import { ref, onBeforeMount, watch  } from 'vue'
+import { getArticle } from '../api/article'
+import formatjs from '../../utils/format'
 const number = __ARTICLE__['number']
 const label = __MENU__['all'].length
+const total = ref(0);
+const like = ref(0)
+const getArticleFn = () => {
+  getArticle().then(res => {
+    console.log(res);
+    const readCount = res.data.reduce((pre, cur) => {
+      return pre + cur.read_count
+    }, 0)
+    const likeCount = res.data.reduce((pre, cur) => {
+      return pre + cur.good
+    },0)
+    total.value = formatjs.transNumberToShort(readCount);
+    like.value = formatjs.transNumberToShort(likeCount);
+  }).catch((err) => {
+    console.log(err);
+  })
+}
+onBeforeMount(() => {
+  getArticleFn();
+})
 </script>
 <style scoped>
 .info-outer {
