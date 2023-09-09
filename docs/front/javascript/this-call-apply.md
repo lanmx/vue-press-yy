@@ -171,8 +171,8 @@ obj.foo()  // this指向bind绑定的abc，说明bind隐式绑定 > 隐式绑定
 function foo() {
     console.log(this)
 }
-var newFoo = foo.bind("abc")  // 显示绑定
-newFoo()  // 隐式绑定
+var newFoo = foo.bind("abc")  
+newFoo()  // 显示绑定 String {"abc"}
 ```
 
 
@@ -541,17 +541,15 @@ foo()
 ```js
 var name = 'window'  // window会保存name,window.name:'window'
 var person = {
-    name: 'person'
-    sayName：function () {
+    name: 'person',
+    sayName: function () {
         console.log(this.name)
     }
 }
 function sayName() {
-    var sayfn = person.sayName()
+    var sayfn = person.sayName
     sayfn()  // 独立函数调用,window
     person.sayName()   // 隐式调用,person
-    (person.sayName)()  // 隐式调用,person
-    (b = person.sayName)()  // 赋值表达式，独立函数调用，window
 }
 sayName()
 ```

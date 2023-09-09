@@ -14,12 +14,29 @@ key绑定的值建议是唯一的标识，因为index可能会变，例如，如
 
 vue中，虚拟 dom 渲染成真实 dom 的新旧 VNode 节点比较用到diff算法
 
-diff 算法是一种通过同层的树节点进行比较的高效算法
+diff 算法是一种通过同层的树节点进行比较的高效算法。
+
+diff整体策略为：深度优先，同层比较。
 
 其有两个特点：
 
 - 比较只会在同层级进行, 不会跨层级比较
 - 在diff比较的过程中，循环从两边向中间比较
+
+在循环比较过程中，如果节点相同，那直接patchVnode;
+
+如果节点是一个新节点，旧DOM树不存在，则调用createElm创建一个新的dom节点；
+
+
+> while循环的逻辑操作主要是：
+>
+> - 当新老 VNode 节点的 start 相同时，直接 patchVnode ，同时新老 VNode 节点的开始索引都加 1
+> - 当新老 VNode 节点的 end 相同时，同样直接 patchVnode ，同时新老 VNode 节点的结束索引都减 1
+> - 当老 VNode 节点的 start 和新 VNode 节点的 end 相同时，这时候在 patchVnode 后，还需要将当前真实 dom 节点移动到 oldEndVnode 的后面，同时老 VNode 节点开始索引加 1，新 VNode 节点的结束索引减 1
+> - 当老 VNode 节点的 end 和新 VNode 节点的 start 相同时，这时候在 patchVnode 后，还需要将当前真实 dom 节点移动到 oldStartVnode 的前面，同时老 VNode 节点结束索引减 1，新 VNode 节点的开始索引加 1
+> - 如果都不满足以上四种情形，那说明没有相同的节点可以复用，则会分为以下两种情况：
+> - 从旧的 VNode 为 key 值，对应 index 序列为 value 值的哈希表中找到与 newStartVnode 一致 key 的旧的 VNode 节点，再进行patchVnode，同时 将这个真实 dom移动到 oldStartVnode 对应的真实 dom 的前面
+> - 调用 createElm 创建一个新的 dom 节点放到当前 newStartIdx 的位置
 
 **patchVnode方法：**
 
@@ -36,6 +53,7 @@ diff 算法是一种通过同层的树节点进行比较的高效算法
 - updateChildren主要做了以下操作：
   - 设置新旧VNode的头尾指针
   - 新旧头尾指针进行比较，循环向中间靠拢，根据情况调用patchVnode进行patch重复流程、调用createElem创建一个新节点，从哈希表寻找 key一致的VNode 节点再分情况操作，直到旧节点的头指针大于尾指针的时候就退出循环。
+
 
 ## 2. vue中如何收集依赖
 
@@ -331,7 +349,7 @@ vue中的模板template无法被浏览器解析并渲染，因为这不属于浏
 **注意的是**，初次渲染时，调用`vm.__patch__(containe, vnode)`，生成真实的DOM结构渲染到容器中。re-render时（二次渲染时），调用`vm.__patch__(vnode, newVnode)`利用`diff`算法对比`新旧vnode`之间的差异，生成需要更新的`真实DOM`，渲染到容器的对应位置。
 ## 10. vuex是什么？
 ### （1）vuex官方解释
-Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式 + 库。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
+Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式 + 库。它采用<strong>集中式存储管理</strong>应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
 ### （2）为什么要使用Vuex?
 举例，比如一个公共组件，A要用它，B要用它，但是每个页面的轮播时间都不一样，又不能去改这个公共组件。
 当我们使用 Vue.js 来开发一个单页应用时，经常会遇到一些组件间共享的数据或状态，或是需要通过 props 深层传递的一些数据。在应用规模较小的时候，我们会使用 props、事件等常用的父子组件的组件间通信方法，或者是通过事件总线来进行任意两个组件的通信。但是当应用逐渐复杂后，问题就开始出现了，这样的通信方式会导致数据流异常地混乱。
@@ -343,12 +361,12 @@ Vuex 可以帮助我们管理共享状态，并附带了更多的概念和框架
 ### （4）vuex有哪些属性？(重点)
 ![vuex图解](@alias/vuex.png)
 Store:是一个大容器，包含以下所有的内容；
-- state：用来读取状态，存放公共数据的地方；(附带mapState辅助函数)
-- getter：用来读取派生状态，获取根据业务场景处理返回的数据；(附带mapGetters辅助函数)
-- mutations：用于同步提交状态变更，唯一修改state的方法；(附带mapMutations辅助函数)
-- action：用于处理异步变更状态，通过分发操作触发mutation，不是直接变更状态；
+- state：用来读取状态，存放公共数据的地方；(附带mapState辅助函数)，使用时通过 $store.state.counter 即可拿到状态信息
+- getter：用来读取派生状态，获取根据业务场景处理返回的数据；(附带mapGetters辅助函数)，类似于计算属性，在数据展示前进行一些变化处理，具有缓存功能，能够提高运行效率
+- mutations：用于同步提交状态变更，唯一修改state的方法；(附带mapMutations辅助函数)，先拿到store对象，然后通过commit提交mutations中的方法。使用时，`this.$store.commit('mutations中的方法','参数')`
+- action：用于处理异步变更状态，通过分发操作触发mutation，不是直接变更状态；mutations在处理异步操作时，能够引起页面的响应式变化，但是 devtools 无法进行监听。建议在action操作，这样 devtools 就能够进行跟踪。组件使用时，调用：`this.$store.dispatch('方法名称','参数')`
 - module：给store划分模块，减少代码臃肿，方便维护代码；
-
+- [推荐详细复习链接](https://blog.csdn.net/A____t/article/details/124541435)
 ### （5）vuex和pinia的区别
  - pinia它没有mutation,他只有state，getters，action【同步、异步】使用他来修改state数据
  - pinia他默认也是存入内存中，如果需要使用本地存储，在配置上比vuex麻烦一点

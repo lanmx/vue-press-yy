@@ -100,6 +100,12 @@ console.log(total) // 1
 
 ### 6. findIndex（返回元素的数组下标值）
 
+### 7. some
+
+### 8. every
+
+### 9. sort
+
 
 
 ## 二、JS闭包定义

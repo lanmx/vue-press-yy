@@ -248,13 +248,115 @@ objProxy.name = 'mx'
 把所有监听到要执行的响应式函数放在一个数组里，然后forEach遍历每个函数并执行；
 
 ### 1. 响应式函数的封装
+```js
+// 1. 响应式函数的封装
+const reactiveFns = []
+let activeReactiveFns = null
+function watchFn(fn) {
+    activeReactiveFns = fn
+    fn()
+    reactiveFns.push(fn)
+    activeReactiveFns = null
+}
+watchFn(function() {
+    // 代理的属性被访问，那么会执行objProxy的get函数
+     console.log(objProxy.name,'监听name变化')
+})
+watchFn(function() {
+     console.log(objProxy.age,'监听age变化')
+}) 
+```
 
 ### 2. Depend类的封装
+```js
+// 2. 封装获取depend函数
+class Depend {
+    constructor() {
+        this.reactiveFns = new Set()
+    }
+    // addDepend(reactiveFn) {
+    //   this.reactiveFns.push(reactiveFn)
+    // }
+    depend(activeReactiveFn) {
+        this.reactiveFns.add(activeReactiveFn)
+    }
+    notify() {
+        this.reactiveFns.forEach(fn => {
+            fn()
+        })
+    }
+}
+const depend = new Depend()
+function watchFn(fn) {
+    depend.push(fn)
+}
+```
 
 ### 3. 监听对象的变化 ：`new Proxy`
+```js
+// 3. 监听对象属性的变化
+function reactive(obj) {
+    return new Proxy(obj,{
+        // target指原对象
+        get: function(target,key,receiver) {
+            // receiver === objProxy
+            // 根据target.key获取对应的depend
+            const depend = getDepend(target, key)
+            // 给depend对象添加响应函数
+            // depend.addDepend(activeReactiveFns)
+            depend.depend()
+            return Reflect.get(target,key,receiver)
+        },
+        set: function(target,key,newValue,receiver) {
+            Reflect.get(target,key,newValue,receiver)
+            depend.notify()
+        }
+    })
+    // vue2原理---start
+    Object.keys(obj).forEach(key => {
+        get: function() {
+            const depend = getDepend(obj, key)
+            depend.depend()
+            return value
+        }
+        set: function(newValue) {
+            value = newValue
+            const depend = getDepend(obj, key)
+            depend.notify()
+        }
+    })
+    return obj
+    // vue2------end
+}
+```
 
 ### 4. 依赖收集的数据结构：使用WeakMap结构
+```js
+// 4. 收集依赖的数据结构
+const objMap = new Map()
+const objKeys = Reflect.ownKeys(obj)
+objKeys.forEach(key => {
+    objMap.set(key, key + 'depend')
+})
+const targetMap = new WeakMap()
+function getDepend(target, key) {
+    // 根据target获取map过程
+    let map = targetMap.get(target)
+    if(!map) {
+        map = new Map()
+        targetMap.set(target, map)
+    }
+    // 根据key获取depend对象
+    let depend = map.get(key)
+    if(!depend) {
+        depend = new Depend()
+        map.set(key, depend)
+    }
+    return depend
+}
+```
 
+### 完整代码
 ```js
 const obj = reactive({
     name: 'lmx',

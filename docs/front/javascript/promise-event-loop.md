@@ -55,10 +55,10 @@ Object.getOwnPropertyDescriptors(Promise.prototype)
 3. then方法传入的回调函数，会在Promise执行resolve函数时，被回调
 4. catch方法传入的回调函数，会在Promise执行reject函数时，被回调
 5. 同一个Promise可以被多次调用then方法，只要同一个Promise用了then，只要resolve方法执行，Promise的then方法都会执行 
-6. then方法的返回值是new Promise，所以可以链式调用.then(res)，res就是then方法的返回值，链式调用的Promise就是上一个then的返回值
+6. then方法的返回值是一个新的new Promise，所以可以链式调用.then(res)，res就是then方法的返回值，链式调用的Promise就是上一个then的返回值
 
 ```js
-returnnew Promise((resolve, reject) => {
+return new Promise((resolve, reject) => {
     // 成功时回调resolve()
     resolve()
     // 失败时回调reject()
@@ -67,7 +67,7 @@ returnnew Promise((resolve, reject) => {
 ```
 
 ### 4. catch方法
-
+Promise.prototype.catch()方法是.then(null, rejection)或.then(undefined, rejection)的别名，用于指定发生错误时的回调函数。
 - 当executor抛出异常时，会调用拒绝reject回调函数
 
 ```js
@@ -288,16 +288,24 @@ promise.then(res => {
 ```js
 function createArrayiterator(arr) {
 	let index = 0
-    return {
-        next: function() {
-            if(index < arr.length) {
-                return { done: false, value: arr[index++] }
-            } else {
-                return { done: true, value: undefined }
-            }
-        }
-    }
+  return {
+      next: function() {
+          if(index < arr.length) {
+              return { done: false, value: arr[index++] }
+          } else {
+              return { done: true, value: undefined }
+          }
+      }
+  }
 }
+const fn = createArrayiterator([1,2,3])
+console.log(fn.next())
+console.log(fn.next())
+console.log(fn.next())
+// { done: false, value: 1 }
+// { done: false, value: 2 }
+// { done: false, value: 3 }
+
 // 无限迭代器
 function createNumberiterator() {
     let index = 0
@@ -307,6 +315,9 @@ function createNumberiterator() {
         }
     }
 }
+const fn = createNumberiterator()
+console.log(fn.next()) 
+// { done: false, value: 0 }, done永远是false，不可能为true
 ```
 
 ### 2. 可迭代对象
@@ -320,24 +331,31 @@ function createNumberiterator() {
 ```js
 // 创建一个迭代对象来访问数组
 const iteratorObj = {
-    names = [ 'mx', 'la', 'mm'],
-    [Symbol.iterator]: function() {
-        let index = 0
-        return {
-            // next: function() {  // 这里next函数有作用域，访问不了names，所以这里要改为箭头函数
-            next: () => {
-                if(index < this.names.length) {
-                    return { done: false, value: arr[index++] }
-                } else {
-                    return { done: true, value: undefined }
-                }
-            }
-        }
-    }
+  names: [ 'mx', 'la', 'mm'],
+  [Symbol.iterator]: function() {
+      let index = 0
+      return {
+          // next: function() {  // 这里next函数有作用域，访问不了names，所以这里要改为箭头函数
+          next: () => {
+              if(index < iteratorObj.names.length) {
+                  return { done: false, value: index++ }
+              } else {
+                  return { done: true, value: undefined }
+              }
+          }
+      }
+  }
 }
 // 每次调这个函数生成的都是新的迭代器
-const iterator = iteratorObj[Symbol.iterator]
+const iterator = iteratorObj[Symbol.iterator]()
 console.log(iterator.next())
+console.log(iterator.next())
+console.log(iterator.next())
+console.log(iterator.next())
+// { done: false, value: 0 }
+// { done: false, value: 1 }
+// { done: false, value: 2 }
+// { done: true, value: undefined }
 ```
 
 ### 3. for...of
@@ -349,9 +367,13 @@ const obj = {
     name: 'lan',
     age: 20
 }
-for(const item of obj) {}  // obj不是一个可迭代对象，不用使用for...of
+for(const item of obj) {}  
+// 上一行代码会报错，error: obj is not iterable
+// obj不是一个可迭代对象，不可使用for...of，如果要循环用for...in
 // ES9(ES2018新增特性)：对象也可以解构，但这里的原理用的不是迭代器
 const newObj = { ...obj , address: '北京'}
+console.log(newObj)
+// { name: 'lan', age: 20, address: '北京' }
 ```
 
 ### 4. 原生迭代器对象（内置迭代器）
@@ -422,23 +444,29 @@ for (const stu of classroom) {
 
 ```js
 function* foo(m) {
-    let num1 = 0
-    console.log(num1)
-    yield
-    
-    let num2 = 10
-    console.log(num2)
-    yield
-    
-    let num3 = 20
-    console.log(num3)
-    yield 
+  let num1 = 0
+  console.log(num1)
+  yield
+  
+  let num2 = 10
+  console.log(num2)
+  yield
+  
+  let num3 = 20
+  console.log(num3)
+  yield 
 }
-	// foo()生成器函数不会执行，需要next()方法把每个yield提升，才会执行
-    const generator = foo(5)
-    console.log(generator.next()) // { done: false, value: 0 }
-    console.log(generator.next()) // { done: false, value: 10 }
-    console.log(generator.next()) // { done: false, value: 20 }
+// foo()生成器函数不会执行，需要next()方法把每个yield提升，才会执行
+const generator = foo(5)
+console.log(generator.next()) // { done: false, value: 0 }
+console.log(generator.next()) // { done: false, value: 10 }
+console.log(generator.next()) // { done: false, value: 20 }
+// 0
+// { value: undefined, done: false }
+// 10
+// { value: undefined, done: false }
+// 20
+// { value: undefined, done: false }
 ```
 
 
@@ -449,15 +477,20 @@ function* foo(m) {
 function* foo(m) {
     let num1 = 0
     console.log(num1)
-    const n = yield num1
-    
+    const n = yield
+    console.log(n) // 3
     let num2 = 10 * n * m
     console.log(num2)
     yield
 }
-    const generator = foo(5)
-    console.log(generator.next()) // { done: false, value: 0 }
-    console.log(generator.next(3)) // { done: false, value: 150  }
+const generator = foo(5)
+console.log(generator.next()) // { done: false, value: 0 }
+console.log(generator.next(3)) // { done: false, value: 150  }
+// 0
+// { value: 0, done: false }
+// 3
+// 150
+// { value: undefined, done: false }
 ```
 
 
@@ -501,6 +534,7 @@ function* foo() {
 const generator = foo()
 const result = generator.next()
 generator.throw("error message")
+// 捕获到异常情况: error message
 
 ```
 
@@ -598,6 +632,12 @@ function execGenerator(genfn) {
 execGenerator(getData)
 
 ```
+#### 迭代器的优点
+生成器函数有几个优点。首先，它们实现了惰性计算，这意味着只有在需要时才会生成值。这避免了在代码中生成大量数据的情况，从而提高了程序的效率。
+
+其次，生成器函数允许我们实现无限序列。因为函数可以无限地生成值，我们可以使用它来生成各种无限序列，如斐波那契数列、质数序列等。
+
+最后，生成器函数还可以用于异步编程。通过在函数中使用异步操作，并将其与yield结合使用，可以实现一个异步生成器函数，该函数将生成一系列异步操作的结果。
 
 ### 2. 用async 、 await优化
 
@@ -686,9 +726,20 @@ js线程 -> 其它线程 -> js线程
 
 在执行任何宏任务之前，都必须先保证微任务队列是否还有任务需要执行，如果微任务有任务，优先执行微任务队列中的任务；必须执行完所有的微任务，才执行宏任务
 
-- 宏任务队列：setTimeval、setTimeout、ajax、DOM监听、UI-Rendering
+- 宏任务队列：setInterval、setTimeout、ajax、DOM监听、UI-Rendering，
 
 - 微任务队列：queueMicrotask()、Promise then回调、Mutation Observer API
+
+**setTimeout：**
+> 用于在指定的毫秒数后调用函数或计算表达式，
+>
+> setTimeout()只运行一次，也就是说设定的时间到后就触发运行指定代码，运行完后就会结束。
+>
+**setInterval：**
+> 实现定时调用的函数，可按照指定的周期（以毫秒计）来调用函数或计算表达式，
+>
+> setInterval()是一直循环运行下去，即每到设定时间间隔就触发指定代码，要想停止，需要使用clearInterval()函数。
+
 
 执行顺序：
 
@@ -717,6 +768,12 @@ async function foo() {
 }
 foo()
 console.log('4')
+// 1
+// 6
+// 2
+// 4   4是在主线程，foo函数的微任务等待到结果后，即可往下执行
+// 5
+// 3
 ```
 
 ###   4. 面试题二
@@ -742,15 +799,17 @@ new Promise(function(resolve) {
     console.log('promise2')
 })
 console.log('script end')
-script start
+// script start
 // async1 start
-// async2
-// promise1
+// async2 // 微任务
+// promise1 // 微任务，new Promise是同步的，then里面才是异步
 // script end
-// async1 end
+// async1 end  // 微任务
 // promise2
-// setTimeout
+// setTimeout // 宏任务
 ```
+**图解：**
+![](@alias/1694053343260.jpg)
 
 ###   5. 面试题三
 
@@ -793,26 +852,26 @@ Promise.resolve().then(() => {
 
 ```js
 Promise.resolve().then(() => {
-    console.log(0)
-    return {
-        then function(resolve) {
-            resolve(4)
-        }
+  console.log(0)
+  return {
+    then(resolve) {
+        resolve(4)
     }
+  }
 }).then((res) => {
-    console.log(res)
+  console.log(res)
 })
 
 Promise.resolve().then(() => {
-    console.log(1)
+  console.log(1)
 }).then(() => {
-    console.log(2)
+  console.log(2)
 }).then(() => {
-    console.log(3)
+  console.log(3)
 }).then(() => {
-    console.log(5)
+  console.log(5)
 }).then(() => {
-    console.log(6)
+  console.log(6)
 })
 // 0
 // 1
@@ -888,7 +947,7 @@ Promise.resolve().then(() => {
 
 ![image-20220210164635452](@alias/image-20220210164635452.png)
 
-（Node的详细学习笔记我以后会记录在nodejs文件夹，在这里就不写了。）
+（Node的详细学习笔记我以后会记录在后台的nodejs目录，在这里就不写了。）
 
 ###   4. Node的宏任务和微任务
 
@@ -902,6 +961,13 @@ Promise.resolve().then(() => {
   2. **poll queue**：IO事件
   3. **check queue**：setImmediate
   4. **close queue**：close事件
+
+**setImmediate：**
+- setImmediate()表示立即执行, 它是宏任务, 回调函数会被放置到事件循环的check阶段。
+- setImmediate是在每轮事件轮询结束阶段执行，能够保证程序的更高优先级。
+- Node.js中的setImmediate()是用于将函数异步执行的方法。比较常用的异步执行方法有setTimeout()和setInterval()，
+但是这两种方式并不是真正意义上的异步，因为他们都需要等待一段时间间隔后才回调执行函数，setImmediate()相比之下，
+更符合异步执行的定义，因为他会在主线程任务执行完后立即调用回调函数，而不是等待一个固定的时间间隔后才调用。
 
 ###   5. Node事件循环顺序
 
@@ -918,10 +984,6 @@ Promise.resolve().then(() => {
 
 <ClientOnly>
   <Reward />
-</ClientOnly>
-
-<ClientOnly>
-  <Valine></Valine>
 </ClientOnly>
 
 

@@ -495,14 +495,14 @@ true.foo = 'abc'
 ```js
 // 1. 严格模式的this指向不一样
 function foo() {
-    console.log(this)  // this指向undefined
-    
-// 2. setTimeout的this
-// setTimeout是一个黑盒子，是浏览器内部实现的，看不到代码内部的运行
-setTimeout(function() {
-    console.log(this)  // 指向仍然是window，有可能是fn.apply(window)绑定了window对象
+    console.log(this)  // this指向window
+    // 2. setTimeout的this
+    // setTimeout是一个黑盒子，是浏览器内部实现的，看不到代码内部的运行
+    setTimeout(function() {
+        console.log(this)  // 指向仍然是window，有可能是fn.apply(window)绑定了window对象
     },2000)
 }
+foo()
 ```
 
 <ClientOnly>

@@ -95,7 +95,7 @@ class类默认继承Object类型
 
 js中类只能继承一个父类：单继承
 
-##      （1）. super关键字
+##      （1）super关键字
 
 - JS引擎在解析子类时，要求如果有继承，在子类的构造方法之前，在使用this之前，或者return this之前,必须调用父类方法super()
 
@@ -112,21 +112,28 @@ js中类只能继承一个父类：单继承
 
 ```js
 class Person {
-    // 类的构造方法,一个类只能有一个构造函数
-    constructor(name,age) {
-        this.name = name
-        this.age = age
-    }
+  // 类的构造方法,一个类只能有一个构造函数
+  constructor(name) {
+    this.name = name;
+  }
+  sayHello() {
+    console.log(`Hello, ${this.name}`);
+  }
 }
 
 class Student extends Person {
-    // JS引擎在解析子类时，要求如果有继承，在子类的构造方法之前，在使用this之前，或者return this之前,必须调用父类方法super()
-    constructor(name,age,ano) {
-        super(name,age)
-        this.ano = ano
-    }
+  // JS引擎在解析子类时，要求如果有继承，在子类的构造方法之前，在使用this之前，或者return this之前,必须调用父类方法super()
+  constructor(name, grade) {
+    super(name);
+    this.grade = grade;
+  }
+  sayHello() {
+    super.sayHello();
+    console.log(`I am in grade ${this.grade}`);
+  }
 }
-
+const student = new Student('Tom', 5);
+student.sayHello(); // 输出：Hello, Tom I am in grade 5
 ```
 
 - 如果继承父类的方法或者静态方法不满意，可以自己写一个名字一样的方法，就不会使用父类的方法了；即重写父类的方法，或者重写静态方法，并且可以通过super.fn复用父类方法
@@ -496,13 +503,17 @@ var obj = {
 ```js
 let arr = [1,3,4]
 // 1. 数组解构[]
-let [item1, item2, item3] = arr  // 1,3,4
+let [item1, item2, item3] = arr  
+console.log(item1, item2, item3) // 1,3,4
 // 2. 解构后面的元素
-let [ , item1, item2] = arr
+let [ , item4, item5] = arr
+console.log(item4, item5)  // 3 4
 // 3. 解构出第一个元素，后面的元素放在一个新的数组
-let [item1, ...newArr] = arr
+let [item6, ...newArr] = arr
+console.log(item6, newArr)  // 1 [ 3, 4 ]
 // 4. 解构默认值(undefined)
-letlet [item1, item2, item3, item4] = arr  // 1,3,4, undefined
+let [item7, item8, item9, item10] = arr 
+console.log(item7, item8, item9, item10)  // 1 3 4 undefined
 ```
 
 ##      （3）对象解构
@@ -557,19 +568,19 @@ const obj = {
 obj.name = '可爱'
 ```
 
-##      （6）let / const 作用域提升
+##      （6）var 和 let / const的区别：作用域提升
 
 - 作用域提升：在声明变量的作用域中，如果这个变量可以在声明之前被访问，那么就称之为作用域提升
 - let / const 和 var 的重要区别是作用域提升
 
-- var声明的变量会进行作用域提升
+- var声明的变量会进行作用域提升，如下例子，var变量会先提升，已经定义了该变量，但是还没有赋值，所以undefined
 
   ```js
-  console.log(foo) // foo
+  console.log(foo) // undefined
   var foo = 'foo' 
   ```
 
-- const / let 声明变量没有作用域提升
+- const / let 声明变量没有作用域提升，如下例子，在打印foo时，foo还没有定义，因此会报错
 
   ```js
   console.log(foo) // ReferenceError: Cannot access 'foo' before initiolization
@@ -580,7 +591,7 @@ obj.name = '可爱'
   >
   > 这些变量会被创建在包含他们的词法环境被实例化，（也就是在创建执行上下文的时候已经创建了），但是不可以访问它们，直到词法绑定被求值
 
-##      （7）var块级作用域
+## （7）var块级作用域
 
 var特点：作用域提升，window全局对象，没有块级作用域
 
@@ -612,9 +623,7 @@ var特点：作用域提升，window全局对象，没有块级作用域
   // var 定义的变量污染全局，不建议使用
   ```
 
-  
-
-##      （8）window对象添加属性
+## （8）window对象添加属性
 
 - var声明变量，事实上会在window上添加一个属性
 
@@ -628,19 +637,19 @@ var特点：作用域提升，window全局对象，没有块级作用域
 
 - window早期的对象是GO，现在是浏览器添加的全局对象，保持window和var相等性，实际上window和var不是同一个对象。
 
-##      （9）暂时性死区
+## （9）暂时性死区
 
 es6中，使用let / const 声明的变量，在声明之前，变量不能被访问；这种现象称为temporal dead zone（暂时性死区，TDZ）
 
-##      （10）字符串模板
+## （10）字符串模板
 
 > ${expression}
 
 ```js
 // 不使用模板字符串
-let name = 'mx
+let name = 'mx'
 let age = 20
-console.log('my name is'+ name, 'age is' + age)
+console.log('my name is '+ name + ', age is ' + age)
 // 使用模板字符串
 console.log(`my name is ${name}, age is ${age}`)
 // 可以写成表达式
@@ -709,7 +718,6 @@ function foo(x, y, z = 30) {
     console.log(x, y, z)
 }
 foo(10,20)
-foo(,10,20)
 foo(undefined,10,20)
 ```
 

@@ -141,30 +141,36 @@ Object.defineProperty(obj, 'name', {
 
 ```js
 var info = {
-    name: 'mx',
-    age: 18,
-    _address: '广州市'  
-    // 定义的_address和使用的address的名字不一样，是为了隐藏某一个私有属性不希望直接被外界使用和赋值
-    
+  name: 'mx',
+  age: 18,
+  _address: '广州市'  
+  // 定义的_address和使用的address的名字不一样，是为了隐藏某一个私有属性不希望直接被外界使用和赋值
+  
 }
 // 存取属性描述符
-Object.defineProperty(obj, 'address', {
-    enumerable: true,
-    configurable: true,
-    get: function() {
-        //如果希望截获某一个属性它访问和设置值的过程，也会使用存储属性描述符,在get里调用foo()函数，截取获取值的过程，vue2的响应式原理也是利用这里，
-        foo()
-        return this._address
-        
-    },
-    set: function(value) {
-        // 在set函数截获和上面的原理一样
-        this._address = value
-    }
+Object.defineProperty(info, 'address', {
+  enumerable: true,
+  configurable: true,
+  get: function() {
+      //如果希望截获某一个属性它访问和设置值的过程，也会使用存储属性描述符,在get里调用foo()函数，截取获取值的过程，vue2的响应式原理也是利用这里，
+      foo()
+      return this._address
+      
+  },
+  set: function(value) {
+      // 在set函数截获和上面的原理一样
+      this._address = value
+  }
 })
 function foo() {
-    console.log("获取了属性值")
+  console.log("获取了属性值")
 }
+
+console.log(info.name)
+console.log(info.address)
+// mx
+// 获取了属性值
+// 广州市
 ```
 
 
@@ -402,17 +408,17 @@ console.log(info.age)
 
 ```js
 function Person() {
-    ...
+  // ...
 }
-console.log(Person.__proto__)  // 隐式原型
-console.log(Person.prototype)  // 显示原型
+console.log(Person.__proto__)  // 隐式原型{}
+console.log(Person.prototype)  // 显示原型{}
 var f1 = new Person()
 var f2 = new Person()
 // new Person() 后，这个对象内部的[[prototype]]属性会被赋值为构造函数的prototype属性(new操作过程涉及到)
-// new内部： this.__proty__ = Person.prototype
+// new内部： this.__proto__ = Person.prototype
 // 所以：
-f1.__proto__ === Person.prototype
-f2.__proto__ === Person.prototype
+console.log(f1.__proto__ === Person.prototype)   // true
+console.log(f2.__proto__ === Person.prototype)   // true
 // 所以，f1函数和f2函数指向的是同一个原型
 ```
 
@@ -427,10 +433,10 @@ f2.__proto__ === Person.prototype
 ```js
 function foo() {}
 console.log(foo.prototype)  // {}
-console.log(foo.getOwnPropertyDescirptors(foo.prototype))
 
 // 相互引用
-console.log(foo.prototype.constructor.prototype.constructor)
+console.log(foo.prototype.constructor.prototype.constructor) // [Function: foo]
+
 ```
 
 打印函数的原型是空对象，实际上不是空的，因为该原型的属性设置为不可枚举，因此不能打印
@@ -525,9 +531,8 @@ console.log(obj.address)  // 北京
 ```js
 var obj = {}
 var obj1 = new Object()
-// obj1.__proto__ = Object.prototype
-console.log(obj2.__proto__ = Object.prototype)  // true
-console.log(Object.getOwnPropertyDescirptors(Object.prototype))
+// obj1.__proto__ === Object.prototype
+console.log(obj1.__proto__ === Object.prototype)  // true
 ```
 
 所以，`__proto__ === Object.prototype`

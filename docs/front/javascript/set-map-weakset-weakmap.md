@@ -150,25 +150,25 @@ WeakMap和Map区别：
 
 ```js
 const obj1 = {
-    name: 'lan'
-    age: 18
+  name: 'lan',
+  age: 18
 }
 function obj1NameFn1() {
-    console.log('obj1NameFn1执行')
+  console.log('obj1NameFn1执行')
 }
 function obj1NameFn2() {
-    console.log('obj1NameFn2执行')
+  console.log('obj1NameFn2执行')
 }
 function obj1AgeFn1() {
-    console.log('obj1AgeFn1执行')
+  console.log('obj1AgeFn1执行')
 }
 function obj1AgeFn2() {
-    console.log('obj1AgeFn2执行')
+  console.log('obj1AgeFn2执行')
 }
 const obj2 = {
-    name: 'min'
-    age: 24
-    height: 180
+  name: 'min',
+  age: 24,
+  height: 180,
 }
 // 1.创建weakMap
 const weakMap = new WeakMap()
@@ -181,7 +181,7 @@ obj1Map.set('age',[obj1AgeFn1,obj1AgeFn2])
 weakMap.set(obj1,obj1Map)
 
 const obj2Map = new Map()
-obj2Map.set('name',[obj2NameFn1,obj2NameFn2])
+obj2Map.set('name',[obj1NameFn1,obj1NameFn2])
 weakMap.set(obj2,obj2Map)
 
 // 5.监听数据是否发生改变Proxy / Object.defineProperty
@@ -189,7 +189,7 @@ obj1.name = 'jame'
 // 6.WeakMap.get拿到改变的数据
 const targetMap = weakMap.get(obj1)
 //  7.通过foreach执行每个数据对应的函数
-const fns = target.get('name')
+const fns = targetMap.get('name')
 fns.forEach(item => item())
 ```
 

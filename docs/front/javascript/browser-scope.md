@@ -6,6 +6,7 @@ meta:
   - name: keywords
     content: 浏览器 V8 执行上下文 作用域链
 ---
+《高级JavaScript教程》一共十一篇文章，详细地从浏览器的底层原理，js的底层源码深入了解JavaScript，最好是能从第一篇文章（当前文章）往下阅读，逐渐了解它，你会有更层次的理解。
 # 浏览器工作原理、V8引擎、执行上下文和作用域链
 
 ## 一、认识JavaScript
@@ -398,7 +399,7 @@ console.log(n) // 3、100
 ```js
 var a = 100
 function foo() {
-    console.log(a) // undefined
+    console.log(a) // 100
 }
 foo()
 ```
@@ -409,12 +410,12 @@ foo()
 function foo() {
    	var a = b = 100   
     // 转换=>
-    // var a = 10 和 b=10
+    // var a = 100 和 b=100
     // b会变为全局变量
 }
 foo()
-console.log(a)  // 报错，a没有定义
-console.log(b)  // 10
+console.log(a)  // 报错，a没有定义，a在foo函数里面定义了，但是外面访问不了；
+console.log(b)  // 100
 ```
 
 六、面试题6

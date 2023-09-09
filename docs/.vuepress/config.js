@@ -21,7 +21,7 @@ const autometa_options = {
 export default defineUserConfig({
   lang: 'zh-CN',
   title: '小蓝的笔记',
-  description: '女程序员，爱coding，一个专注分享学习经验，记录前端知识的个人博客',
+  description: '小蓝，小蓝的笔记，女程序员，爱coding，一个专注分享学习经验，记录前端知识的个人博客',
   head: [
       ['meta', { name: 'baidu-site-verification', content: 'codeva-CG1MKx50Sm'}],
       ['meta', { name: 'baidu-site-verification', content: 'codeva-jIfosA0IJ1'}],
@@ -67,7 +67,7 @@ export default defineUserConfig({
           text: '高级JavaScript教程',   // 必要的
           collapsible: true,
           sidebarDepth: 3,    // 可选的, 默认值是 2
-          children: getChildren('docs/front/javascript/')
+          children: getChildren('docs/front/javascript/').sort((a, b) => new Date(a.publish_time) - new Date(b.publish_time))
         },
         {
           text: 'Vue',
@@ -242,6 +242,7 @@ export default defineUserConfig({
         name: '所有文章'
       },
       'number': getChildren('docs/front/').concat(getChildren('docs/back/')).length,
+      // 'js': getChildren('docs/front/javascript/').sort((a, b) => new Date(a.publish_time) - new Date(b.publish_time))
     }
   },
   vue: {
