@@ -7,22 +7,22 @@
 
 ```ts
 let array = {
-0:“aaa”,
-1:“12”,
-2:[“bbb”,“ccc”,“ddd”],
-“length”:3
+0:"aaa",
+1:"12",
+2:["bbb","ccc","ddd"],
+"length":3
 }
 let arr = Array.from(array);
-输出结果：[“aaa”,“12”,[“bbb”,“ccc”,“ddd”]];
+输出结果：["aaa","12",["bbb","ccc","ddd"]];
 ```
 
 如果没有length属性，输出结果为什么？
 
 ```
 let array = {
-0:“aaa”,
-1:“12”,
-2:[“bbb”,“ccc”,“ddd”],
+0:"aaa",
+1:"12",
+2:["bbb","ccc","ddd"],
 }
 let arr = Array.from(array);
 输出结果：[];
@@ -34,12 +34,12 @@ let arr = Array.from(array);
 
 ```ts
 let array = { 
-    “name”:“aaa”, 
-    “age”:“12”,
-	“friends”:[“bbb”,“ccc”,“ddd”], 
-    “length”:3 
+    "name":"aaa", 
+    "age":"12",
+	  "friends":["bbb","ccc","ddd"], 
+    "length":3 
 } 
-let arr = Array.from(array); 输出结果：[undefined,undefined,undefined]
+let arr = Array.from(array); // 输出结果：[undefined,undefined,undefined]
 ```
 
 可以看出，如果对象的属性名不是数字类型，输出的结果则是长度为3，元素均为undefined的数组 所以我们可以得出以下结论：
@@ -65,8 +65,8 @@ console.log(Array.from(set,item=>item+1));// [3,5,6,7,2,8]
 - 将字符串转换为数组
 
   ```ts
-  let str = “hello world!”
-  console.log(Array.from(str));//[“h”, “e”, “l”, “l”, “o”, " ", “w”, “o”, “r”, “l”, “d”, “!”]
+  let str = "hello world!"
+  console.log(Array.from(str));//["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", "!"]
   ```
 
   

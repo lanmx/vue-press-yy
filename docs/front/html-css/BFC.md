@@ -7,7 +7,7 @@ Dlock Formatting Context：格式化上下文
 #### 1. 触发BFC的条件：
 
 - 根元素，即HTML元素
-- 浮动元素：float值为left、right
+- 浮动元素：float值为left、right（float 除 none 以外的值）
 - overflow值不为 visible，为 auto、scroll、hidden
 - display的值为inline-block、inltable-cell、table-caption、table、inline-table、flex、inline-flex、grid、inline-grid
 - position的值为absolute或fixed

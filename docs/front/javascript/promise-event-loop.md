@@ -958,14 +958,14 @@ Promise.resolve().then(() => {
   2. **other queue**：Promise的then回调，queueMicrotask
 - 宏任务队列：
   1. **timer queue**：setTimeout、setInterval
-  2. **poll queue**：IO事件
+  2. **poll queue**：IO事件，文件读写，数据库操作，网络请求
   3. **check queue**：setImmediate
   4. **close queue**：close事件
 
 **setImmediate：**
 - setImmediate()表示立即执行, 它是宏任务, 回调函数会被放置到事件循环的check阶段。
 - setImmediate是在每轮事件轮询结束阶段执行，能够保证程序的更高优先级。
-- Node.js中的setImmediate()是用于将函数异步执行的方法。比较常用的异步执行方法有setTimeout()和setInterval()，
+- Node.js中的setImmediate()是用于函数异步执行的方法。比较常用的异步执行方法有setTimeout()和setInterval()，
 但是这两种方式并不是真正意义上的异步，因为他们都需要等待一段时间间隔后才回调执行函数，setImmediate()相比之下，
 更符合异步执行的定义，因为他会在主线程任务执行完后立即调用回调函数，而不是等待一个固定的时间间隔后才调用。
 
@@ -976,10 +976,18 @@ Promise.resolve().then(() => {
 1. **`next tick microtask queue`**
 2. **`other microtask queue`**
 3. **`timer queue`**
-4. **`poll queue`**
-5. **`check queue`**
-6. **`close queue`**
+4. **`idle prepare queue`** ：node内部使用
+5. **`poll queue`**
+6. **`check queue`**
+7. **`close queue`**
 
+轮询阶段（Poll queue）：此阶段是Node.js事件循环的核心。在此阶段：
+
+Node.js会检查是否有待处理的I/O事件回调函数，如果有，将其移至下一个阶段。
+
+如果没有I/O事件回调函数，Node.js会等待新的I/O事件的到来。
+
+在等待过程中，如果定时器到达指定时间，或者其他预定的条件满足，事件循环将会立即进入下一个阶段。
 
 
 <ClientOnly>

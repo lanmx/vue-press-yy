@@ -1419,7 +1419,121 @@ type User = Name & {
 
 
 ## 27、table表格的虚拟滚动怎么实现
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    }
+    .virtual-scroll-viewport {
+        position: relative;
+        width: 240px;
+        height: 300px;
+        margin: 150px auto 0;
+        overflow: auto;
+        will-change: scroll-position;
+        border: 1px solid #aaaaaa;
+    }
+    /* 撑开高度 */
+    .virtual-scroll-spacer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+    .virtual-scroll-list {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+    .virtual-scroll-item {
+        height: 50px;
+        padding-left: 15px;
+        line-height: 50px;
+    }
+    .virtual-scroll-item:nth-child(2n) {
+        background: #f6f8fa;
+    }
+  </style>
+</head>
+<body>
+  <div class="virtual-scroll-viewport">
+    <div class="virtual-scroll-spacer"></div>
+    <div class="virtual-scroll-list"></div>
+  </div>
+</body>
+<script>
+// 获取dom
+const virtualViewportDom = document.querySelector('.virtual-scroll-viewport');
+const virtualSpacerDom = document.querySelector('.virtual-scroll-spacer');
+const virtualListDom = document.querySelector('.virtual-scroll-list');
+const VIEWPORT_HEIGHT = 300; // 视口高度
+const ITEM_HEIGHT = 50; // 列表项高度
+const COUNT = 10; // 渲染数量
+const TOTAL_COUNT = 100000; // 总条数
+const TOTAL_HEIGHT = ITEM_HEIGHT * TOTAL_COUNT; // 总高度
+let scrollTop = 0, translateY = 0;
+virtualSpacerDom.style.height = TOTAL_HEIGHT + 'px';
 
+// 监听scroll事件
+virtualViewportDom.addEventListener('scroll', function (e) {
+    scrollTop = this.scrollTop;
+    const start = Math.max(Math.floor(scrollTop / ITEM_HEIGHT) - 2, 0);
+    const end = Math.min(start + COUNT, TOTAL_COUNT);
+    const y = start * ITEM_HEIGHT;
+    if (scrollTop === 0 || scrollTop === TOTAL_HEIGHT - VIEWPORT_HEIGHT || Math.abs(translateY - y) >= 100) {
+        render(start, end);
+        translateY = y;
+        virtualListDom.style.transform = 'translate3d(0px, ' + translateY + 'px, 0px)';
+    }
+});
+
+// 初次渲染
+render(0, COUNT);
+
+function render(start, end) {
+    let html = '';
+    // 移除多余的dom
+    let list = document.querySelectorAll('.virtual-scroll-item');
+    for (const item of list) {
+        const index = Number(item.dataset.index);
+        if (index < start || index >= end) {
+            item.remove();
+        }
+    }
+    list = document.querySelectorAll('.virtual-scroll-item');
+    if (list.length > 0) {
+        const lastStart = Number(list[0].dataset.index);
+        const lastEnd = Number(list[list.length - 1].dataset.index);
+        if (end - 1 - lastEnd > 0) { // 下滑
+            for (let i = lastEnd + 1; i < end; i++) {
+                html += '<div class="virtual-scroll-item" data-index="' + i + '">item' + i + '</div>';
+            }
+            virtualListDom.insertAdjacentHTML('beforeend', html);
+        } else if (start - lastStart < 0) { // 上滑
+            for (let i = start; i < lastStart; i++) {
+                html += '<div class="virtual-scroll-item" data-index="' + i + '">item' + i + '</div>';
+            }
+            virtualListDom.insertAdjacentHTML('afterbegin', html);
+        }
+    } else {
+        // 快速滑动或拖动滚动条或初次渲染
+        for (let i = start; i < end; i++) {
+            html += '<div class="virtual-scroll-item" data-index="' + i + '">item' + i + '</div>';
+        }
+        virtualListDom.innerHTML = html;
+    }
+}
+</script>
+</html>
+```
 ## 28、从零搭建项目，需要做什么准备
 
 ## 29、懒加载
@@ -1427,6 +1541,11 @@ type User = Name & {
 ## 30、如何做权限控制
 
 ## 31、token jwt
+
+## 32. Typescript和JavaScript的区别？typescript有什么作用？
+TypeScript引入了静态类型检查，能够帮助开发者在编码阶段捕获错误，开发者可以在代码中显式地定义变量的类型，并在编译时进行类型检查。这有助于在编码阶段发现潜在的类型相关错误，并提前解决问题，避免了很多潜在的BUG。
+
+TypeScript支持类、接口、泛型等面向对象的概念。它使得代码结构更清晰，可读性更好，更易于组织和维护。通过接口和类的定义，可以明确指定数据的结构。
 
 ## 字节一轮面试题
 *字节一轮面试---start*

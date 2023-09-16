@@ -1,4 +1,35 @@
 ## 1、node的事件循环
+在Node.js中编写代码时，经常会涉及到异步操作，比如文件读写、网络请求等。Node.js采用了事件驱动的模型，通过事件循环来处理这些异步操作。
+
+**事件循环执行过程：**
+
+执行前，会先执行同步任务、再执行process.nextTick 、微任务 ，等所有微任务队列全部执行完后，才进入事件循环event-loop的timers阶段。
+
+在事件循环的每一个子阶段退出之前会判断有没有微任务：process.nextTick、microtask。如果有，会优先执行（process.nextTick先执行于microtask）。
+- **进入 event-loop**
+- **进入 timers 阶段**：处理通过setTimeout()和setInterval()设置的定时器任务。当定时器到达指定的时间时，事件循环将进入下一个阶段。
+- **进入 IO callbacks阶段**：处理异步I/O操作的回调函数，比如文件读写、网络请求的回调函数。当这些异步操作完成时，相关的回调函数会被添加到事件循环的I/O队列中。
+- **进入 idle，prepare 阶段**：该阶段在内部使用。
+- **进入 poll 阶段**
+
+轮询阶段（Poll queue）：此阶段是Node.js事件循环的核心。在此阶段：
+
+Node.js会检查是否有待处理的I/O事件回调函数，如果有，将其移至下一个阶段。
+
+如果没有I/O事件回调函数，Node.js会等待新的I/O事件的到来。
+
+在等待过程中，如果定时器到达指定时间，或者其他预定的条件满足，事件循环将会立即进入下一个阶段。
+
+
+![](@alias/da63df50e47e4db2acc40af9181e2e12.png)
+- **进入 check 阶段**：
+在此阶段执行setImmediate()回调函数。setImmediate()函数用于注册在事件循环的下一个轮询阶段之前执行的回调函数。
+- **进入 closing 阶段**。
+处理关闭事件的回调函数，如socket.on('close')
+- 检查是否有活跃的 handles（定时器、IO等事件句柄）。
+  如果有，继续下一轮循环。
+  如果没有，结束事件循环，退出程序。
+
 ## 2、用过nodejs的什么框架，为什么用express框架，有什么优点
 express、koa、egg、nest、midway都是常见的nodejs开源框架。
 其关系，基本如下：

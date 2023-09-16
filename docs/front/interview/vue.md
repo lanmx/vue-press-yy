@@ -367,6 +367,17 @@ Store:是一个大容器，包含以下所有的内容；
 - action：用于处理异步变更状态，通过分发操作触发mutation，不是直接变更状态；mutations在处理异步操作时，能够引起页面的响应式变化，但是 devtools 无法进行监听。建议在action操作，这样 devtools 就能够进行跟踪。组件使用时，调用：`this.$store.dispatch('方法名称','参数')`
 - module：给store划分模块，减少代码臃肿，方便维护代码；
 - [推荐详细复习链接](https://blog.csdn.net/A____t/article/details/124541435)
+
+对于小型项目，Vuex 过于复杂或不必要，可以考虑：
+
+
+**Vue.js 的本地状态（Local State）**：Vue.js 本身提供了一种简单的方式来管理组件的本地状态。你可以在组件中使用 data、computed、methods 等选项来管理组件内部的状态。这种方式更加轻量级，适用于小型项目或组件级别的状态管理。
+
+**Event Bus 模式**：Event Bus 是一种简单的跨组件通信方式。你可以创建一个事件总线，并在需要通信的组件间触发和监听事件。这样可以在不引入全局状态管理的情况下实现组件之间的通信。
+
+**Vue Composition API（组合式 API）**：Vue 3 中引入的 Composition API 可以帮助你更方便地组织和管理组件中的状态和逻辑。你可以使用 reactive、ref、computed 等 API 在组件内部管理状态，避免了全局状态管理的复杂性。
+
+**简化版本的状态管理库**：如tinyx、vuesion 等。这些库提供了更轻量级的状态管理解决方案，适用于小型项目。
 ### （5）vuex和pinia的区别
  - pinia它没有mutation,他只有state，getters，action【同步、异步】使用他来修改state数据
  - pinia他默认也是存入内存中，如果需要使用本地存储，在配置上比vuex麻烦一点

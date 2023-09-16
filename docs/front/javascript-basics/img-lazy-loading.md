@@ -30,7 +30,7 @@ window.onscroll = throttle(loadImage, 500)
 
 ### 5. 代码
 
-```js
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,7 +89,6 @@ window.onscroll = throttle(loadImage, 500)
   function lazyload() { 
       // 可见区域高度clientHeight
       let seeHeight = document.documentElement.clientHeight
-      let seeHeight = document.documentElement.clientHeight; 
       // 滚动条距离顶部高度scrollTop
       let scrollTop = document.documentElement.scrollTop || document.body.scrollTop; 
       for (let i = n; i < num; i++) {

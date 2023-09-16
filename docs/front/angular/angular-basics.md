@@ -477,7 +477,7 @@ export class HeaderComponent implements OnInit {
 
 ## 十、 服务Service
 
-### 1. 创建服务
+### 1. 同级组件可以通过创建服务传输数据
 
 服务于服务之间可以相互调用；
 
