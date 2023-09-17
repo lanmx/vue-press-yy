@@ -9,8 +9,8 @@
 #### 关于博客
 - 基于vuepress2.0.0-beta.61构建的vuepress网站;
 - 前后端分离项目；
-- 前端技术栈：vuepress + vue + axios；
-- 后端技术栈：nodejs(express)；
+- 前端技术栈：vuepress + vue + axios + vite；
+- 后端技术栈：nodejs(express) + mysql；
 
 技术文章会持续更新~~~
 

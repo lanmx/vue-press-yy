@@ -101,7 +101,7 @@ export default {
         menu.forEach(m => {
           m.name = menuMap[m.text]
         })
-        console.log(menu);
+        // console.log(menu);
       }
     }
     onBeforeMount(() => {
@@ -110,7 +110,7 @@ export default {
     })
     const articleData = __ARTICLE__[cate];
     onBeforeMount(() => {
-      console.log('articleData', articleData, props)
+      // console.log('articleData', articleData, props)
     })
     const list = ref([])
     articleData.list = articleData.list.filter(item => item.text !== 'README');
@@ -119,7 +119,7 @@ export default {
     const getArticleFn = (param = '') => {
       const params = { cate: cate, parent: param }
       getCateArticle(params).then(res => {
-        console.log(res);
+        // console.log(res);
         if (res && res.data) {
           res.data.forEach(item => {
             item.read_count = formatjs.transNumberToShort(item.read_count);
@@ -166,7 +166,7 @@ export default {
         all.value = false;
         cateItem.value = item;
         getCateList(item);
-        console.log(item)
+        // console.log(item)
       }
       window.scrollTo(0,0);
     }
@@ -193,7 +193,7 @@ export default {
         id: item.id
       }
       addRead(params).then(res => {
-        console.log(res);
+        // console.log(res);
       }).catch((err) => {
         console.log(err);
       })
@@ -206,7 +206,7 @@ export default {
           id: item.id
         }
         addLike(params).then(res => {
-          console.log(res);
+          // console.log(res);
           item.good++;
         }).catch((err) => {
           console.log(err);
@@ -217,7 +217,7 @@ export default {
           id: item.id
         }
         removeLike(params).then(res => {
-          console.log(res);
+          // console.log(res);
           item.good--;
         }).catch((err) => {
           console.log(err);
