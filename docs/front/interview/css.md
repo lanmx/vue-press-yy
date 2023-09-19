@@ -63,9 +63,21 @@ ul {
 }
 ```
 
-## 2. flex
+## 2. 说一说flexbox布局
+Flexbox 是一种用于创建灵活的页面布局的 CSS3 模块。可以让我们更轻松地管理元素在容器中的位置、大小和空间分配。
 
-- 父元素开启flex
+Flexbox 的布局由一个容器元素和容器内的子元素组成。容器元素被称为 Flex 容器，而子元素被称为 Flex 项目。
+
+- **flex-direction**：指定 Flex 项目的排列方向。可以是 row（默认）表示水平排列，或 column 表示垂直排列。还可以使用 row-reverse 或 column-reverse 来反转排列方向。
+- **justify-content**：定义 Flex 项目在主轴上的对齐方式。可以是 flex-start（默认）表示靠近主轴起点对齐，flex-end 表示靠近主轴终点对齐，center 表示居中对齐，space-between 表示平均分布在主轴上，space-around 表示平均分布并包围在主轴上，或 space-evenly 表示平均分布，包括主轴起点和终点。
+- **align-items**：定义 Flex 项目在侧轴上的对齐方式。可以是 flex-start 表示靠近侧轴起点对齐，flex-end 表示靠近侧轴终点对齐，center 表示居中对齐，baseline 表示基线对齐，或 stretch（默认）表示拉伸以填充侧轴。
+- **flex-wrap**：定义 Flex 项目是否换行。默认情况下，Flex 项目都在一行上显示。可以设置为 nowrap（默认）表示不换行，wrap 表示换行，并将项目从新行开始排列，或 wrap-reverse 表示换行，并将项目从新行的末尾开始排列。
+- **align-content**：定义多行 Flex 项目在侧轴上的对齐方式。只有在存在多行时才生效。可以是 flex-start 表示靠近侧轴起点对齐，flex-end 表示靠近侧轴终点对齐，center 表示居中对齐，space-between 表示平均分布在侧轴上，space-around 表示平均分布并包围在侧轴上，或 stretch 表示拉伸以填充侧轴。
+- **flex-grow**：定义 Flex 项目在剩余空间中的放大比例。默认为 0，表示不放大。如果将某个项目的 flex-grow 设置为非零值，它将在剩余空间中以比例放大，以填充容器。
+- **flex-shrink**：定义 Flex 项目在空间不足时的缩小比例。默认为 1，表示等比例缩小。如果某个项目的 flex-shrink 设置为非零值，当空间不足时，它将按比例缩小以适应容器。
+- **flex-basis**：定义项目在分配空间之前的初始大小。可以是固定值（像素、百分比等）或 auto。默认为 auto。
+
+父元素开启flex
 
 ```css
 display:flex
@@ -229,3 +241,27 @@ CSS盒模型有两种：标准盒模型和怪异盒模型（也叫IE盒模型）
 可以使用CSS的box-sizing属性来指定盒模型的类型。默认情况下是标准盒模型（box-sizing: content-box），若要使用怪异盒模型，可以将box-sizing设置为border-box。
 
 小结：怪异盒子模型的宽高是定死的，设置 padding 或 border 不会影响页面布局。怪异盒子模型的 width 或 height 等于 content + padding + border 的宽或高。
+
+## 8. 说一说css3的伪类和伪元素
+### （1）伪类（Pseudo-classes）
+伪类选择器用于选择处于特定状态的元素，比如鼠标悬停、被点击、处于某个状态的输入框等。以下是常见的CSS3伪类：
+- :hover：选择鼠标悬停在元素上的状态。
+- :active：选择被点击或正在被激活的元素。
+- :focus：选择当前获得焦点的输入元素。
+- :checked：选择被选中的复选框或单选框元素。
+- :nth-child(n)：选择父元素的第n个子元素。
+- :first-child、:last-child、:nth-last-child(n)：选择父元素的第一个、最后一个、倒数第n个子元素。
+- :nth-of-type(n)、:first-of-type、:last-of-type、:nth-last-of-type(n)：选择父元素中特定类型的第n个、第一个、最后一个、倒数第n个元素。
+
+通过使用伪类选择器，我们可以根据元素的状态或位置来应用样式，从而实现更加精细的样式化效果
+### （2）伪元素（Pseudo-elements）
+伪元素则是用于创建元素的虚拟部分或插入内容的方式。常见的CSS3伪元素有：
+- ::before：在元素的内容之前插入一个虚拟元素。
+- ::after：在元素的内容之后插入一个虚拟元素。
+- ::first-line：选择元素的第一行文本。
+- ::first-letter：选择元素的第一个字母。
+- ::selection：选择用户选择的文本部分。
+
+伪元素可以用来在元素内部或者特定位置插入样式和内容。通过结合伪元素和CSS属性，我们可以创建一些特殊的效果，比如添加图标、装饰文本等。
+
+通过合理地使用伪类和伪元素，我们可以实现更加灵活和细粒度的样式化效果，让页面更具交互性和视觉效果。

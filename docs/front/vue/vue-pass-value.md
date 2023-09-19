@@ -1,26 +1,26 @@
 ## vue中组件传值常用的几种方式
 
-- 父组件传值给子组件，子组件使用props进行接收
+- **props**：父组件传值给子组件，子组件使用props进行接收
 
-- 子组件传值给父组件，子组件使用$emit+事件对父组件进行传值
+- **$emit**：子组件传值给父组件，子组件使用$emit+事件对父组件进行传值
 
-- 组件中可以使用$parent和$children获取到父组件实例和子组件实例，进而获取数据
+- **$refs**：使用$refs获取组件实例，进而获取数据
 
-- 使用$attrs和$listeners，在子组件上v-bind和v-on，在对一些组件进行二次封装时可以方便传值，例如A->B->C
+- **$parent和$children**：组件中可以使用$parent和$children获取到父组件实例和子组件实例，进而获取数据
 
-- 使用$refs获取组件实例，进而获取数据
+- **$attrs和$listeners**：使用$attrs和$listeners，在子组件上v-bind和v-on，在对一些组件进行二次封装时可以方便传值，例如A->B->C
 
-- 使用Vuex进行状态管理
+- **provide和inject**：使用provide和inject（依赖注入），在父组件中使用provide方法提供数据，然后在子组件中使用inject方法注入数据。这种方式可以跨层级地传递数据，不仅仅限于父子组件关系。
 
-- 使用eventBus进行跨组件触发事件，进而传递数据，new Vue()挂载一个实例到eventBus；如果是nuxt.js项目，直接导出（_, inject{  inject('eventBus', new Vue())}）
+- **eventBus**：使用eventBus进行跨组件触发事件，进而传递数据，new Vue()挂载一个实例到eventBus；如果是nuxt.js项目，直接导出（_, inject{  inject('eventBus', new Vue())}）
 
-- 使用provide和inject，官方建议我们不要用这个，我在看ElementUI源码时发现大量使用
+- **Vuex**：使用Vuex进行状态管理
 
-- 使用浏览器本地缓存，例如localStorage
+- **localStorage**：使用浏览器本地缓存，例如localStorage
 
 
 
-### 一.父子组件传值
+### 一、父子组件传值
 
 1. props / $emit
 2. $parant / children
@@ -61,7 +61,14 @@ this.$parant.msg();
 
 3. vuex
 
-### 三、vue3组件子传父
+### 三、vue3组件传值方法有哪些？
+- **Props（属性传值）**：使用组件的props属性来传递数据。在父组件中定义props属性，并通过属性绑定的方式将数据传递给子组件。子组件通过props接收传递的值，并在组件中使用。
+- **Emit（事件传值）**：通过自定义事件进行传值。在子组件中使用$emit方法触发一个自定义事件，并将需要传递的数据作为事件参数。在父组件中通过添加事件监听器来接收传递的数据。
+- **Provide / Inject（依赖注入）**：在父组件中使用provide方法提供数据，然后在子组件中使用inject方法注入数据。这种方式可以跨层级地传递数据，不仅仅限于父子组件关系。
+- **$attrs 和 listeners**：在组件之间进行传递未声明的props和事件监听器。listeners：在组件之间进行传递未声明的props和事件监听器。attrs对象包含父组件传递给子组件但子组件未声明的props，而$listeners对象包含父组件传递给子组件的事件监听器。
+- **Vuex（状态管理）**：如果需要在多个组件之间共享状态数据，你可以使用Vue的官方状态管理库Vuex。通过定义全局的状态管理模块，在多个组件中读取和修改共享的状态。
+
+### 四、vue3组件子传父
 1、子组件先定义defineEmits
 ```ts
 const emit = defineEmits(['getcurMusic'])
@@ -84,7 +91,7 @@ onMounted(() => {
 })
 ```
 
-### 四、vue3使用mitt插件实现事件总线传值
+### 五、vue3使用mitt插件实现事件总线传值
 1、在client.js客户端文件全局引入mitt插件并注册
 ```ts
 import { defineClientConfig } from '@vuepress/client'

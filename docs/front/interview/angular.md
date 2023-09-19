@@ -8,7 +8,7 @@ ngAfterContentInit，ngAfterContentChecked，ngAfterViewInit, ngAfterViewChecked
 在ngOnDestroy阶段，销毁指令和组件之前触发，可在这里移除事件监听等清扫操作；
 
 ## 2. 组件如何传值？父子组件和同级组件的传值？
-对于父子组件，可以用input, emit，ViewChild传值；对于非父子组件，可以用service传值，或者localstorage
+对于父子组件，可以用input，emit，ViewChild传值；对于非父子组件，可以用service传值，或者localstorage
 
 ## 3. 谈一谈路由传参的详细？
 路由传参是一种将数据传递给路由组件的方式，在angular中有两种类型传参，路径传参和查询传参；

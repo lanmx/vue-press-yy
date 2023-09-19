@@ -113,9 +113,11 @@ Tree shaking做了两件事：
 判断那些模块和变量未被使用或者引用，进而删除对应代码
 ### （2）编译优化
 1. diff算法优化
+
 vue3在diff算法中相比vue2增加了静态标记, 其作用是为了会发生变化的地方添加一个flag标记，下次发生变化的时候直接找该地方进行比较,提高性能
 
 2. 静态提升
+
 Vue3中对不参与更新的元素，会做静态提升，只会被创建一次，在渲染时直接复用
 这样就免去了重复的创建节点，大型应用会受益于这个改动，免去了重复的创建操作，优化了运行时候的内存占用
 没有做静态提升之前
@@ -177,6 +179,8 @@ export function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 而通过composition这种形式，可以将一些复用的代码抽离出来作为一个函数，只要的使用的地方直接进行调用即可
 ### 6、数据劫持(响应式系统)优化
+数据劫持(响应式系统)即当数据发生变化时，能够自动更新相关的视图。在vue3中，用Proxy替换Object.defineProperty；
+
 在vue2中，数据劫持是通过Object.defineProperty ，这个 API 有一些缺陷:
 检测不到对象属性的添加和删除（vue为了解决这个问题，出现了$set和$delete实例方法。另外还存在一个问题，就是如果存在多个对象进行嵌套问题，需要深层监听，造成性能问题。）
 数组API方法无法监听到
@@ -191,7 +195,7 @@ Object.defineProperty(data, 'a',{
   }
 })
 ```
-Proxy直接可以劫持整个对象，并返回一个新对象，我们可以只操作新的对象达到响应式目的
+Vue 3 中使用 Proxy 来劫持数据对象，当访问或修改数据时，会触发 Proxy 上的相应拦截器方法。Proxy直接可以劫持整个对象，并返回一个新对象，我们可以只操作新的对象达到响应式目的
 ```js
 function reactive(obj) {
     if (typeof obj !== 'object' && obj != null) {
@@ -364,7 +368,7 @@ Store:是一个大容器，包含以下所有的内容；
 - state：用来读取状态，存放公共数据的地方；(附带mapState辅助函数)，使用时通过 $store.state.counter 即可拿到状态信息
 - getter：用来读取派生状态，获取根据业务场景处理返回的数据；(附带mapGetters辅助函数)，类似于计算属性，在数据展示前进行一些变化处理，具有缓存功能，能够提高运行效率
 - mutations：用于同步提交状态变更，唯一修改state的方法；(附带mapMutations辅助函数)，先拿到store对象，然后通过commit提交mutations中的方法。使用时，`this.$store.commit('mutations中的方法','参数')`
-- action：用于处理异步变更状态，通过分发操作触发mutation，不是直接变更状态；mutations在处理异步操作时，能够引起页面的响应式变化，但是 devtools 无法进行监听。建议在action操作，这样 devtools 就能够进行跟踪。组件使用时，调用：`this.$store.dispatch('方法名称','参数')`
+- action：用于处理异步变更状态，通过分发操作触发action的方法；mutations在处理异步操作时，能够引起页面的响应式变化，但是 devtools 无法进行监听。建议在action操作，这样 devtools 就能够进行跟踪。组件使用时，调用：`this.$store.dispatch('方法名称','参数')`
 - module：给store划分模块，减少代码臃肿，方便维护代码；
 - [推荐详细复习链接](https://blog.csdn.net/A____t/article/details/124541435)
 
@@ -379,14 +383,21 @@ Store:是一个大容器，包含以下所有的内容；
 
 **简化版本的状态管理库**：如tinyx、vuesion 等。这些库提供了更轻量级的状态管理解决方案，适用于小型项目。
 ### （5）vuex和pinia的区别
- - pinia它没有mutation,他只有state，getters，action【同步、异步】使用他来修改state数据
- - pinia他默认也是存入内存中，如果需要使用本地存储，在配置上比vuex麻烦一点
- - pinia语法上比vuex更容易理解和使用，灵活。
- - pinia没有modules配置，没一个独立的仓库都是definStore生成出来的
- - pinia state是一个对象返回一个对象和组件的data是一样的语法
+ - **性能差异**：在性能方面，Pinia相对于Vuex来说更加高效。Pinia采用了Proxy实现，可以实现更细粒度的状态变更追踪，避免了不必要的重新渲染。而Vuex采用了Vue的响应式系统，进行状态的跟踪和更新。
+ - **TypeScript 支持**：Vuex在对TypeScript的支持上相对较弱，需要额外添加类型声明文件来实现类型检查和推导。Pinia在设计之初就天然支持TypeScript，并提供了更好的类型推导和开发体验。
+ - **属性不一样**：pinia它没有mutation, 他只有state，getters，action【同步、异步】使用他来修改state数据
+ - **pinia更加轻量级，更加灵活**：Pinia 提供了更加灵活的状态管理方式，因为它支持多个 store 实例，而 Vuex 只支持一个 store 实例。
+ - **插件体系和生态**：Vuex拥有丰富的插件体系，可以用于扩展和增强Vuex的功能。相对于Vuex，Pinia的插件和生态系统相对较小。
+ - **pinia支持多个 store 实例**：pinia没有modules配置，每一个独立的仓库都是definStore生成出来的
 
 ## 11. 说说vue-router的使用，讲一下路由钩子函数，beforeEach的实现原理
-
+ - **beforeEach**: 全局前置守卫。在每个路由导航之前被调用，可以用来进行全局的导航守卫逻辑，例如身份验证、权限控制等。如果在 beforeEach 中调用 next()，则路由导航会继续进行；如果传递参数或调用 next(false)，则导航会中断。场景：在每次路由跳转之前，需要进行用户是否登录的验证或者判断用户权限等操作。如果用户未登录或权限不足，可以在此处将其重定向到登录页或者其他指定路由。
+ - **beforeResolve**: 全局解析守卫。在每个路由导航被确认之前被调用，和 beforeEach 类似，但在组件内的守卫和异步路由组件被解析之后才会被调用。
+ - **afterEach**: 全局后置钩子。在每个路由导航成功完成之后被调用，无论是跳转成功还是中断。场景：在每次路由跳转之后，需要进行一些额外的操作，例如记录用户的访问日志，发送统计数据等。
+ - **beforeEnter**: 路由独享守卫。可以在单个路由配置中定义，只在该路由被激活时调用。可以用来实现特定路由的导航守卫逻辑。对于某个特定的路由，需要进行个别的前置拦截和验证，可以使用beforeEnter来定义钩子函数。
+ - **beforeRouteEnter**: 组件内守卫。在路由进入组件之前被调用，此时组件实例还未被创建，因此无法访问组件实例的数据和方法。可以使用 next(vm => {}) 来访问组件实例。
+ - **beforeRouteUpdate**: 组件内守卫。在当前路由改变，但是该组件被复用时被调用，可以用于对路由参数的变化进行响应，例如从 /user/1 导航到 /user/2。。
+ - **beforeRouteLeave**: 组件内守卫。在离开当前路由时被调用，可以用来弹出确认提示框或者保存数据等操作。。
 ## 12. 说一下vue mixin的用法 好处和优点
 
 ## 13. vue的nextTick原理
