@@ -75,7 +75,7 @@ export default {
 	// setup函数中要使用props的话，要接收一下
   setup(props, context) {
     const cate = props.cate;
-    const menu = __MENU__[cate];
+    const menu = ref(__MENU__[cate]);
     // 文档菜单目录和标题名称的映射
     const menuMap = {
       'javascript-basics': 'JavaScript基础',
@@ -97,11 +97,12 @@ export default {
     
     // 初始化菜单
     const getMenu = () => {
-      if (menu) {
-        menu.forEach(m => {
+      if (menu.value) {
+        menu.value.forEach(m => {
           m.name = menuMap[m.text]
         })
         // console.log(menu);
+        menu.value = menu.value.filter((item) => item.name !== '前端面试集合')
       }
     }
     onBeforeMount(() => {

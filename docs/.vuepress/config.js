@@ -99,11 +99,11 @@ export default defineUserConfig({
           collapsible: true,
           children: getChildren('docs/front/vuepress/')
         },
-        {
-          text: '前端面试集合',
-          collapsible: true,
-          children: getChildren('docs/front/interview/')
-        },
+        // {
+        //   text: '前端面试集合',
+        //   collapsible: true,
+        //   children: getChildren('docs/front/interview/')
+        // },
       ],
       '/back/': [
         {
