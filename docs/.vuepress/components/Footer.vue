@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <div class="footer-nav">
       <div class="left">
         <div class="title">小蓝的技术博客</div>
@@ -18,7 +18,7 @@
       </div>
     </div>
   </div>
-  <div class="line"></div>
+  <div class="line"></div> -->
   <div class="tips">
     <p>MIT Licensed | Copyright © 2022-2023 蓝敏晓</p>
     <a href="https://beian.miit.gov.cn" target="_blank">备案号：粤ICP备2023024899号-1</a> 
@@ -87,14 +87,17 @@ const linkToDoc = () => {
   color: var(--c-text-accent);
 }
 .tips {
-    padding: 1.5rem;
-    padding-bottom: 2.5rem;
-    text-align: center;
-    color: #4e6e8e;
-    font-size: 14px;
+  padding: 1.5rem;
+  padding-bottom: 2.5rem;
+  text-align: center;
+  font-size: 14px;
+  color: #ffffff;
+  position: fixed;
+  bottom: 10px;
+  width: calc(100% - 74px);
 }
 a {
-    color: #4e6e8e;
+    color: #ffffff;
 }
 a:hover {
   color: rgb(50, 142, 223)

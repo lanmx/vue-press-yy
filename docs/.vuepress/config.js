@@ -21,7 +21,7 @@ const autometa_options = {
 export default defineUserConfig({
   lang: 'zh-CN',
   title: '小蓝的笔记',
-  description: '小蓝，小蓝的笔记，女程序员，爱coding，一个专注分享学习经验，记录前端知识的个人博客',
+  description: '小蓝的笔记，一个专注分享学习经验，记录前端知识的个人博客',
   head: [
       ['meta', { name: 'baidu-site-verification', content: 'codeva-CG1MKx50Sm'}],
       ['meta', { name: 'baidu-site-verification', content: 'codeva-jIfosA0IJ1'}],

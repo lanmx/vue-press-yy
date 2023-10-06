@@ -43,3 +43,12 @@ angular会创建一个可观察对象，并且在这个对象上注册一个观�
 且同时更新上一次时间为当前时间；
 ## 8. angular的路由导航，可以说说吗
 [angular路由](/front/angular/angular-router.html)
+
+## 9. angular和vue的区别
+- angular是mvvm框架, 而vue是一个渐进式的框架, 相当于view层。
+- 都有双向数据绑定, 但是angular中的双向数据绑定是基于脏检查机制，vue的双向数据绑定是基于ES5的getter和setter来实现。
+- angular的指令都是ng-xxx。vue的指令都是v-xxx。
+- Angularjs是在整个html页面下进行实例化，而vue需要一个el对象进行实例化。
+- Angularjs适合用于复杂的 Web 应用的开发，Vue.JS 则适用于构建中小型 Web 应用程序，和移动端的开发
+- Vue 相比于 Angular 更加灵活，可以按照不同的需要去组织项目的应用代码。比如，甚至可以直接像引用jquery那样在HTML中引用vue，然后仅仅当成一个前端的模板引擎来用。
+- vue比angular更轻量, 占用空间更小，性能上更高效, 比angular更容易上手, 学习成本低。
